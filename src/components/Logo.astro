@@ -1,0 +1,49 @@
+---
+// PLACEHOLDER LOGO. Replace the SVG below with the designer's files (see brief, section 5).
+// "emblem" = compact mark for header/favicon/footer. "lockup" = emblem + wordmark.
+interface Props {
+  variant?: 'lockup' | 'emblem';
+  tone?: 'color' | 'light';
+  class?: string;
+}
+const { variant = 'lockup', tone = 'color', class: cls = '' } = Astro.props;
+const main = tone === 'light' ? '#F7F6F2' : '#1F3F99';
+const trunk = tone === 'light' ? '#C9A464' : '#8A6A3F';
+---
+
+<span class:list={['inline-flex items-center gap-3', cls]}>
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 48 48"
+    fill="none"
+    role="img"
+    aria-label={variant === 'emblem' ? 'Oakheart Technologies' : undefined}
+    aria-hidden={variant === 'emblem' ? undefined : 'true'}
+  >
+    <circle cx="24" cy="24" r="22" stroke={main} stroke-width="2.5"></circle>
+    <circle cx="24" cy="15" r="8" fill={main}></circle>
+    <circle cx="16.5" cy="20" r="6.5" fill={main}></circle>
+    <circle cx="31.5" cy="20" r="6.5" fill={main}></circle>
+    <path d="M21.5 22h5l1.2 15h-7.4z" fill={trunk}></path>
+    <path d="M14 38h20" stroke={trunk} stroke-width="2.5" stroke-linecap="round"></path>
+  </svg>
+  {
+    variant === 'lockup' && (
+      <span class="leading-none">
+        <span
+          class="block font-serif text-xl font-semibold tracking-[0.14em]"
+          style={`color:${tone === 'light' ? '#F7F6F2' : '#0E1A33'}`}
+        >
+          OAKHEART
+        </span>
+        <span
+          class="mt-1 block text-right text-[0.7rem] font-medium tracking-[0.2em] uppercase"
+          style={`color:${trunk}`}
+        >
+          Technologies
+        </span>
+      </span>
+    )
+  }
+</span>

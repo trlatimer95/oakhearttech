@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Privacy Policy" description="How Oakheart Technologies handles information collected through this website.">
+  <article class="wrap section">
+    <h1 class="text-4xl md:text-5xl">Privacy Policy</h1>
+    <p class="ph mt-4 inline-block text-sm font-semibold">DRAFT: have this reviewed before launch</p>
+    <div class="prose-measure mt-8 space-y-5 [&_h2]:mt-8 [&_h2]:text-2xl">
+      <p>Last updated: <span class="ph">[date]</span></p>
+      <p>
+        This site is operated by Oakheart Technologies in Spokane, WA. This page explains what information the site
+        collects and how it is used.
+      </p>
+      <h2>Contact form</h2>
+      <p>
+        If you send a message, I receive the name, email address, business, phone number (if given) and message you
+        submit. I use it only to reply to you and to follow up on your inquiry. I do not sell or share it for marketing.
+        The form is protected by Cloudflare Turnstile to block spam.
+      </p>
+      <h2>Booking</h2>
+      <p>
+        If you book a call through Microsoft Bookings, your details are handled by Microsoft under its own privacy
+        terms, and I receive the booking information.
+      </p>
+      <h2>Analytics</h2>
+      <p>
+        This site uses Cloudflare Web Analytics, which measures traffic without cookies and without tracking individual
+        visitors across sites.
+      </p>
+      <h2>Retention and your choices</h2>
+      <p>
+        I keep inquiry emails for as long as they are useful for the relationship or required by law. To ask me to
+        delete your information, email <a class="text-royal underline" href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+import Button from './Button.astro';
+import { site, bookingHref, bookingIsExternal } from '../data/site';
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Not sure where to start? Book a free 30-minute call.',
+  text = 'Tell me what is slowing you down. If I am not the right fit, I will say so and point you somewhere useful.',
+} = Astro.props;
+---
+
+<section class="on-dark bg-ink text-paper">
+  <div class="wrap section text-center">
+    <div class="mx-auto h-px w-16 bg-brass"></div>
+    <h2 class="mx-auto mt-8 max-w-3xl text-3xl text-paper md:text-4xl">{title}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-paper/80">{text}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <Button href={bookingHref} external={bookingIsExternal} variant="light">Book a free 30-minute call</Button>
+      <Button href={`mailto:${site.email}`} variant="outline-light">Email {site.email}</Button>
+    </div>
+    <p class="mt-6 text-sm text-paper/70">{site.location}</p>
+  </div>
+</section>

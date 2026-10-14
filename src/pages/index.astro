@@ -1,0 +1,254 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQ from '../components/FAQ.astro';
+import { services } from '../data/services';
+import { bookingHref, bookingIsExternal } from '../data/site';
+import { ph } from '../lib/ph';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+
+const pains = [
+  { icon: 'copy', text: 'Typing the same data into three systems' },
+  { icon: 'file', text: 'Quotes and invoices built by hand' },
+  { icon: 'calendar', text: 'Scheduling that lives in someone’s head or a spreadsheet' },
+  { icon: 'globe', text: 'A website that doesn’t bring in work' },
+  { icon: 'lifebuoy', text: 'A software project that stalled or was abandoned' },
+  { icon: 'plug', text: 'Tools that don’t talk to each other' },
+];
+
+const steps = [
+  { t: 'Listen', d: 'A free call to understand the business and what is slowing it down.' },
+  { t: 'Map', d: 'The Workflow Checkup: a written plan with priorities, costs and time saved.' },
+  { t: 'Build', d: 'Fixed-scope work with regular check-ins, so there are no surprises.' },
+  { t: 'Hand off', d: 'Documentation, training, and you own everything you paid for.' },
+];
+
+const why = [
+  {
+    t: 'I run a small business too.',
+    d: 'I own TRL Home Solutions, a contracting and handyman company I started alone and grew to a working crew. I know what it is like when the paperwork eats the day.',
+  },
+  {
+    t: 'Honest scope, fixed prices.',
+    d: 'Clear estimates, changes agreed in writing, no surprise invoices.',
+  },
+  {
+    t: 'You own it.',
+    d: 'Code, accounts and documentation are handed over. No lock-in.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What does a typical project cost?',
+    a: 'It depends on scope, which is why I start with a fixed-price Workflow Checkup. Starting prices are listed on each service page. [Add typical project ranges once decided.]',
+  },
+  { q: 'Do you work with businesses outside Spokane?', a: 'Yes. Most work is done remotely, with video calls and shared documents. I am happy to meet in person around Spokane.' },
+  {
+    q: 'Who owns the software you build?',
+    a: 'You do, once you have paid. I keep my own reusable tools and grant you a license to use them in your project.',
+  },
+  {
+    q: 'I already pay for software. Can you make it work better instead of replacing it?',
+    a: 'Usually, yes. Connecting and configuring what you already have is often the cheapest fix.',
+  },
+  {
+    q: 'What if my last developer disappeared?',
+    a: 'That is exactly what Project Rescue is for. The first step is making sure you have access to your code and accounts.',
+  },
+  {
+    q: 'Do you charge sales tax?',
+    a: 'Yes. Washington requires sales tax on most software and IT services, and it is itemized on every quote.',
+  },
+];
+---
+
+<BaseLayout
+  fullTitle
+  title="Oakheart Technologies | Practical software help for small businesses"
+  description="Fix clunky systems, automate manual work, rescue stalled software projects and build custom tools. Based in Spokane, WA, working with small businesses locally and remotely."
+>
+  <!-- 1. Hero -->
+  <section class="relative overflow-hidden">
+    <svg
+      class="pointer-events-none absolute -top-40 -right-40 h-[44rem] w-[44rem] text-oak opacity-[0.06]"
+      viewBox="0 0 200 200"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.2"
+      aria-hidden="true"
+    >
+      {[18, 32, 46, 60, 74, 88].map((r) => <circle cx="100" cy="100" r={r}></circle>)}
+    </svg>
+    <div class="wrap relative section">
+      <p class="eyebrow">Software for small business, from someone who runs one</p>
+      <h1 class="mt-4 max-w-4xl text-[2.5rem] leading-[1.08] md:text-7xl">
+        Less busywork. Fewer spreadsheets. Software that fits.
+      </h1>
+      <p class="prose-measure mt-6 text-xl text-muted">
+        Custom tools, automation and project rescue for small businesses. Based in Spokane, working locally and
+        remotely.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-4">
+        <Button href={bookingHref} external={bookingIsExternal}>Book a free 30-minute call</Button>
+        <Button href="/services/workflow-checkup" variant="secondary">See the Workflow Checkup</Button>
+      </div>
+      <p class="mt-10 border-t border-line pt-5 text-sm font-medium text-muted">
+        Software engineer · Owner of TRL Home Solutions · Based in Spokane, WA · Working locally and remotely
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Pain list -->
+  <section class="bg-white">
+    <div class="wrap section">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">The small problems that cost hours every week.</h2>
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          pains.map((p) => (
+            <li class="reveal flex items-start gap-4 rounded-xl border border-line bg-paper p-5">
+              <span class="text-royal">
+                <Icon name={p.icon} />
+              </span>
+              <span class="font-medium text-ink">{p.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. Services -->
+  <section>
+    <div class="wrap section">
+      <p class="eyebrow">Services</p>
+      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">Start small. Go as far as makes sense.</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          services.filter((s) => s.slug !== 'interactive-vr').map((s) => (
+            <a href={`/services/${s.slug}`} class="card reveal group relative block p-7 transition-shadow hover:shadow-lg">
+              {s.badge && (
+                <span class="absolute top-5 right-5 rounded-full bg-royal px-3 py-1 text-xs font-semibold text-white">
+                  {s.badge}
+                </span>
+              )}
+              <span class="text-royal">
+                <Icon name={s.icon} class="h-8 w-8" />
+              </span>
+              <h3 class="mt-4 text-2xl">{s.title}</h3>
+              <p class="mt-2 text-muted">{s.summary}</p>
+              <p class="mt-5 flex items-center justify-between font-semibold text-ink">
+                <span set:html={ph(s.price)} />
+                <span class="flex items-center gap-1 text-royal group-hover:gap-2">
+                  Learn more <Icon name="arrow" class="h-4 w-4" />
+                </span>
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. How I work -->
+  <section class="bg-white">
+    <div class="wrap section">
+      <p class="eyebrow">How I work</p>
+      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">Listen. Map. Build. Hand off.</h2>
+      <ol class="mt-10 grid gap-6 md:grid-cols-4">
+        {
+          steps.map((s, i) => (
+            <li class="reveal">
+              <span class="font-serif text-4xl font-semibold text-oak">{i + 1}</span>
+              <h3 class="mt-2 text-xl">{s.t}</h3>
+              <p class="mt-2 text-muted">{s.d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. Why Oakheart -->
+  <section>
+    <div class="wrap section">
+      <p class="eyebrow">Why Oakheart</p>
+      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">Plain-spoken help from someone who has been there.</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {
+          why.map((w) => (
+            <div class="reveal border-t-2 border-oak pt-5">
+              <h3 class="text-xl">{w.t}</h3>
+              <p class="mt-2 text-muted">{w.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Featured work -->
+  {
+    work.length > 0 && (
+      <section class="bg-white">
+        <div class="wrap section">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p class="eyebrow">Featured work</p>
+              <h2 class="mt-3 text-3xl md:text-4xl">Problem, fix, result.</h2>
+            </div>
+            <a href="/work" class="font-semibold text-royal underline underline-offset-4">All work</a>
+          </div>
+          <div class="mt-10 grid gap-6 md:grid-cols-3">
+            {work.map((w) => (
+              <a href={`/work/${w.id}`} class="card reveal block p-6 transition-shadow hover:shadow-lg">
+                {w.data.draft && <span class="ph text-xs font-semibold">DRAFT PLACEHOLDER</span>}
+                <p class="eyebrow mt-3">{w.data.service}</p>
+                <h3 class="mt-2 text-xl">{w.data.title}</h3>
+                <p class="mt-2 text-muted">{w.data.summary}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- 7. Interactive & VR strip -->
+  <section class="on-dark bg-ink text-paper">
+    <div class="wrap flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Beyond business software</p>
+        <h2 class="mt-3 text-2xl text-paper md:text-3xl">Interactive training and simulation.</h2>
+        <p class="mt-3 text-paper/80">
+          I also build interactive and VR training, including work on VR EMS training, and I am developing games under
+          Oakheart Interactive.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <Button href="/services/interactive-vr" variant="light">Interactive & VR training</Button>
+        <Button href="/interactive" variant="outline-light">Oakheart Interactive</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Testimonials: intentionally omitted until real ones exist. -->
+
+  <!-- 9. FAQ -->
+  <section>
+    <div class="wrap section">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="mt-3 text-3xl md:text-4xl">Common questions</h2>
+      <div class="mt-8 max-w-3xl">
+        <FAQ items={faqs} />
+      </div>
+    </div>
+  </section>
+
+  <CTABand />
+</BaseLayout>

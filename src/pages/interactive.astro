@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Logo from '../components/Logo.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Oakheart Interactive"
+  description="Oakheart Interactive is the games and simulation side of Oakheart Technologies."
+>
+  <section class="on-dark relative overflow-hidden bg-ink text-paper">
+    <svg
+      class="pointer-events-none absolute -right-48 -bottom-48 h-[46rem] w-[46rem] text-brass opacity-[0.08]"
+      viewBox="0 0 200 200"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      aria-hidden="true"
+    >
+      {[16, 30, 44, 58, 72, 86, 100].map((r) => <circle cx="100" cy="100" r={r}></circle>)}
+    </svg>
+    <div class="wrap section relative">
+      <Logo variant="emblem" tone="light" />
+      <p class="eyebrow mt-8">Oakheart Interactive</p>
+      <h1 class="mt-3 max-w-3xl text-4xl text-paper md:text-6xl">The games and simulation side of the studio.</h1>
+      <p class="prose-measure mt-6 text-xl text-paper/80">
+        The same studio and the same standards as the business work, aimed at things that are fun to build.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section grid gap-10 md:grid-cols-2">
+      <div>
+        <h2 class="text-3xl md:text-4xl">In development</h2>
+        <p class="prose-measure mt-4">
+          <span class="ph">[Describe what you are working on, only what you want public. A sentence or two is plenty.]</span>
+        </p>
+        <p class="prose-measure mt-4">
+          For business and organizational training, see
+          <a class="font-semibold text-royal underline underline-offset-4" href="/services/interactive-vr">Interactive &amp; VR Training</a>.
+        </p>
+      </div>
+      <div class="card p-7">
+        <h2 class="text-2xl">Follow development</h2>
+        <p class="mt-2 text-muted">
+          <span class="ph">[Newsletter signup, itch.io or Steam links go here once they exist.]</span>
+        </p>
+        <Button href={`mailto:${site.email}?subject=Oakheart%20Interactive`} variant="secondary" class="mt-5">
+          Get in touch
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

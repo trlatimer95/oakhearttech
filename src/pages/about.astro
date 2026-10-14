@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.astro';
+import { ph } from '../lib/ph';
+
+// Employer names are fine here; project specifics belong (anonymized) in the case studies.
+const jobs = [
+  {
+    org: 'TRL Home Solutions',
+    role: 'Founder and owner',
+    dates: 'Since August 2024',
+    points: [
+      'Started a contracting and handyman company alone and grew it to a working crew.',
+      'Designed the processes and tools that run it, from quoting to checklists to bookkeeping.',
+    ],
+  },
+  {
+    org: 'Iron Mountain',
+    role: 'Senior Software Engineer (previously Software Engineer IV)',
+    dates: 'Oct 2022 – Aug 2025 · Apr 2026 – Present',
+    points: [
+      'Lead engineer building enterprise document ingestion pipelines in C#, SQL Server, Python, JavaScript and Kofax, covering scanning, OCR, metadata extraction and database integration.',
+      'Cut processing time on very large documents from about 30 minutes to under 10.',
+      'Coordinated development across 15+ engineers, with code reviews and design guidance.',
+      'Worked with project managers and security teams to deliver compliant systems for federal and enterprise clients.',
+    ],
+  },
+  {
+    org: 'Goodwell Technologies',
+    role: 'Systems Engineer (Software Engineering)',
+    dates: 'Apr 2022 – Oct 2026',
+    points: [
+      'Core engineer on a commerce platform connecting partner networks to suppliers.',
+      'Helped build a microservices architecture on ASP.NET Core, Azure Functions and SQL Server.',
+      'Set up development processes for a small team and managed the Azure environment, including significantly reducing monthly spend.',
+      'Brought AI tooling into the full development lifecycle and coached other departments on using it well.',
+    ],
+  },
+  {
+    org: 'Nordson Select',
+    role: 'Software Engineer',
+    dates: 'Feb 2020 – Aug 2022',
+    points: [
+      'Sole engineer responsible for machine-control software on selective soldering machines used worldwide.',
+      'Integrated motion controllers, PLCs, sensors and other hardware.',
+      'Built a computer-vision tool in Python and OpenCV.',
+    ],
+  },
+  {
+    org: 'Potlatch No. 1 Financial Credit Union',
+    role: 'Programmer',
+    dates: 'May 2019 – Feb 2020',
+    points: [
+      'One of the first programmers hired during a migration to a new core banking system.',
+      'Built automation and integrations that replaced manual spreadsheet routines.',
+    ],
+  },
+];
+
+const certs = [
+  ['Microsoft', 'Technology Associate'],
+  ['CompTIA (earned, since expired)', 'A+, Network+, Project+, Security+'],
+  ['CIW', 'Site Development Associate, Advanced HTML5 and CSS3 Specialist, UI Designer'],
+  ['Oracle', 'Database SQL Certified Associate'],
+];
+---
+
+<BaseLayout
+  title="About"
+  description="Oakheart Technologies is run by Tyler Latimer, a software engineer with 8+ years of experience who also owns a contracting and handyman business."
+>
+  <section class="wrap section grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-start">
+    <div>
+      <p class="eyebrow">About</p>
+      <h1 class="mt-3 text-4xl md:text-6xl">An engineer who also runs a small business.</h1>
+      <div class="prose-measure mt-8 space-y-5 text-lg">
+        <p>
+          I am Tyler Latimer, a software engineer with more than eight years of experience in C# and .NET. I have built
+          enterprise document-processing systems, commerce platforms and machine-control software, and I have taken over
+          struggling software and turned it around.
+        </p>
+        <p>
+          I also own TRL Home Solutions, a contracting and handyman company I started on my own and have grown to a
+          working crew. That means I know the operational side of a small business firsthand: the
+          quotes, the scheduling, the paperwork at 9 pm. It is why I talk about outcomes, not technology.
+        </p>
+        <p>
+          I have also spent several years as the sole developer on a multiplayer VR training simulator, so I can build
+          interactive and simulation software, not just business tools.
+        </p>
+        <p>
+          <span class="ph">[Optional: a short paragraph on why you started Oakheart.]</span>
+        </p>
+      </div>
+    </div>
+    <div class="ph-box aspect-[4/5]">
+      <div>
+        <strong class="block text-lg">Headshot goes here</strong>
+        A real photo of you, not stock. Portrait crop, ideally at your workspace or on a job site.
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="wrap section">
+      <h2 class="text-3xl md:text-4xl">What I hold myself to</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        {
+          [
+            ['Honesty over optimism', 'If something is not worth building, or is cheaper to rebuild, I will say so.'],
+            ['Fixed prices where possible', 'You see the number before the work starts. Changes are agreed in writing.'],
+            ['You own what you pay for', 'Code, accounts and documentation are handed over. No lock-in.'],
+            ['Plain language', 'No jargon and no AI buzzwords. If I use a tool, I will tell you what it does.'],
+          ].map(([t, d]) => (
+            <div class="border-t-2 border-oak pt-4">
+              <h3 class="text-xl">{t}</h3>
+              <p class="mt-2 text-muted">{d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section">
+      <h2 class="text-3xl md:text-4xl">How I use AI</h2>
+      <div class="prose-measure mt-4 space-y-4">
+        <p>
+          I use AI tools every day, in my own business and in software development, because they save real time. I use
+          them the way I would use any power tool: with judgment, and with a human checking the result.
+        </p>
+        <ul class="list-disc space-y-2 pl-5">
+          <li>A person reviews anything that matters before it goes out. That person is me.</li>
+          <li>Client names and private information stay out of the tools.</li>
+          <li>I tell you where AI helps, where it does not, and when you do not need it at all.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="wrap section">
+      <h2 class="text-3xl md:text-4xl">Experience</h2>
+      <div class="mt-8 divide-y divide-line">
+        {
+          jobs.map((j) => (
+            <div class="grid gap-3 py-6 md:grid-cols-[1fr_2fr] md:gap-10">
+              <div>
+                <h3 class="text-xl">{j.org}</h3>
+                <p class="mt-1 font-semibold text-ink" set:html={ph(j.role)} />
+                <p class="text-sm text-muted" set:html={ph(j.dates)} />
+              </div>
+              <ul class="list-disc space-y-2 pl-5 text-muted">
+                {j.points.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap section grid gap-10 md:grid-cols-2">
+      <div>
+        <h2 class="text-3xl md:text-4xl">Credentials</h2>
+        <p class="mt-4 text-muted">B.S. Software Development, Western Governors University.</p>
+        <ul class="mt-5 space-y-3">
+          {
+            certs.map(([org, list]) => (
+              <li>
+                <span class="font-semibold text-ink">{org}:</span> {list}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-3xl md:text-4xl">Why “Oakheart”</h2>
+        <p class="prose-measure mt-4">
+          Heartwood is the strongest, most durable part of an oak. The name is a promise: work that is built strong and
+          built to last.
+        </p>
+        <h2 class="mt-10 text-3xl md:text-4xl">Where I work</h2>
+        <p class="prose-measure mt-4">
+          Based in Spokane, WA. I meet local clients in person and work with clients anywhere, remotely.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTABand />
+</BaseLayout>

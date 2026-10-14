@@ -1,0 +1,23 @@
+---
+import { ph } from '../lib/ph';
+interface Props {
+  items: { q: string; a: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="divide-y divide-line rounded-xl border border-line bg-white">
+  {
+    items.map((i) => (
+      <details class="group px-5 py-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-ink">
+          {i.q}
+          <span class="text-2xl leading-none text-royal transition-transform group-open:rotate-45" aria-hidden="true">
+            +
+          </span>
+        </summary>
+        <p class="prose-measure mt-3 text-muted" set:html={ph(i.a)} />
+      </details>
+    ))
+  }
+</div>

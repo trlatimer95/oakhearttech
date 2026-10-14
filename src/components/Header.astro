@@ -1,0 +1,73 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import { bookingHref, bookingIsExternal } from '../data/site';
+
+const links = [
+  { href: '/services', label: 'Services' },
+  { href: '/work', label: 'Work' },
+  { href: '/about', label: 'About' },
+  { href: '/interactive', label: 'Interactive' },
+  { href: '/contact', label: 'Contact' },
+];
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(href + '/');
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
+  <div class="wrap flex items-center justify-between py-3">
+    <a href="/" aria-label="Oakheart Technologies, home"><Logo /></a>
+
+    <nav aria-label="Main" class="hidden items-center gap-7 md:flex">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            aria-current={isActive(l.href) ? 'page' : undefined}
+            class:list={[
+              'text-[0.95rem] font-medium hover:text-royal',
+              isActive(l.href) ? 'text-royal' : 'text-text',
+            ]}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <Button href={bookingHref} external={bookingIsExternal} class="!px-4 !py-2 text-[0.95rem]">Book a free call</Button>
+    </nav>
+
+    <button
+      id="menu-toggle"
+      class="rounded-lg p-2 text-ink md:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+    >
+      <Icon name="menu" />
+    </button>
+  </div>
+
+  <nav id="mobile-menu" aria-label="Mobile" class="hidden border-t border-line bg-paper md:hidden">
+    <div class="wrap flex flex-col gap-1 py-3">
+      {
+        links.map((l) => (
+          <a href={l.href} class="rounded-lg px-2 py-3 text-lg font-medium text-ink hover:bg-white">
+            {l.label}
+          </a>
+        ))
+      }
+      <Button href={bookingHref} external={bookingIsExternal} class="mt-2">Book a free 30-minute call</Button>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+</script>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- PLACEHOLDER favicon. Replace with the designer's emblem. -->
+  <circle cx="24" cy="24" r="23" fill="#F7F6F2" stroke="#1F3F99" stroke-width="3"/>
+  <circle cx="24" cy="15" r="8.5" fill="#1F3F99"/>
+  <circle cx="16" cy="20.5" r="7" fill="#1F3F99"/>
+  <circle cx="32" cy="20.5" r="7" fill="#1F3F99"/>
+  <path d="M21 22h6l1.5 16h-9z" fill="#8A6A3F"/>
+</svg>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Website Terms" description="Terms of use for the Oakheart Technologies website.">
+  <article class="wrap section">
+    <h1 class="text-4xl md:text-5xl">Website Terms</h1>
+    <p class="ph mt-4 inline-block text-sm font-semibold">DRAFT: have this reviewed before launch</p>
+    <div class="prose-measure mt-8 space-y-5 [&_h2]:mt-8 [&_h2]:text-2xl">
+      <p>Last updated: <span class="ph">[date]</span></p>
+      <h2>Use of this site</h2>
+      <p>
+        The content on this site is provided for general information about Oakheart Technologies and its services. It
+        is not a contract or an offer. Any work is governed by a separate written agreement or quote.
+      </p>
+      <h2>Intellectual property</h2>
+      <p>
+        The site’s text, design and logos belong to Oakheart Technologies unless noted. Please do not copy them without
+        permission.
+      </p>
+      <h2>No warranty</h2>
+      <p>
+        The site is provided as is. I make reasonable efforts to keep it accurate and available but do not guarantee
+        it.
+      </p>
+      <h2>Contact</h2>
+      <p>Questions: <a class="text-royal underline" href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+  </article>
+</BaseLayout>

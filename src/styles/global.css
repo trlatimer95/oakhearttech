@@ -1,0 +1,120 @@
+@import 'tailwindcss';
+
+/* Design tokens from the brief (section 5). If the final logo uses a different blue, update here and recheck contrast. */
+@theme {
+  --color-royal: #1f3f99;
+  --color-royal-dark: #17307a;
+  --color-ink: #0e1a33;
+  --color-text: #1a1d24;
+  --color-muted: #5b616e;
+  --color-paper: #f7f6f2;
+  --color-oak: #8a6a3f;
+  --color-brass: #c9a464;
+  --color-line: #e3e0d8;
+
+  --font-serif: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-royal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-brass);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .wrap {
+    max-width: 75rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  .section {
+    padding-block: 4.5rem;
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 7rem;
+    }
+  }
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-oak);
+  }
+  .on-dark .eyebrow {
+    color: var(--color-brass);
+  }
+  .prose-measure {
+    max-width: 66ch;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px rgb(14 26 51 / 0.04), 0 4px 16px rgb(14 26 51 / 0.04);
+  }
+  /* Highlights anything the owner still has to fill in. Remove the class once real content is in. */
+  .ph {
+    background: #fff4c9;
+    color: #5c4700;
+    border-radius: 0.25rem;
+    padding: 0 0.3em;
+    box-decoration-break: clone;
+  }
+  .ph-box {
+    border: 2px dashed var(--color-oak);
+    background: repeating-linear-gradient(135deg, #fff 0 12px, #faf7ef 12px 24px);
+    color: var(--color-oak);
+    border-radius: 0.75rem;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Scroll reveal: only hidden when JS is present and motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 280ms ease-out, transform 280ms ease-out;
+  }
+  .js .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+}
