@@ -35,7 +35,7 @@ import { site } from '../data/site';
       </div>
 
       <!-- Form -->
-      <form id="contact-form" class="card space-y-5 p-7" method="post" action="/api/contact">
+      <form id="contact-form" class="card space-y-5 p-7" data-access-key={site.web3formsAccessKey}>
         <h2 class="text-2xl">Or send a message</h2>
         {
           [
@@ -72,18 +72,8 @@ import { site } from '../data/site';
           <label for="source" class="block text-sm font-semibold text-ink">How did you hear about Oakheart?</label>
           <input id="source" name="source" type="text" class="mt-1 w-full rounded-lg border border-line bg-paper px-3 py-2.5 text-base" />
         </div>
-        <!-- Honeypot: real people leave this empty -->
-        <div class="hidden" aria-hidden="true">
-          <label>Leave blank <input name="website" tabindex="-1" autocomplete="off" /></label>
-        </div>
-        {
-          site.turnstileSiteKey && (
-            <>
-              <div class="cf-turnstile" data-sitekey={site.turnstileSiteKey}></div>
-              <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
-            </>
-          )
-        }
+        <!-- Honeypot (Web3Forms "botcheck"): real people leave this empty -->
+        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <button
           type="submit"
           class="rounded-lg border-2 border-royal bg-royal px-5 py-3 text-base font-semibold text-white hover:bg-royal-dark"
@@ -102,10 +92,20 @@ import { site } from '../data/site';
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!status) return;
+    const key = form.dataset.accessKey;
+    if (!key) {
+      status.textContent = 'The form is not set up yet. Please email me directly instead.';
+      return;
+    }
     status.textContent = 'Sending…';
     try {
-      const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
-      if (!res.ok) throw new Error(String(res.status));
+      const data = new FormData(form);
+      data.append('access_key', key);
+      data.append('subject', 'New website inquiry: Oakheart Technologies');
+      data.append('from_name', 'Oakheart website');
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      const result = await res.json();
+      if (!result.success) throw new Error('rejected');
       form.reset();
       status.textContent = 'Thanks, message sent. I will reply within 1 business day.';
     } catch {

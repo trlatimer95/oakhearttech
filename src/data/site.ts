@@ -14,8 +14,9 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/tlatimer95/',
   github: 'https://github.com/trlatimer95',
 
-  // Cloudflare Turnstile site key (public). Blank = the form still renders, without the widget.
-  turnstileSiteKey: '',
+  // Web3Forms access key (public by design). Get one at web3forms.com using tyler@oakhearttech.com.
+  // Blank = the form renders but tells visitors to email instead.
+  web3formsAccessKey: '',
   // Cloudflare Web Analytics token. Blank = analytics script not included.
   analyticsToken: '',
 };

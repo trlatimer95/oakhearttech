@@ -1,0 +1,10 @@
+{
+  // Must match the existing Worker name (oakhearttech.<account>.workers.dev), or deploy creates a new Worker.
+  // Static assets only: no Worker code. The contact form posts directly to Web3Forms from the browser.
+  "name": "oakhearttech",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
