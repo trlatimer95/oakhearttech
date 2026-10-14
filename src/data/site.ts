@@ -16,7 +16,7 @@ export const site = {
 
   // Web3Forms access key (public by design). Get one at web3forms.com using tyler@oakhearttech.com.
   // Blank = the form renders but tells visitors to email instead.
-  web3formsAccessKey: '',
+  web3formsAccessKey: '4a1738a7-aa5b-43c8-803b-ae24d56e97db',
   // Cloudflare Web Analytics token. Blank = analytics script not included.
   analyticsToken: '',
 };
