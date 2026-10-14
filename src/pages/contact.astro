@@ -74,6 +74,8 @@ import { site } from '../data/site';
         </div>
         <!-- Honeypot (Web3Forms "botcheck"): real people leave this empty -->
         <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <!-- hCaptcha, injected by the Web3Forms client script. Enabled in the Web3Forms dashboard. -->
+        <div class="h-captcha" data-captcha="true"></div>
         <button
           type="submit"
           class="rounded-lg border-2 border-royal bg-royal px-5 py-3 text-base font-semibold text-white hover:bg-royal-dark"
@@ -86,6 +88,8 @@ import { site } from '../data/site';
   </section>
 </BaseLayout>
 
+<script is:inline src="https://web3forms.com/client/script.js" async defer></script>
+
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const status = document.getElementById('form-status');
@@ -95,6 +99,11 @@ import { site } from '../data/site';
     const key = form.dataset.accessKey;
     if (!key) {
       status.textContent = 'The form is not set up yet. Please email me directly instead.';
+      return;
+    }
+    const captcha = form.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement | null;
+    if (captcha && !captcha.value) {
+      status.textContent = 'Please complete the captcha above, then send again.';
       return;
     }
     status.textContent = 'Sending…';
