@@ -7,7 +7,7 @@ export const site = {
   tagline: 'Software that works the way your business does.',
 
   // Microsoft Bookings page URL. Until this is set, "Book a call" buttons go to /contact#book.
-  bookingUrl: '',
+  bookingUrl: 'https://bookings.cloud.microsoft/book/OakheartTechnologies1@oakhearttech.com/',
   // Optional. Leave blank to publish no phone number.
   phone: '(208) 553-6162',
   // Personal profiles for now; swap to Oakheart company profiles once created.
