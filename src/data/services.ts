@@ -29,8 +29,8 @@ export const services: Service[] = [
     icon: 'clipboard',
     badge: 'Start here',
     summary: 'A working session and a written plan: the 3–5 fixes worth making first, with cost and time saved for each.',
-    price: 'From $[X]',
-    priceNote: `Fixed price, credited toward a follow-on project. ${TAX}`,
+    price: '$395',
+    priceNote: `Fixed price, credited toward any project that follows. ${TAX}`,
     metaDescription:
       'A fixed-price Workflow Checkup for small businesses: a working session and a written plan of the 3–5 fixes worth making first.',
     heroTitle: 'Find out what is actually slowing you down.',
@@ -56,7 +56,7 @@ export const services: Service[] = [
       { title: 'Book', text: 'Pick a time for a free 30-minute call, or book the checkup directly.' },
       { title: 'Intake', text: 'A short form about your tools and what is slowing you down.' },
       { title: 'Session', text: 'We walk through your workflow together. You show me; I ask questions.' },
-      { title: 'Report', text: 'You get the written plan within [X] business days.' },
+      { title: 'Report', text: 'You get the written plan within 3 business days of the session.' },
     ],
     faqs: [
       {
@@ -78,8 +78,8 @@ export const services: Service[] = [
     title: 'Practical AI Implementation',
     icon: 'users',
     summary: 'Find where AI actually helps your business, set it up properly, and know where it does not belong.',
-    price: 'From $[X]',
-    priceNote: `The checkup is a fixed price; setup is scoped per project. ${TAX}`,
+    price: '$495',
+    priceNote: `The checkup is a fixed $495, credited toward setup. Setup is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
       'Practical AI implementation for small and mid-size businesses: find where AI saves real time, set up the workflows with guardrails, and know when not to use it.',
     heroTitle: 'Use AI where it helps. Know where it does not.',
@@ -138,8 +138,8 @@ export const services: Service[] = [
     title: 'Automation & Integrations',
     icon: 'plug',
     summary: 'Stop typing the same data into three systems. Connect the tools you already pay for.',
-    price: 'From $[X]',
-    priceNote: `Typical projects range from $[X]–$[Y]. ${TAX}`,
+    price: 'Quoted after the checkup',
+    priceNote: `Projects are quoted as a fixed price after a Workflow Checkup, based on what is needed. Most start around $1,500. ${TAX}`,
     metaDescription:
       'Workflow automation and software integrations for small businesses: connect your existing tools and cut double data entry.',
     heroTitle: 'Make your tools talk to each other.',
@@ -163,8 +163,8 @@ export const services: Service[] = [
     processTitle: 'How a project runs',
     process: [
       { title: 'Listen', text: 'A free call to understand the business and the problem.' },
-      { title: 'Map', text: 'Agree on scope and price in writing, usually after a Workflow Checkup.' },
-      { title: 'Build', text: 'Fixed-scope work with regular check-ins, so you see progress.' },
+      { title: 'Diagnose', text: 'Agree on scope and price in writing, usually after a Workflow Checkup.' },
+      { title: 'Fix', text: 'Fixed-scope work with regular check-ins, so you see progress.' },
       { title: 'Hand off', text: 'Documentation, training, and the accounts are yours.' },
     ],
     faqs: [
@@ -187,8 +187,8 @@ export const services: Service[] = [
     title: 'Custom Software & Websites',
     icon: 'code',
     summary: 'When off-the-shelf does not fit: purpose-built tools and websites that do their job and are yours to keep.',
-    price: 'From $[X]',
-    priceNote: `Typical projects range from $[X]–$[Y]. ${TAX}`,
+    price: 'Quoted after discovery',
+    priceNote: `Quoted as a fixed price once the scope is clear, usually after a Workflow Checkup. Most projects start around $5,000. ${TAX}`,
     metaDescription:
       'Custom software and websites for small businesses, built to fit how you work, with code and accounts handed over to you.',
     heroTitle: 'Software built to fit, not squeezed to fit.',
@@ -231,8 +231,8 @@ export const services: Service[] = [
     title: 'Project Rescue',
     icon: 'lifebuoy',
     summary: 'A stalled, abandoned or broken software project, assessed honestly and either fixed or replaced.',
-    price: 'From $[X]',
-    priceNote: `The assessment is a fixed-price first step. ${TAX}`,
+    price: 'From $595',
+    priceNote: `The assessment is a fixed-price first step: $595 for a small to medium codebase, larger ones quoted, and credited toward the fix. Fixes are quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
       'Software project rescue: an honest assessment of stalled, abandoned or AI-generated code, then a plan to finish it or replace it.',
     heroTitle: 'Your software project stalled. Let us find out why.',
@@ -274,52 +274,64 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: 'cloud-cost-review',
-    title: 'Cloud & Software Cost Review',
+    slug: 'software-cost-review',
+    title: 'Software & Subscription Cost Review',
     icon: 'gauge',
-    summary: 'Find the subscriptions, licenses and cloud resources you are paying for and not using, and what to trim.',
-    price: 'From $[X]',
-    priceNote: `Fixed price. Can be combined with a Workflow Checkup. ${TAX}`,
+    summary: 'Find the overlapping tools, unused seats and over-tiered plans you are paying for, and what to consolidate.',
+    price: '$395',
+    priceNote: `Fixed price, set so it pays for itself quickly, and credited toward any follow-on work. Can be combined with a Workflow Checkup. ${TAX}`,
     metaDescription:
-      'A fixed-price review of your software subscriptions and cloud spend (Azure, AWS, Microsoft 365 and more), with a written list of what to cut and what it saves.',
-    heroTitle: 'Stop paying for software and cloud services you do not use.',
+      'A fixed-price review of your software subscriptions (CRMs, project tools, Microsoft 365 and more): find overlapping tools, unused seats and over-tiered plans, with a written list of what to consolidate and what it saves.',
+    heroTitle: 'Stop paying for software you do not use, or use twice.',
     heroLead:
-      'Subscriptions pile up. Cloud resources get started and forgotten. I go through what you are paying for, find the waste, and give you a written list of what to change and what it saves.',
+      'Subscriptions pile up, and tools quietly overlap. I go through what you pay for, find the overlap and waste, and give you a written list of what to consolidate, drop or downgrade, with the monthly saving for each.',
     signsTitle: 'Signs you need this',
     signs: [
-      'Your monthly software or cloud bill has grown and nobody can say why.',
-      'You are paying for licenses for people who left, or for tools two people use.',
-      'A previous developer set up cloud resources and nobody knows what is safe to turn off.',
+      'You pay for two or three tools that do much the same job.',
+      'You are paying for seats for people who left, or tools only one person uses.',
+      'Nobody can say what each subscription is for, or when it renews.',
       'You pay for the higher tier of something without being sure you need it.',
+      'Your software bill has grown and nobody can explain why.',
     ],
     includesTitle: 'What is included',
     includes: [
-      'An inventory of your subscriptions, licenses and cloud resources, with what each costs',
-      'What is unused, duplicated or over-provisioned',
+      'An inventory of every subscription: what it costs, who uses it and when it renews',
+      'Which tools overlap, and what could be consolidated into fewer',
+      'Unused seats and plans that are bigger than you need',
       'A written list of recommended changes, with the monthly saving for each',
-      'Risks flagged, so nothing you rely on gets switched off by mistake',
-      'Optional: I make the changes with you',
+      'Risks flagged, such as data migration, so nothing you rely on breaks',
+      'A renewal calendar, so changes happen at the right time',
+      'Optional: help migrating or connecting the tools you keep',
+      'Optional add-on: a review of cloud resources, such as Azure, if you have them',
     ],
     processTitle: 'How it works',
     process: [
       { title: 'Scope', text: 'A free call to see what you use and where the bills come from.' },
-      { title: 'Inventory', text: 'Read-only access to billing and resource views, or exports you share.' },
-      { title: 'Analyze', text: 'Go through every line: used, unused, duplicated or too big.' },
-      { title: 'Report', text: 'A written list within [X] business days, ranked by savings.' },
+      { title: 'Inventory', text: 'Bank or card statements, invoices and admin exports. Read-only access at most.' },
+      { title: 'Analyze', text: 'Go through every line: used, unused, overlapping or too big.' },
+      { title: 'Report', text: 'A written list within 5 business days, ranked by savings.' },
     ],
-    stance: 'If there are no meaningful savings to find, I will tell you.',
+    stance: 'If there are no meaningful savings to find, I will tell you. Sometimes the answer is to keep what you have.',
     faqs: [
       {
-        q: 'Do you need access to our accounts?',
-        a: 'Only read-only access to billing and resource views, or exports you share with me. You stay in control of any changes.',
+        q: 'What do you need from me?',
+        a: 'A list of what you pay for, usually from card or bank statements and invoices, plus admin exports from tools like Microsoft 365. Read-only access at most. You stay in control of every change.',
+      },
+      {
+        q: 'Will you make me switch tools?',
+        a: 'Only when switching is clearly cheaper than staying, counting migration time and risk. Often the right answer is to drop the weakest tool and keep the rest.',
+      },
+      {
+        q: 'How much could I save?',
+        a: 'It depends on what you have, so I give an honest estimate line by line, not a promise. In my own business, after comparing about five tools built for contractors, I cut software costs from $700+ a month to about $250.',
       },
       {
         q: 'Is this a security audit?',
-        a: 'No. I look at cost and obvious waste. If you need a formal security assessment, I will say so and point you to someone who does that work.',
+        a: 'No. I look at cost, overlap and obvious waste. If you need a formal security assessment, I will say so and point you to someone who does that work.',
       },
       {
-        q: 'What platforms do you cover?',
-        a: 'Microsoft Azure and Microsoft 365 are where I have the most experience, plus the usual SaaS subscriptions. Tell me what you use and I will say if it is a fit.',
+        q: 'What tools do you cover?',
+        a: 'Any subscription: CRMs, project and documentation tools, Microsoft 365, accounting and the like. For companies on Azure, I can also review cloud resources.',
       },
     ],
   },
@@ -363,5 +375,17 @@ export const services: Service[] = [
     ],
   },
 ];
+
+// Display order everywhere (home cards, footer, services page): fix-first, build last.
+const displayOrder = [
+  'workflow-checkup',
+  'project-rescue',
+  'automation-integrations',
+  'software-cost-review',
+  'ai-implementation',
+  'custom-software',
+  'interactive-vr',
+];
+services.sort((a, b) => displayOrder.indexOf(a.slug) - displayOrder.indexOf(b.slug));
 
 export const getService = (slug: string) => services.find((s) => s.slug === slug)!;

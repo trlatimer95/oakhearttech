@@ -1,7 +1,7 @@
 ---
 title: 'Significantly reducing cloud spend on a commerce platform'
 client: 'Commerce platform company (anonymized)'
-service: 'Cloud & Software Cost Review'
+service: 'Software & Subscription Cost Review'
 summary: 'I went through a commerce platform’s Azure environment resource by resource and significantly reduced monthly cloud spend, while also helping bring its automated compliance checks to a passing state.'
 problem: 'The cloud bill had grown with unused and over-provisioned resources, and the platform also had automated compliance tests failing and software vulnerabilities to address.'
 fix: 'I went through the environment removing unused resources and lowering the tier of anything that did not need the higher one. Alongside that, I worked out how to implement the changes in Azure that the failing compliance tests required, and fixed the software vulnerabilities that were found.'
@@ -39,4 +39,4 @@ cloud bill had grown faster than the business needed, and there was also complia
 ## Why it matters for small business
 
 Small shops overspend on software and cloud too, just at a smaller scale. The same walkthrough, line by line, works
-for a $250 monthly bill as well as a $25k one. It is the heart of the Cloud & Software Cost Review.
+for a $250 monthly bill as well as a $25k one. It is the heart of the Software & Subscription Cost Review, with cloud resources as an add-on.
