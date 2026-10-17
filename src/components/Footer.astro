@@ -16,7 +16,16 @@ const year = new Date().getFullYear();
         <a class="underline decoration-brass underline-offset-4 hover:text-white" href={`mailto:${site.email}`}
           >{site.email}</a
         >
-        {site.phone && <span> · {site.phone}</span>}
+        {
+          site.phone && (
+            <span>
+              {' · '}
+              <a class="underline decoration-brass underline-offset-4 hover:text-white" href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>
+                {site.phone}
+              </a>
+            </span>
+          )
+        }
       </p>
       <p class="mt-1 text-paper/80">Based in Spokane, WA. Working with clients locally and remotely.</p>
     </div>
@@ -39,7 +48,6 @@ const year = new Date().getFullYear();
     <div>
       <h2 class="font-sans text-sm font-semibold tracking-widest text-brass uppercase">Company</h2>
       <ul class="mt-4 space-y-2">
-        <li><a class="text-paper/80 hover:text-white" href="/care-plan">Care plans</a></li>
         <li><a class="text-paper/80 hover:text-white" href="/about">About</a></li>
         <li><a class="text-paper/80 hover:text-white" href="/work">Work</a></li>
         <li><a class="text-paper/80 hover:text-white" href="/interactive">Interactive</a></li>

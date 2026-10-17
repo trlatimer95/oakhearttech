@@ -12,6 +12,8 @@ const work = defineCollection({
     problem: z.string(),
     fix: z.string(),
     result: z.string(),
+    // Who the work was for. Shown on the page so it isn't mistaken for an Oakheart client project.
+    origin: z.enum(['employee', 'own', 'contract']).default('employee'),
     // Set to false once the case study has real, approved content.
     draft: z.boolean().default(true),
     order: z.number().default(100),

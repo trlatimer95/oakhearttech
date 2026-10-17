@@ -33,9 +33,9 @@ export const services: Service[] = [
     priceNote: `Fixed price, credited toward any project that follows. ${TAX}`,
     metaDescription:
       'A fixed-price Workflow Checkup for small businesses: a working session and a written plan of the 3–5 fixes worth making first.',
-    heroTitle: 'Find out what is actually slowing you down.',
+    heroTitle: 'Find out what’s actually slowing you down.',
     heroLead:
-      'You know something is inefficient. You just do not know what to fix first. The Workflow Checkup gives you a short, written, prioritized plan, so you can decide with real numbers in front of you.',
+      'You know something is inefficient. You just don’t know what to fix first. The Workflow Checkup gives you a short, written, prioritized plan, so you can decide with real numbers in front of you.',
     signsTitle: 'Is this you?',
     signs: [
       'You know work takes longer than it should, but not where the time goes.',
@@ -54,14 +54,14 @@ export const services: Service[] = [
     processTitle: 'How it works',
     process: [
       { title: 'Book', text: 'Pick a time for a free 30-minute call, or book the checkup directly.' },
-      { title: 'Intake', text: 'A short form about your tools and what is slowing you down.' },
+      { title: 'Intake', text: 'A short form about your tools and what’s slowing you down.' },
       { title: 'Session', text: 'We walk through your workflow together. You show me; I ask questions.' },
       { title: 'Report', text: 'You get the written plan within 3 business days of the session.' },
     ],
     faqs: [
       {
-        q: 'What if the answer is that you do not need me?',
-        a: 'Then I will say so. Sometimes the best fix is a setting in software you already own, and the report will tell you that.',
+        q: 'What if the answer is that you don’t need me?',
+        a: 'Then I’ll say so. Sometimes the best fix is a setting in software you already own, and the report will tell you that.',
       },
       {
         q: 'Do I have to hire you afterward?',
@@ -77,8 +77,8 @@ export const services: Service[] = [
     slug: 'ai-implementation',
     title: 'Practical AI Implementation',
     icon: 'users',
-    summary: 'Find where AI actually helps your business, set it up properly, and know where it does not belong.',
-    price: '$495',
+    summary: 'Find where AI actually helps your business, set it up properly, and know where it doesn’t belong.',
+    price: 'AI checkup $495',
     priceNote: `The checkup is a fixed $495, credited toward setup. Setup is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
       'Practical AI implementation for small and mid-size businesses: find where AI saves real time, set up the workflows with guardrails, and know when not to use it.',
@@ -87,9 +87,9 @@ export const services: Service[] = [
       'Most businesses are being told they need AI and have no one honest to ask. I show where it saves real time in your business, set it up with the right guardrails, and tell you where to leave it alone.',
     signsTitle: 'Sound familiar?',
     signs: [
-      'You hear about AI constantly and cannot tell where it applies to your business.',
+      'You hear about AI constantly and can’t tell where it applies to your business.',
       'Employees are already using it, and nobody has set any rules.',
-      'You tried a tool, got mixed results, and are not sure why.',
+      'You tried a tool, got mixed results, and aren’t sure why.',
       'You want the time savings without the risk of mistakes or leaked information.',
     ],
     includesTitle: 'What you get',
@@ -109,7 +109,7 @@ export const services: Service[] = [
       { title: 'Set up', text: 'Build the workflows you choose, with templates and guardrails.' },
       { title: 'Hand off', text: 'A walkthrough for your team and support as you put it to use.' },
     ],
-    stance: 'AI is a tool that makes mistakes. I set it up so its work gets checked, and I will tell you where it does not belong.',
+    stance: 'AI is a tool that makes mistakes. I set it up so its work gets checked, and I’ll tell you where it doesn’t belong.',
     faqs: [
       {
         q: 'Do you recommend a particular AI tool?',
@@ -117,7 +117,7 @@ export const services: Service[] = [
       },
       {
         q: 'Is it safe to put our business information into AI tools?',
-        a: 'Not all of it. A big part of the setup is defining what should never be pasted in, and which settings and plans protect your data. I am not a lawyer, so for legal or regulatory questions I will tell you when to ask one.',
+        a: 'Not all of it. A big part of the setup is defining what should never be pasted in, and which settings and plans protect your data. I’m not a lawyer, so for legal or regulatory questions I’ll tell you when to ask one.',
       },
       {
         q: 'How much will we save?',
@@ -125,7 +125,7 @@ export const services: Service[] = [
       },
       {
         q: 'Will AI replace my staff?',
-        a: 'That is not the goal and not what I recommend. The aim is to remove busywork so people can spend time on the work that needs them.',
+        a: 'That isn’t the goal and not what I recommend. The aim is to remove busywork so people can spend time on the work that needs them.',
       },
       {
         q: 'Can you work with my whole team?',
@@ -139,12 +139,12 @@ export const services: Service[] = [
     icon: 'plug',
     summary: 'Stop typing the same data into three systems. Connect the tools you already pay for.',
     price: 'Quoted after the checkup',
-    priceNote: `Projects are quoted as a fixed price after a Workflow Checkup, based on what is needed. Most start around $1,500. ${TAX}`,
+    priceNote: `Projects are quoted as a fixed price after a Workflow Checkup, based on what’s needed. Most start around $1,500. ${TAX}`,
     metaDescription:
       'Workflow automation and software integrations for small businesses: connect your existing tools and cut double data entry.',
     heroTitle: 'Make your tools talk to each other.',
     heroLead:
-      'Most small businesses do not need new software. They need the software they have to stop making people re-type things. I connect your tools and automate the repetitive steps.',
+      'Most small businesses don’t need new software. They need the software they have to stop making people re-type things. I connect your tools and automate the repetitive steps.',
     signsTitle: 'Signs you need this',
     signs: [
       'The same customer or job details get typed into more than one system.',
@@ -152,7 +152,7 @@ export const services: Service[] = [
       'Someone exports a spreadsheet every week just to move data somewhere else.',
       'Follow-ups and reminders depend on someone remembering.',
     ],
-    includesTitle: 'What is included',
+    includesTitle: 'What’s included',
     includes: [
       'A map of the steps being repeated by hand',
       'Integrations between the tools you already use, built and tested',
@@ -174,11 +174,11 @@ export const services: Service[] = [
       },
       {
         q: 'Can you help us use AI in our business?',
-        a: 'Yes, where it makes sense. I will show you where it saves time, what it should never be left to do alone, and what information should never go into it. Sometimes the honest answer is that you do not need it yet.',
+        a: 'Yes, where it makes sense. I’ll show you where it saves time, what it should never be left to do alone, and what information should never go into it. Sometimes the honest answer is that you don’t need it yet.',
       },
       {
         q: 'What happens if a connected tool changes?',
-        a: 'Integrations can break when a vendor changes something. I document how each one works and can offer an optional care plan.',
+        a: 'Integrations can break when a vendor changes something. I document how each one works, so you or another developer can fix it, and I can quote ongoing support if you want it.',
       },
     ],
   },
@@ -186,22 +186,22 @@ export const services: Service[] = [
     slug: 'custom-software',
     title: 'Custom Software & Websites',
     icon: 'code',
-    summary: 'When off-the-shelf does not fit: purpose-built tools and websites that do their job and are yours to keep.',
+    summary: 'When off-the-shelf doesn’t fit: purpose-built tools and websites that do their job and are yours to keep.',
     price: 'Quoted after discovery',
     priceNote: `Quoted as a fixed price once the scope is clear, usually after a Workflow Checkup. Most projects start around $5,000. ${TAX}`,
     metaDescription:
       'Custom software and websites for small businesses, built to fit how you work, with code and accounts handed over to you.',
     heroTitle: 'Software built to fit, not squeezed to fit.',
     heroLead:
-      'Sometimes nothing off the shelf matches how your business works. I design and build the tool, or the website, that does, and I hand over everything when it is done.',
+      'Sometimes nothing off the shelf matches how your business works. I design and build the tool, or the website, that does, and I hand over everything when it’s done.',
     signsTitle: 'A good fit if',
     signs: [
-      'You have been bending your process around software that does not quite fit.',
-      'Your website does not bring in work, or is hard for you to update.',
+      'You have been bending your process around software that doesn’t quite fit.',
+      'Your website doesn’t bring in work, or is hard for you to update.',
       'You have a spreadsheet that has quietly become critical to the business.',
       'You need an internal tool, a customer portal, or a simple booking or quoting flow.',
     ],
-    includesTitle: 'What is included',
+    includesTitle: 'What’s included',
     includes: [
       'A written scope with a fixed price wherever possible',
       'Design, build and testing in short stages you can review',
@@ -231,13 +231,13 @@ export const services: Service[] = [
     title: 'Project Rescue',
     icon: 'lifebuoy',
     summary: 'A stalled, abandoned or broken software project, assessed honestly and either fixed or replaced.',
-    price: 'From $595',
-    priceNote: `The assessment is a fixed-price first step: $595 for a small to medium codebase, larger ones quoted, and credited toward the fix. Fixes are quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    price: 'Assessment from $595',
+    priceNote: `The assessment is a fixed-price first step:$595 for a small to medium codebase, larger ones quoted, and credited toward the fix. Fixes are quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
       'Software project rescue: an honest assessment of stalled, abandoned or AI-generated code, then a plan to finish it or replace it.',
     heroTitle: 'Your software project stalled. Let us find out why.',
     heroLead:
-      'No blame, no sales pitch. I review what exists, tell you plainly what is salvageable, and give you options with real costs.',
+      'No blame, no sales pitch. I review what exists, tell you plainly what’s salvageable, and give you options with real costs.',
     signsTitle: 'Recognize any of these?',
     signs: [
       'Deadlines keep slipping, and nobody can say when it will be done.',
@@ -249,27 +249,27 @@ export const services: Service[] = [
     includesTitle: 'What an assessment covers',
     includes: [
       'Review of the code, hosting, accounts and documentation',
-      'A plain-language report on what works, what does not, and what is risky',
+      'A plain-language report on what works, what does not, and what’s risky',
       'Options with estimated costs: finish it, fix parts, or rebuild',
       'A recommendation, including when rebuilding is cheaper',
     ],
     processTitle: 'The rescue process',
     process: [
       { title: 'Assess', text: 'I review what exists and talk to you about what it was supposed to do.' },
-      { title: 'Diagnose', text: 'What works, what is broken, and what is risky.' },
+      { title: 'Diagnose', text: 'What works, what’s broken, and what’s risky.' },
       { title: 'Options', text: 'Two or three paths with honest cost and time estimates.' },
       { title: 'Stabilize', text: 'Secure accounts, fix critical issues, stop the bleeding.' },
       { title: 'Continue', text: 'Finish the work, or hand a clean plan to whoever should.' },
     ],
-    stance: 'Honesty over optimism: if it is cheaper to rebuild, I will tell you.',
+    stance: 'Honesty over optimism: if it’s cheaper to rebuild, I’ll tell you.',
     faqs: [
       {
         q: 'What if my last developer disappeared?',
-        a: 'The first step is making sure you have access to your code, hosting and accounts. Then we look at what is there.',
+        a: 'The first step is making sure you have access to your code, hosting and accounts. Then we look at what’s there.',
       },
       {
         q: 'Can you work with AI-generated code?',
-        a: 'Yes. I will tell you honestly whether it is worth keeping or whether starting clean is the better investment.',
+        a: 'Yes. I’ll tell you honestly whether it’s worth keeping or whether starting clean is the better investment.',
       },
     ],
   },
@@ -277,23 +277,23 @@ export const services: Service[] = [
     slug: 'software-cost-review',
     title: 'Software & Subscription Cost Review',
     icon: 'gauge',
-    summary: 'Find the overlapping tools, unused seats and over-tiered plans you are paying for, and what to consolidate.',
+    summary: 'Find the overlapping tools, unused seats and over-tiered plans you’re paying for, and what to consolidate.',
     price: '$395',
     priceNote: `Fixed price, set so it pays for itself quickly, and credited toward any follow-on work. Can be combined with a Workflow Checkup. ${TAX}`,
     metaDescription:
       'A fixed-price review of your software subscriptions (CRMs, project tools, Microsoft 365 and more): find overlapping tools, unused seats and over-tiered plans, with a written list of what to consolidate and what it saves.',
-    heroTitle: 'Stop paying for software you do not use, or use twice.',
+    heroTitle: 'Stop paying for software you don’t use, or use twice.',
     heroLead:
       'Subscriptions pile up, and tools quietly overlap. I go through what you pay for, find the overlap and waste, and give you a written list of what to consolidate, drop or downgrade, with the monthly saving for each.',
     signsTitle: 'Signs you need this',
     signs: [
       'You pay for two or three tools that do much the same job.',
-      'You are paying for seats for people who left, or tools only one person uses.',
+      'You’re paying for seats for people who left, or tools only one person uses.',
       'Nobody can say what each subscription is for, or when it renews.',
       'You pay for the higher tier of something without being sure you need it.',
       'Your software bill has grown and nobody can explain why.',
     ],
-    includesTitle: 'What is included',
+    includesTitle: 'What’s included',
     includes: [
       'An inventory of every subscription: what it costs, who uses it and when it renews',
       'Which tools overlap, and what could be consolidated into fewer',
@@ -311,7 +311,7 @@ export const services: Service[] = [
       { title: 'Analyze', text: 'Go through every line: used, unused, overlapping or too big.' },
       { title: 'Report', text: 'A written list within 5 business days, ranked by savings.' },
     ],
-    stance: 'If there are no meaningful savings to find, I will tell you. Sometimes the answer is to keep what you have.',
+    stance: 'If there are no meaningful savings to find, I’ll tell you. Sometimes the answer is to keep what you have.',
     faqs: [
       {
         q: 'What do you need from me?',
@@ -327,7 +327,7 @@ export const services: Service[] = [
       },
       {
         q: 'Is this a security audit?',
-        a: 'No. I look at cost, overlap and obvious waste. If you need a formal security assessment, I will say so and point you to someone who does that work.',
+        a: 'No. I look at cost, overlap and obvious waste. If you need a formal security assessment, I’ll say so and point you to someone who does that work.',
       },
       {
         q: 'What tools do you cover?',
@@ -350,10 +350,10 @@ export const services: Service[] = [
     signsTitle: 'A good fit if',
     signs: [
       'The skill is hands-on, high-stakes or expensive to practice for real.',
-      'Slide decks and videos are not changing what people do on the job.',
+      'Slide decks and videos aren’t changing what people do on the job.',
       'You want repeatable scenarios and a way to see how people performed.',
     ],
-    includesTitle: 'What is included',
+    includesTitle: 'What’s included',
     includes: [
       'Scenario design with your subject-matter experts',
       'Interactive or VR build, tested with real users',

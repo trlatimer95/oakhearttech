@@ -8,6 +8,7 @@ import FAQ from '../components/FAQ.astro';
 import { services } from '../data/services';
 import { bookingHref, bookingIsExternal } from '../data/site';
 import { ph } from '../lib/ph';
+import { originShort } from '../lib/origin';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
 
@@ -22,8 +23,8 @@ const pains = [
 
 // Figures come from the case studies. Keep them identical to what those pages say.
 const proof = [
-  { figure: '200+', label: 'defects fixed in six months on machine-control software, with new reports nearly stopping' },
-  { figure: '10 steps → 1', label: 'a weekly spreadsheet routine replaced with a one-screen form' },
+  { figure: '200+', label: 'defects fixed over my time on machine-control software, with new reports nearly stopping' },
+  { figure: '10+ steps → 1', label: 'a weekly spreadsheet routine replaced with a one-screen form' },
   { figure: '$700 → $250', label: 'monthly software cost in my own business after consolidating overlapping tools' },
 ];
 
@@ -35,7 +36,7 @@ const rank = [
 ];
 
 const steps = [
-  { t: 'Listen', d: 'A free call to understand what is broken and what it is costing you.' },
+  { t: 'Listen', d: 'A free call to understand what’s broken and what it’s costing you.' },
   { t: 'Diagnose', d: 'The Workflow Checkup, or a code review for software: a written plan with priorities, costs and time saved.' },
   { t: 'Fix', d: 'Fixed-scope work with regular check-ins, so there are no surprises.' },
   { t: 'Hand off', d: 'Documentation, training, and you own everything you paid for.' },
@@ -44,7 +45,7 @@ const steps = [
 const why = [
   {
     t: 'I run a small business too.',
-    d: 'I own TRL Home Solutions, a contracting and handyman company I started alone and grew to a working crew. I know what it is like when the paperwork eats the day.',
+    d: 'I own TRL Home Solutions, a contracting and handyman company I started alone and grew to a working crew. I know what it’s like when the paperwork eats the day.',
   },
   {
     t: 'Honest scope, fixed prices.',
@@ -61,7 +62,7 @@ const faqs = [
     q: 'What does a typical project cost?',
     a: 'It depends on scope, which is why I start with a fixed-price Workflow Checkup, $395, credited toward any project that follows. Larger work is quoted after the checkup, and my hourly rate for ad hoc work is $125.',
   },
-  { q: 'Do you work with businesses outside Spokane?', a: 'Yes. Most work is done remotely, with video calls and shared documents. I am happy to meet in person around Spokane.' },
+  { q: 'Do you work with businesses outside Spokane?', a: 'Yes. Most work is done remotely, with video calls and shared documents. I’m happy to meet in person around Spokane.' },
   {
     q: 'Who owns the software you build?',
     a: 'You do, once you have paid. I keep my own reusable tools and grant you a license to use them in your project.',
@@ -76,7 +77,7 @@ const faqs = [
   },
   {
     q: 'Do you charge sales tax?',
-    a: 'Yes. Washington requires sales tax on most software and IT services, and it is itemized on every quote.',
+    a: 'Yes, for Washington clients. Washington taxes most software and IT services, and it’s itemized on every quote. Clients outside Washington may not be charged Washington tax.',
   },
 ];
 ---
@@ -166,12 +167,10 @@ const faqs = [
               </span>
               <h3 class="mt-4 text-2xl">{s.title}</h3>
               <p class="mt-2 text-muted">{s.summary}</p>
-              <p class="mt-5 flex items-center justify-between font-semibold text-ink">
-                <span set:html={ph(s.price)} />
-                <span class="flex items-center gap-1 text-royal group-hover:gap-2">
-                  Learn more <Icon name="arrow" class="h-4 w-4" />
-                </span>
-              </p>
+              <p class="mt-5 font-semibold text-ink" set:html={ph(s.price)} />
+              <span class="mt-2 flex items-center gap-1 font-semibold text-royal group-hover:gap-2">
+                Learn more <Icon name="arrow" class="h-4 w-4" />
+              </span>
             </a>
           ))
         }
@@ -195,7 +194,7 @@ const faqs = [
             {work.map((w) => (
               <a href={`/work/${w.id}`} class="card reveal block p-6 transition-shadow hover:shadow-lg">
                 {w.data.draft && <span class="ph text-xs font-semibold">DRAFT PLACEHOLDER</span>}
-                <p class="eyebrow mt-3">{w.data.service}</p>
+                <p class="eyebrow mt-3">{originShort[w.data.origin]} · {w.data.service}</p>
                 <h3 class="mt-2 text-xl">{w.data.title}</h3>
                 <p class="mt-2 text-muted">{w.data.summary}</p>
               </a>
@@ -277,7 +276,7 @@ const faqs = [
         <p class="eyebrow">Beyond business software</p>
         <h2 class="mt-3 text-2xl text-paper md:text-3xl">Interactive training and simulation.</h2>
         <p class="mt-3 text-paper/80">
-          I also build interactive and VR training, including work on VR EMS training, and I am developing games under
+          I also build interactive and VR training, including work on VR EMS training, and I’m developing games under
           Oakheart Interactive.
         </p>
       </div>
@@ -295,7 +294,7 @@ const faqs = [
     <div class="wrap section">
       <p class="eyebrow">FAQ</p>
       <h2 class="mt-3 text-3xl md:text-4xl">Common questions</h2>
-      <div class="mt-8 max-w-3xl">
+      <div class="mt-8 max-w-4xl">
         <FAQ items={faqs} />
       </div>
     </div>

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTABand from '../../components/CTABand.astro';
+import { originShort } from '../../lib/origin';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -16,7 +17,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
         work.map((w) => (
           <a href={`/work/${w.id}`} class="card block p-7 transition-shadow hover:shadow-lg">
             {w.data.draft && <span class="ph text-xs font-semibold">DRAFT PLACEHOLDER</span>}
-            <p class="eyebrow mt-3">{w.data.client}</p>
+            <p class="eyebrow mt-3">{originShort[w.data.origin]} · {w.data.client}</p>
             <h2 class="mt-2 text-2xl">{w.data.title}</h2>
             <p class="mt-2 text-muted">{w.data.summary}</p>
           </a>

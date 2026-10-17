@@ -2,10 +2,11 @@
 title: 'A multiplayer VR simulator for emergency medical training'
 client: 'Confidential client'
 service: 'Interactive & VR Training'
-summary: 'A virtual simulator that lets fire departments recreate real calls and practice working through them together. I am the sole developer, building it in Unity with networked multiplayer.'
+origin: 'contract'
+summary: 'A virtual simulator that lets fire departments recreate real calls and practice working through them together. I’m the sole developer, building it in Unity with networked multiplayer.'
 problem: 'Emergency medical skills are hard to practice realistically and repeatably, and departments want to rehearse the specific calls they actually run, as a team.'
 fix: 'I designed and built the simulator in Unity and C#, with networked multiplayer on Photon Fusion and an outside artist for models. I own the code, the multiplayer sync, the interactions and performance.'
-result: 'In development for several years and planned for fire department training. It is my largest project to date.'
+result: 'In development for several years and planned for fire department training. It’s my largest project to date.'
 draft: true
 order: 5
 ---
@@ -21,7 +22,7 @@ the scenarios.
 
 ## My role
 
-I am the sole developer. I built the code, the functionality, the multiplayer synchronization and the performance
+I’m the sole developer. I built the code, the functionality, the multiplayer synchronization and the performance
 work, with an outside artist providing the 3D models.
 
 ## The hard part: interactions that behave like the real thing
@@ -38,4 +39,5 @@ between users has to be network-aware.
 ## Why it matters for your project
 
 Building a networked, scenario-driven simulator end to end is the same skill set needed for business training and
-simulation work: interaction design, multiplayer, and performance on headsets.
+simulation work: interaction design, multiplayer, and performance on headsets. See
+[Interactive & VR Training](/services/interactive-vr) for what I can build for you.

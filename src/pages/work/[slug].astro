@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTABand from '../../components/CTABand.astro';
 import { ph } from '../../lib/ph';
+import { originLong } from '../../lib/origin';
 
 export async function getStaticPaths() {
   const work = await getCollection('work');
@@ -24,6 +25,9 @@ const blocks = [
     {d.draft && <p class="ph mt-6 inline-block text-sm font-semibold">DRAFT PLACEHOLDER: not real content yet</p>}
     <p class="eyebrow mt-4">{d.client} · {d.service}</p>
     <h1 class="mt-3 max-w-4xl text-4xl md:text-5xl">{d.title}</h1>
+    <p class="mt-4 inline-block rounded-lg border border-line bg-white px-4 py-2 text-sm text-muted">
+      {originLong[d.origin]}
+    </p>
 
     <div class="mt-10 grid gap-6 md:grid-cols-3">
       {

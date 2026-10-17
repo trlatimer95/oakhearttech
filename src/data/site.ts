@@ -9,7 +9,8 @@ export const site = {
   // Microsoft Bookings page URL. Until this is set, "Book a call" buttons go to /contact#book.
   bookingUrl: 'https://bookings.cloud.microsoft/book/OakheartTechnologies1@oakhearttech.com/',
   // Optional. Leave blank to publish no phone number.
-  phone: '(208) 553-6162',
+  // Hidden until there is a separate business number (the (208) number is also the TRL Home Solutions number).
+  phone: '',
   // Personal profiles for now; swap to Oakheart company profiles once created.
   linkedin: 'https://www.linkedin.com/in/tlatimer95/',
   github: 'https://github.com/trlatimer95',
