@@ -7,7 +7,7 @@ interface Props {
 }
 const {
   title = `Not sure where to start? Book a free <span class="whitespace-nowrap">30-minute</span> call.`,
-  text = `Tell me what's slowing you down. If I'm not the right fit, I'll say so and point you somewhere useful.`,
+  text = `Bring one frustrating process, recurring software expense or broken system. We'll talk through what's happening, what you've tried, and whether I can help. If there's a fit, I'll explain the best next step.`,
 } = Astro.props;
 ---
 
@@ -15,7 +15,7 @@ const {
   <div class="wrap section text-center">
     <div class="mx-auto h-px w-16 bg-brass"></div>
     <h2 class="mx-auto mt-8 max-w-3xl text-3xl text-paper md:text-4xl" set:html={title} />
-    <p class="mx-auto mt-4 max-w-xl text-paper/80">{text}</p>
+    <p class="mx-auto mt-4 max-w-2xl text-paper/80">{text}</p>
     <div class="mt-8 flex flex-wrap justify-center gap-4">
       <Button href={bookingHref} external={bookingIsExternal} variant="light">Book a free 30-minute call</Button>
       <Button href={`mailto:${site.email}`} variant="outline-light">Email {site.email}</Button>

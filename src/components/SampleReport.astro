@@ -1,0 +1,62 @@
+---
+import Logo from './Logo.astro';
+// Illustrative example of the written Workflow Checkup report. All names and figures are made up.
+const fixes = [
+  { rank: 1, issue: 'Job details typed into three tools', fix: 'Connect the intake form to accounting', effort: 'Medium', cost: '$1,800', saved: '~5 hrs / week' },
+  { rank: 2, issue: 'Quotes built by hand in Word', fix: 'Quote template that fills itself in', effort: 'Small', cost: '$600', saved: '~3 hrs / week' },
+  { rank: 3, issue: 'Follow-ups tracked from memory', fix: 'Reminders on every open lead', effort: 'Small', cost: '$350', saved: '~2 hrs / week' },
+];
+---
+
+<figure class="mx-auto w-full max-w-3xl" aria-labelledby="sample-report-caption">
+  <div class="overflow-hidden rounded-xl border border-line bg-white shadow-[0_8px_30px_rgb(14_26_51/0.10)]">
+    <div class="flex items-center justify-between gap-4 border-b border-line bg-paper px-5 py-3">
+      <Logo variant="emblem" class="[&_svg]:h-7 [&_svg]:w-7" />
+      <span class="rounded bg-[#FFF4C9] px-2.5 py-1 text-[0.7rem] font-bold tracking-wider text-[#5C4700]">SAMPLE</span>
+    </div>
+
+    <div class="px-5 py-6 sm:px-8">
+      <p class="eyebrow">Workflow Checkup</p>
+      <h3 class="mt-1 text-2xl">Written report and action plan</h3>
+      <p class="mt-1 text-sm text-muted">Sample Co., a 6-person service business · Workflow reviewed: lead to paid invoice</p>
+
+      <h4 class="mt-6 font-sans text-sm font-semibold tracking-wider text-oak uppercase">Prioritized fixes</h4>
+      <div class="mt-2 overflow-x-auto">
+        <table class="w-full min-w-[34rem] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-line text-xs text-muted">
+              <th class="py-2 pr-3 font-semibold">#</th>
+              <th class="py-2 pr-3 font-semibold">What's costing you</th>
+              <th class="py-2 pr-3 font-semibold">The fix</th>
+              <th class="py-2 pr-3 font-semibold">Effort</th>
+              <th class="py-2 pr-3 font-semibold">Est. cost</th>
+              <th class="py-2 font-semibold">Time saved</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              fixes.map((f) => (
+                <tr class="border-b border-line align-top last:border-0">
+                  <td class="py-3 pr-3 font-serif text-lg font-semibold text-oak">{f.rank}</td>
+                  <td class="py-3 pr-3 font-medium text-ink">{f.issue}</td>
+                  <td class="py-3 pr-3 text-muted">{f.fix}</td>
+                  <td class="py-3 pr-3 text-muted">{f.effort}</td>
+                  <td class="py-3 pr-3 font-semibold text-ink">{f.cost}</td>
+                  <td class="py-3 font-semibold text-royal">{f.saved}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-5 rounded-lg border-l-4 border-royal bg-[#EEF1FA] px-4 py-3 text-sm text-ink">
+        <span class="font-semibold">Recommendation:</span> start with fix 1, since it removes the most re-typing. Fixes 2
+        and 3 can follow in either order. This plan is yours to keep, whether or not we work together.
+      </div>
+    </div>
+  </div>
+  <figcaption id="sample-report-caption" class="mt-3 text-center text-sm text-muted">
+    A made-up example of the written report you receive. Real reports are specific to your business.
+  </figcaption>
+</figure>

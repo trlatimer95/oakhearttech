@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CTABand from '../../components/CTABand.astro';
 import { ph } from '../../lib/ph';
 import { originLong } from '../../lib/origin';
+import BeforeAfter from '../../components/BeforeAfter.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work');
@@ -39,6 +40,8 @@ const blocks = [
         ))
       }
     </div>
+
+    {entry.id === 'credit-union-workflows' && <div class="mt-12"><BeforeAfter /></div>}
 
     <div class="prose-measure mt-12 space-y-4 [&_h2]:mt-8 [&_h2]:text-2xl">
       <Content />

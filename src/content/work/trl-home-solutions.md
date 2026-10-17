@@ -7,11 +7,9 @@ summary: 'I started a contracting and handyman company alone and grew it to a wo
 problem: 'Once there was a crew, job scope lived in text threads, before-and-after photos and notes were scattered, and client updates depended on someone remembering. Missed scope and miscommunication followed. Meanwhile I had ended up with three CRMs plus separate documentation and project tools, costing $700+ a month.'
 fix: 'I mapped how a job moves from first call to paid invoice, then built a checklist for each job directly from the quote, so the crew sees everything in one place on site. After comparing about five tools aimed at contractors, I settled on two: QuickBooks for the money side and Asana for tracking.'
 result: 'Fewer missed items and miscommunications on jobs, a crew that no longer digs through text threads for scope, and software costs cut from $700+ a month to about $250.'
-draft: true
+draft: false
 order: 1
 ---
-
-This is a draft. The facts come from the owner; check each claim before publishing.
 
 ## Background
 

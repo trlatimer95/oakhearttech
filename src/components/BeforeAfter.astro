@@ -1,0 +1,59 @@
+---
+// Simplified before/after for the credit union case study. The "before" shows the shape of the routine
+// (the same numbers entered twice, then more steps), not an exact step list.
+const before = [
+  'Collect the amounts due for the week',
+  'Type each amount into a spreadsheet',
+  'Work out the total in the spreadsheet',
+  'Open the system',
+  'Re-enter the amounts there',
+  'Update the values to match',
+];
+---
+
+<figure class="my-10 not-prose" aria-labelledby="ba-caption">
+  <div class="grid gap-6 md:grid-cols-[1.1fr_auto_1fr] md:items-stretch">
+    <div class="card p-6">
+      <p class="eyebrow">Before</p>
+      <h3 class="mt-2 text-xl">10+ steps, every week</h3>
+      <ol class="mt-5 space-y-2">
+        {
+          before.map((b, i) => (
+            <li class="flex items-start gap-3 rounded-lg border border-line bg-paper px-3 py-2 text-sm">
+              <span class="mt-px font-serif font-semibold text-oak">{i + 1}</span>
+              <span class="text-ink">{b}</span>
+            </li>
+          ))
+        }
+        <li class="rounded-lg border border-dashed border-line px-3 py-2 text-sm text-muted">…and the rest of the routine</li>
+      </ol>
+      <p class="mt-4 text-sm text-muted">The same numbers typed twice, in two places.</p>
+    </div>
+
+    <div class="flex items-center justify-center text-oak" aria-hidden="true">
+      <svg class="h-8 w-8 rotate-90 md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </div>
+
+    <div class="card flex flex-col border-royal p-6 ring-2 ring-royal">
+      <p class="eyebrow">After</p>
+      <h3 class="mt-2 text-xl">One screen, a few clicks</h3>
+      <div class="mt-5 flex-1 rounded-lg border border-line bg-paper p-4">
+        <p class="text-sm font-semibold text-ink">Enter the amounts once</p>
+        <div class="mt-3 space-y-2">
+          <div class="h-8 rounded border border-line bg-white"></div>
+          <div class="h-8 rounded border border-line bg-white"></div>
+          <div class="h-8 rounded border border-line bg-white"></div>
+        </div>
+        <div class="mt-4 inline-block rounded-lg bg-royal px-4 py-2 text-sm font-semibold text-white">Save</div>
+      </div>
+      <p class="mt-4 text-sm text-muted">
+        The total is calculated and written straight to the database. Three or four clicks in all.
+      </p>
+    </div>
+  </div>
+  <figcaption id="ba-caption" class="mt-3 text-sm text-muted">
+    Simplified illustration of one department's weekly routine, before and after.
+  </figcaption>
+</figure>

@@ -50,6 +50,7 @@ export const services: Service[] = [
       'A written report with 3–5 prioritized fixes',
       'For each fix: an estimated cost and the time it should save',
       'The checkup fee credited toward any follow-on project with me',
+      'Scope: one workflow and up to about five tools or systems. A review across a whole company is quoted separately.',
     ],
     processTitle: 'How it works',
     process: [
@@ -87,9 +88,11 @@ export const services: Service[] = [
       'Most businesses are being told they need AI and have no one honest to ask. I show where it saves real time in your business, set it up with the right guardrails, and tell you where to leave it alone.',
     signsTitle: 'Sound familiar?',
     signs: [
-      'You hear about AI constantly and can’t tell where it applies to your business.',
+      'You paste numbers or lists into AI to add them up or look things up, and have to double-check the answer.',
+      'You use AI every day but retype the same prompts, and the good ones live in one person’s head.',
+      'You use it a lot and can’t say what it actually saves.',
+      'You’re not sure where AI would help your business, or how to start.',
       'Employees are already using it, and nobody has set any rules.',
-      'You tried a tool, got mixed results, and aren’t sure why.',
       'You want the time savings without the risk of mistakes or leaked information.',
     ],
     includesTitle: 'What you get',
@@ -98,7 +101,9 @@ export const services: Service[] = [
       'A written plan: 3–5 places AI helps and 2–3 places it should not be used',
       'An honest range of time saved for each, based on your own tasks',
       'Clear rules for what information should never go into AI tools',
-      'Setup of the specific workflows you choose, such as drafting, summarizing, estimating or scheduling',
+      'For each task, the right tool: where AI helps, a saved and tested workflow with a checklist for checking its work; where it doesn’t, a small script or form',
+      'A simple script or form in place of AI for exact jobs such as totals, lookups and reformatting, so the answer is the same every time, with no drift and no AI cost',
+      'A before-and-after check on time spent, so you can see what it really saves',
       'Templates and a one-page usage guide, written for your business',
       'A hand-off walkthrough so your team knows how to use it and check its work',
     ],
@@ -111,6 +116,14 @@ export const services: Service[] = [
     ],
     stance: 'AI is a tool that makes mistakes. I set it up so its work gets checked, and I’ll tell you where it doesn’t belong.',
     faqs: [
+      {
+        q: 'How is this different from automation?',
+        a: 'Many people use AI to speed up a task but are really just swapping the manual work for pasting and prompting. This service starts from how you use AI today and decides what to keep, what to replace with a script, and what to leave alone. Automation starts from a manual process and connects your tools so data moves on its own. They sometimes overlap, but I scope them differently.',
+      },
+      {
+        q: 'Why not just use AI for everything?',
+        a: 'AI is good at language and judgment, but it can drift on exact work like adding up invoices or looking up a price. For jobs like that, I build a small script or form that gives the same answer every time, runs instantly, and costs nothing per use.',
+      },
       {
         q: 'Do you recommend a particular AI tool?',
         a: 'I recommend what fits your work and budget, which is sometimes a tool you already pay for. Tools change quickly, so I build the checks and habits around the work, not around one product.',
@@ -137,25 +150,26 @@ export const services: Service[] = [
     slug: 'automation-integrations',
     title: 'Automation & Integrations',
     icon: 'plug',
-    summary: 'Stop typing the same data into three systems. Connect the tools you already pay for.',
+    summary: 'Find the manual process behind the busywork, then connect the tools so the data moves on its own.',
     price: 'Quoted after the checkup',
     priceNote: `Projects are quoted as a fixed price after a Workflow Checkup, based on what’s needed. Most start around $1,500. ${TAX}`,
     metaDescription:
       'Workflow automation and software integrations for small businesses: connect your existing tools and cut double data entry.',
     heroTitle: 'Make your tools talk to each other.',
     heroLead:
-      'Most small businesses don’t need new software. They need the software they have to stop making people re-type things. I connect your tools and automate the repetitive steps.',
+      'Most small businesses don’t need new software. They need the software they have to stop making people re-type things. I look at a manual process from start to finish, then connect your tools so the data moves on its own.',
     signsTitle: 'Signs you need this',
     signs: [
+      'A lead starts in a spreadsheet, its status is tracked there, then the quote and invoice are rebuilt by hand in your accounting software.',
       'The same customer or job details get typed into more than one system.',
-      'Quotes and invoices are built by hand from a template.',
       'Someone exports a spreadsheet every week just to move data somewhere else.',
       'Follow-ups and reminders depend on someone remembering.',
     ],
     includesTitle: 'What’s included',
     includes: [
-      'A map of the steps being repeated by hand',
-      'Integrations between the tools you already use, built and tested',
+      'A map of the process from first contact to paid invoice, and every step that’s done by hand',
+      'A simpler setup, often using tools you already pay for, such as leads and documentation in one place that syncs to your accounting software when something is created',
+      'Integrations between your tools, built and tested',
       'Automation of the repetitive steps, with a manual fallback',
       'Plain-language documentation of what runs and why',
       'A hand-off session so your team knows how it works',
@@ -173,8 +187,8 @@ export const services: Service[] = [
         a: 'Usually, yes. Making what you have work better is often cheaper than replacing it.',
       },
       {
-        q: 'Can you help us use AI in our business?',
-        a: 'Yes, where it makes sense. I’ll show you where it saves time, what it should never be left to do alone, and what information should never go into it. Sometimes the honest answer is that you don’t need it yet.',
+        q: 'How is this different from your AI service?',
+        a: 'Automation starts with a manual process and connects your tools so the data moves without anyone retyping it. The AI service starts with how you’re using AI today, often a manual task with a prompt bolted on, and decides what to keep, what to replace with a script, and what to leave alone. They overlap sometimes, since fixing AI use can mean building an automation, but they start from different places.',
       },
       {
         q: 'What happens if a connected tool changes?',
@@ -227,17 +241,17 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: 'project-rescue',
-    title: 'Project Rescue',
+    slug: 'software-rescue',
+    title: 'Software Rescue',
     icon: 'lifebuoy',
-    summary: 'A stalled, abandoned or broken software project, assessed honestly and either fixed or replaced.',
+    summary: 'A stalled, abandoned or broken software project or website, assessed honestly and either fixed or replaced.',
     price: 'Assessment from $595',
-    priceNote: `The assessment is a fixed-price first step:$595 for a small to medium codebase, larger ones quoted, and credited toward the fix. Fixes are quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    priceNote: `The assessment is a fixed-price first step: $595 for a small to medium codebase, larger ones quoted, and credited toward the fix. Fixes are quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
-      'Software project rescue: an honest assessment of stalled, abandoned or AI-generated code, then a plan to finish it or replace it.',
-    heroTitle: 'Your software project stalled. Let us find out why.',
+      'Software rescue: an honest assessment of stalled, abandoned or AI-generated code, then a plan to finish it or replace it.',
+    heroTitle: 'Your software project stalled. Let’s find out why.',
     heroLead:
-      'No blame, no sales pitch. I review what exists, tell you plainly what’s salvageable, and give you options with real costs.',
+      'No blame, no sales pitch. I review what exists, tell you plainly what’s salvageable, and give you options with real costs. That includes websites that are slow, down or falling apart.',
     signsTitle: 'Recognize any of these?',
     signs: [
       'Deadlines keep slipping, and nobody can say when it will be done.',
@@ -245,13 +259,15 @@ export const services: Service[] = [
       'Nobody on your side understands the code.',
       'Someone used AI to generate the code, and it breaks whenever you change anything.',
       'You have paid a lot and have little that works.',
+      'Your website is slow, down, or full of broken links, or its contact form doesn’t deliver.',
     ],
     includesTitle: 'What an assessment covers',
     includes: [
       'Review of the code, hosting, accounts and documentation',
-      'A plain-language report on what works, what does not, and what’s risky',
+      'A plain-language report on what works, what doesn’t, and what’s risky',
       'Options with estimated costs: finish it, fix parts, or rebuild',
       'A recommendation, including when rebuilding is cheaper',
+      'For websites: slow pages, errors, broken links, forms that don’t deliver, expired certificates, basic search fixes such as missing titles and descriptions, and who controls the domain and hosting',
     ],
     processTitle: 'The rescue process',
     process: [
@@ -271,17 +287,21 @@ export const services: Service[] = [
         q: 'Can you work with AI-generated code?',
         a: 'Yes. I’ll tell you honestly whether it’s worth keeping or whether starting clean is the better investment.',
       },
+      {
+        q: 'Do you do SEO or marketing for websites?',
+        a: 'I fix the basics that hold a site back: speed, mobile layout, broken links, missing titles and descriptions, and forms that don’t deliver. Often a few simple fixes make a real difference. I don’t do ongoing marketing, content or ad campaigns, and for that I’ll point you to someone who specializes in it.',
+      },
     ],
   },
   {
     slug: 'software-cost-review',
     title: 'Software & Subscription Cost Review',
     icon: 'gauge',
-    summary: 'Find the overlapping tools, unused seats and over-tiered plans you’re paying for, and what to consolidate.',
-    price: '$395',
-    priceNote: `Fixed price, set so it pays for itself quickly, and credited toward any follow-on work. Can be combined with a Workflow Checkup. ${TAX}`,
+    summary: 'Find the overlapping tools, unused seats and over-tiered plans you’re paying for, then have me set up what I recommend.',
+    price: 'Assessment from $395',
+    priceNote: `The assessment is a fixed-price first step from $395, set so it pays for itself quickly, and credited toward the implementation. Setting up what I recommend is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
-      'A fixed-price review of your software subscriptions (CRMs, project tools, Microsoft 365 and more): find overlapping tools, unused seats and over-tiered plans, with a written list of what to consolidate and what it saves.',
+      'A fixed-price assessment of your software subscriptions (CRMs, project tools, Microsoft 365 and more): find overlapping tools, unused seats and over-tiered plans, with a written list of what to consolidate, and help setting it up.',
     heroTitle: 'Stop paying for software you don’t use, or use twice.',
     heroLead:
       'Subscriptions pile up, and tools quietly overlap. I go through what you pay for, find the overlap and waste, and give you a written list of what to consolidate, drop or downgrade, with the monthly saving for each.',
@@ -301,7 +321,7 @@ export const services: Service[] = [
       'A written list of recommended changes, with the monthly saving for each',
       'Risks flagged, such as data migration, so nothing you rely on breaks',
       'A renewal calendar, so changes happen at the right time',
-      'Optional: help migrating or connecting the tools you keep',
+      'Then, if you want it: I set up what I recommend, such as QuickBooks integrations, Asana projects and automations, and moving your data over',
       'Optional add-on: a review of cloud resources, such as Azure, if you have them',
     ],
     processTitle: 'How it works',
@@ -310,12 +330,17 @@ export const services: Service[] = [
       { title: 'Inventory', text: 'Bank or card statements, invoices and admin exports. Read-only access at most.' },
       { title: 'Analyze', text: 'Go through every line: used, unused, overlapping or too big.' },
       { title: 'Report', text: 'A written list within 5 business days, ranked by savings.' },
+      { title: 'Implement', text: 'Optional: I set up the changes, quoted after the report and credited with your assessment fee.' },
     ],
     stance: 'If there are no meaningful savings to find, I’ll tell you. Sometimes the answer is to keep what you have.',
     faqs: [
       {
         q: 'What do you need from me?',
         a: 'A list of what you pay for, usually from card or bank statements and invoices, plus admin exports from tools like Microsoft 365. Read-only access at most. You stay in control of every change.',
+      },
+      {
+        q: 'Can you set up what you recommend?',
+        a: 'Yes. Many clients ask me to. That can mean setting up QuickBooks integrations, building out Asana projects and automations, or moving your data between tools. It’s quoted after the report, and your assessment fee is credited toward it.',
       },
       {
         q: 'Will you make me switch tools?',
@@ -379,7 +404,7 @@ export const services: Service[] = [
 // Display order everywhere (home cards, footer, services page): fix-first, build last.
 const displayOrder = [
   'workflow-checkup',
-  'project-rescue',
+  'software-rescue',
   'automation-integrations',
   'software-cost-review',
   'ai-implementation',

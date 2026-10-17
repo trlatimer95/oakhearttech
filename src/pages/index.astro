@@ -5,6 +5,8 @@ import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
 import CTABand from '../components/CTABand.astro';
 import FAQ from '../components/FAQ.astro';
+import SampleReport from '../components/SampleReport.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
 import { services } from '../data/services';
 import { bookingHref, bookingIsExternal } from '../data/site';
 import { ph } from '../lib/ph';
@@ -12,13 +14,14 @@ import { originShort } from '../lib/origin';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
 
+// Each pain leads to the service that fixes it.
 const pains = [
-  { icon: 'copy', text: 'Typing the same data into three systems' },
-  { icon: 'file', text: 'Quotes and invoices built by hand' },
-  { icon: 'calendar', text: 'Scheduling that lives in someone’s head or a spreadsheet' },
-  { icon: 'globe', text: 'A website that doesn’t bring in work' },
-  { icon: 'lifebuoy', text: 'A software project that stalled or was abandoned' },
-  { icon: 'plug', text: 'Tools that don’t talk to each other' },
+  { icon: 'copy', text: 'Typing the same data into three systems', href: '/services/automation-integrations' },
+  { icon: 'users', text: 'Using AI every day for jobs a simple tool would do more reliably', href: '/services/ai-implementation' },
+  { icon: 'gauge', text: 'Paying for several tools, with no clear picture of what’s used or what overlaps', href: '/services/software-cost-review' },
+  { icon: 'code', text: 'A one-off problem no off-the-shelf tool solves', href: '/services/custom-software' },
+  { icon: 'lifebuoy', text: 'A software project that stalled, was abandoned, or was built with AI and now breaks', href: '/services/software-rescue' },
+  { icon: 'globe', text: 'A website that’s slow, down or full of broken links', href: '/services/software-rescue' },
 ];
 
 // Figures come from the case studies. Keep them identical to what those pages say.
@@ -28,8 +31,15 @@ const proof = [
   { figure: '$700 → $250', label: 'monthly software cost in my own business after consolidating overlapping tools' },
 ];
 
+const checkup = [
+  'A review of one business workflow and the tools behind it',
+  'The most expensive or time-consuming bottlenecks, ranked',
+  '3–5 prioritized fixes, each with cost, effort and time saved',
+  'A written action plan you keep, whether or not you hire me',
+];
+
 const rank = [
-  { t: 'Customer pain', d: 'What hurts the people who use it or pay for it, first. If they are about to leave, it goes to the top.' },
+  { t: 'Customer pain', d: 'What hurts the people who use it or pay for it, first. If they’re about to leave, it goes to the top.' },
   { t: 'Risk', d: 'Anything that can stop the business or lose data: failures, missing backups, single points of failure.' },
   { t: 'Efficiency', d: 'What wastes the most hours or money each week, and what can be removed rather than improved.' },
   { t: 'Everything else', d: 'Nice-to-haves wait. Fixing in small, verified steps beats a big risky change.' },
@@ -39,22 +49,13 @@ const steps = [
   { t: 'Listen', d: 'A free call to understand what’s broken and what it’s costing you.' },
   { t: 'Diagnose', d: 'The Workflow Checkup, or a code review for software: a written plan with priorities, costs and time saved.' },
   { t: 'Fix', d: 'Fixed-scope work with regular check-ins, so there are no surprises.' },
-  { t: 'Hand off', d: 'Documentation, training, and you own everything you paid for.' },
+  { t: 'Hand off', d: 'Documentation, a walkthrough, and you own everything you paid for.' },
 ];
 
 const why = [
-  {
-    t: 'I run a small business too.',
-    d: 'I own TRL Home Solutions, a contracting and handyman company I started alone and grew to a working crew. I know what it’s like when the paperwork eats the day.',
-  },
-  {
-    t: 'Honest scope, fixed prices.',
-    d: 'Clear estimates, changes agreed in writing, no surprise invoices.',
-  },
-  {
-    t: 'You own it.',
-    d: 'Code, accounts and documentation are handed over. No lock-in.',
-  },
+  { t: 'Honest scope, fixed prices.', d: 'Clear estimates, changes agreed in writing, no surprise invoices.' },
+  { t: 'You own it.', d: 'Code, accounts and documentation are handed over. No lock-in.' },
+  { t: 'Small, verified steps.', d: 'I fix things in pieces I can check, and I tell you plainly when something isn’t worth fixing.' },
 ];
 
 const faqs = [
@@ -65,7 +66,7 @@ const faqs = [
   { q: 'Do you work with businesses outside Spokane?', a: 'Yes. Most work is done remotely, with video calls and shared documents. I’m happy to meet in person around Spokane.' },
   {
     q: 'Who owns the software you build?',
-    a: 'You do, once you have paid. I keep my own reusable tools and grant you a license to use them in your project.',
+    a: 'You do, once you’ve paid. I keep my own reusable tools and grant you a license to use them in your project.',
   },
   {
     q: 'I already pay for software. Can you make it work better instead of replacing it?',
@@ -73,7 +74,7 @@ const faqs = [
   },
   {
     q: 'What if my last developer disappeared?',
-    a: 'That is exactly what Project Rescue is for. The first step is making sure you have access to your code and accounts.',
+    a: 'That’s exactly what Software Rescue is for. The first step is making sure you have access to your code and accounts.',
   },
   {
     q: 'Do you charge sales tax?',
@@ -110,7 +111,7 @@ const faqs = [
       </p>
       <div class="mt-9 flex flex-wrap gap-4">
         <Button href={bookingHref} external={bookingIsExternal}>Book a free 30-minute call</Button>
-        <Button href="/services/workflow-checkup" variant="secondary">See the Workflow Checkup</Button>
+        <Button href="/work" variant="secondary">See the results</Button>
       </div>
       <dl class="mt-12 grid gap-6 border-t border-line pt-8 sm:grid-cols-3">
         {
@@ -128,7 +129,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 2. Pain list -->
+  <!-- 2. What's broken -->
   <section class="bg-white">
     <div class="wrap section">
       <p class="eyebrow">What's broken?</p>
@@ -136,11 +137,21 @@ const faqs = [
       <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
           pains.map((p) => (
-            <li class="reveal flex items-start gap-4 rounded-xl border border-line bg-paper p-5">
-              <span class="text-royal">
-                <Icon name={p.icon} />
-              </span>
-              <span class="font-medium text-ink">{p.text}</span>
+            <li class="reveal">
+              <a
+                href={p.href}
+                class="group flex h-full items-start gap-4 rounded-xl border border-line bg-paper p-5 transition-colors hover:border-royal"
+              >
+                <span class="text-royal">
+                  <Icon name={p.icon} />
+                </span>
+                <span>
+                  <span class="block font-medium text-ink">{p.text}</span>
+                  <span class="mt-2 flex items-center gap-1 text-sm font-semibold text-royal group-hover:gap-2">
+                    See how I fix this <Icon name="arrow" class="h-4 w-4" />
+                  </span>
+                </span>
+              </a>
             </li>
           ))
         }
@@ -178,10 +189,65 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 4. Featured work (proof sits right after the services) -->
+  <!-- 4. Entry offer -->
+  <section class="bg-white">
+    <div class="wrap section grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-16">
+      <div>
+        <p class="eyebrow">Start here</p>
+        <h2 class="mt-3 text-3xl md:text-4xl">Start with a Workflow Checkup.</h2>
+        <p class="mt-4 text-muted">
+          Not sure what to fix first? In one working session and a short written report, you find out where the time and
+          money are going and what to do about it, before you commit to anything bigger.
+        </p>
+        <ul class="mt-6 space-y-3">
+          {
+            checkup.map((c) => (
+              <li class="flex gap-3">
+                <span class="mt-0.5 text-royal">
+                  <Icon name="check" />
+                </span>
+                <span>{c}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <Button href={bookingHref} external={bookingIsExternal}>Book a free 30-minute call</Button>
+          <Button href="/services/workflow-checkup" variant="secondary">See what's included</Button>
+        </div>
+      </div>
+      <aside class="card p-7">
+        <p class="font-serif text-5xl font-semibold text-ink">$395</p>
+        <p class="mt-1 font-semibold text-oak">Fixed price, credited toward any project that follows</p>
+        <dl class="mt-6 space-y-4 text-sm">
+          <div>
+            <dt class="font-semibold text-ink">Scope</dt>
+            <dd class="mt-0.5 text-muted">
+              One workflow and up to about five tools or systems, with a 60–90 minute working session.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-ink">Turnaround</dt>
+            <dd class="mt-0.5 text-muted">Written report within 3 business days of the session.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-ink">Bigger than that?</dt>
+            <dd class="mt-0.5 text-muted">
+              A review across a whole company is quoted separately. I'll tell you on the free call.
+            </dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+    <div class="wrap pb-16 md:pb-24">
+      <SampleReport />
+    </div>
+  </section>
+
+  <!-- 5. Featured work -->
   {
     work.length > 0 && (
-      <section class="bg-white">
+      <section>
         <div class="wrap section">
           <div class="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -190,7 +256,14 @@ const faqs = [
             </div>
             <a href="/work" class="font-semibold text-royal underline underline-offset-4">All work</a>
           </div>
-          <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <div class="mt-10">
+            <p class="font-semibold text-ink">
+              One example: a weekly routine cut from 10+ steps to one screen.
+              <a href="/work/credit-union-workflows" class="ml-1 text-royal underline underline-offset-4">Read the story</a>
+            </p>
+            <BeforeAfter />
+          </div>
+          <div class="grid gap-6 md:grid-cols-3">
             {work.map((w) => (
               <a href={`/work/${w.id}`} class="card reveal block p-6 transition-shadow hover:shadow-lg">
                 {w.data.draft && <span class="ph text-xs font-semibold">DRAFT PLACEHOLDER</span>}
@@ -205,7 +278,44 @@ const faqs = [
     )
   }
 
-  <!-- 5. How I work -->
+  <!-- 6. Founder and trust -->
+  <section class="bg-white">
+    <div class="wrap section grid gap-10 md:grid-cols-[auto_1fr] md:gap-14">
+      <figure class="mx-auto w-full max-w-[12rem] md:mx-0">
+        <img
+          src="/images/tyler-latimer.jpg"
+          alt="Tyler Latimer"
+          width="640"
+          height="640"
+          loading="lazy"
+          class="aspect-square w-full rounded-2xl border border-line object-cover shadow-sm"
+        />
+        <figcaption class="mt-3 text-sm text-muted">Tyler Latimer, founder</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">Who you'd work with</p>
+        <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">Software engineer. Small business owner.</h2>
+        <p class="prose-measure mt-4 text-lg text-muted">
+          I'm Tyler. I've spent more than eight years building, fixing and improving software, and I also own a
+          contracting company, so I've felt how much time a business loses to clumsy tools and manual work. Oakheart
+          brings those two sides together.
+        </p>
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          {
+            why.map((w) => (
+              <div class="reveal border-t-2 border-oak pt-5">
+                <h3 class="text-xl">{w.t}</h3>
+                <p class="mt-2 text-muted">{w.d}</p>
+              </div>
+            ))
+          }
+        </div>
+        <p class="mt-8"><a href="/about" class="font-semibold text-royal underline underline-offset-4">More about me</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. How I work -->
   <section>
     <div class="wrap section">
       <p class="eyebrow">How I work</p>
@@ -224,14 +334,14 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 6. How I diagnose -->
+  <!-- 8. How I diagnose -->
   <section class="bg-white">
     <div class="wrap section grid gap-10 md:grid-cols-[1fr_1.4fr] md:gap-16">
       <div>
         <p class="eyebrow">How I diagnose</p>
         <h2 class="mt-3 text-3xl md:text-4xl">Rank by what costs you most, then work down.</h2>
         <p class="mt-4 text-muted">
-          When there is a long list of problems, the answer is rarely to start over. I rank every issue by its cost to you
+          When there's a long list of problems, the answer is rarely to start over. I rank every issue by its cost to you
           and fix them in that order, in small steps that I verify as I go.
         </p>
       </div>
@@ -251,32 +361,14 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 5. Why Oakheart -->
-  <section>
-    <div class="wrap section">
-      <p class="eyebrow">Why Oakheart</p>
-      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">Plain-spoken help from someone who has been there.</h2>
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
-        {
-          why.map((w) => (
-            <div class="reveal border-t-2 border-oak pt-5">
-              <h3 class="text-xl">{w.t}</h3>
-              <p class="mt-2 text-muted">{w.d}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Interactive & VR strip -->
+  <!-- 9. Interactive & VR strip (secondary) -->
   <section class="on-dark bg-ink text-paper">
     <div class="wrap flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between">
       <div class="max-w-2xl">
         <p class="eyebrow">Beyond business software</p>
         <h2 class="mt-3 text-2xl text-paper md:text-3xl">Interactive training and simulation.</h2>
         <p class="mt-3 text-paper/80">
-          I also build interactive and VR training, including work on VR EMS training, and I’m developing games under
+          I also build interactive and VR training, including work on VR EMS training, and I'm developing games under
           Oakheart Interactive.
         </p>
       </div>
@@ -287,9 +379,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 8. Testimonials: intentionally omitted until real ones exist. -->
-
-  <!-- 9. FAQ -->
+  <!-- 10. FAQ -->
   <section>
     <div class="wrap section">
       <p class="eyebrow">FAQ</p>

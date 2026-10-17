@@ -25,7 +25,7 @@ import { site } from '../data/site';
       <p class="eyebrow mt-8">Oakheart Interactive</p>
       <h1 class="mt-3 max-w-3xl text-4xl text-paper md:text-6xl">The games and simulation side of the studio.</h1>
       <p class="prose-measure mt-6 text-xl text-paper/80">
-        The same studio and the same standards as the business work, aimed at things that are fun to build.
+        The same engineering and the same standards as the business work, aimed at things that are fun to build.
       </p>
     </div>
   </section>
@@ -33,19 +33,29 @@ import { site } from '../data/site';
   <section>
     <div class="wrap section grid gap-10 md:grid-cols-2">
       <div>
-        <h2 class="text-3xl md:text-4xl">In development</h2>
-        <p class="prose-measure mt-4">
-          <span class="ph">[Describe what you’re working on, only what you want public. A sentence or two is plenty.]</span>
-        </p>
-        <p class="prose-measure mt-4">
-          For business and organizational training, see
-          <a class="font-semibold text-royal underline underline-offset-4" href="/services/interactive-vr">Interactive &amp; VR Training</a>.
-        </p>
+        <h2 class="text-3xl md:text-4xl">What I'm working on</h2>
+        <div class="prose-measure mt-4 space-y-4">
+          <p>
+            Interactive work sits alongside the consulting. Right now that means a multiplayer VR training simulator for
+            fire departments, built in Unity, and early game prototypes that aren't ready to show yet.
+          </p>
+          <p>
+            Nothing is public yet. When there's something to play, it'll be announced here.
+          </p>
+          <p>
+            For business and organizational training, see
+            <a class="font-semibold text-royal underline underline-offset-4" href="/services/interactive-vr"
+              >Interactive &amp; VR Training</a
+            >, or read about the
+            <a class="font-semibold text-royal underline underline-offset-4" href="/work/vr-ems-training">VR simulator</a>.
+          </p>
+        </div>
       </div>
       <div class="card p-7">
-        <h2 class="text-2xl">Follow development</h2>
+        <h2 class="text-2xl">Have something in mind?</h2>
         <p class="mt-2 text-muted">
-          <span class="ph">[Newsletter signup, itch.io or Steam links go here once they exist.]</span>
+          If you have a training simulation or an interactive idea you'd like built, or you just want to hear when the
+          first game is ready, send me a note.
         </p>
         <Button href={`mailto:${site.email}?subject=Oakheart%20Interactive`} variant="secondary" class="mt-5">
           Get in touch

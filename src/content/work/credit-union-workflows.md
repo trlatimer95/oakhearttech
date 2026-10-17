@@ -7,11 +7,9 @@ summary: 'During a core-platform migration, I worked with each department, found
 problem: 'Departments ran on spreadsheets and manual data entry, many stored on individual employees'' computers, holding large amounts of data. The same numbers were typed into a spreadsheet and then again into the system.'
 fix: 'I spent time with each business unit, mapped how they really worked, and built single-page forms that calculate and write straight to the database. I also built scripts to bulk-load very large data files and integrated separate systems with the core platform.'
 result: 'One department went from a 10+ step weekly process to a one-screen entry with a handful of clicks. Other processes went from around eight steps to a single form submission, and key data moved out of personal spreadsheets into the core platform.'
-draft: true
-order: 4
+draft: false
+order: 5
 ---
-
-This is a draft. Keep the employer general, and keep details broad enough that no one could be identified.
 
 ## The approach
 

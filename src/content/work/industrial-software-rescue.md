@@ -1,17 +1,15 @@
 ---
 title: 'Turning around software with hundreds of open defects'
 client: 'Industrial equipment manufacturer'
-service: 'Project Rescue'
+service: 'Software Rescue'
 origin: 'employee'
 summary: 'Machine-control software had a long list of open defects and a backlog that was hurting customers. I took over as the only engineer in the code, fixed what mattered most first, and new reports nearly stopped.'
 problem: 'More than 300 open defects, at least 50 of them critical or at risk of losing a customer. Machines weren''t doing things that were critical to production, and customer satisfaction was a priority.'
 fix: 'I learned the software and the hardware it drives. A long-serving staff engineer handled customer communication and decided what the correct result should be, while I worked in the code. Together we ranked every issue by customer pain, safety and production impact, and I fixed them in that order. One of the biggest wins was finding why boards got stuck during handoffs inside the machine.'
 result: 'Most of the critical issues were resolved within about six months, and I fixed 200+ defects over my time on the software. Customer satisfaction improved, and new issue reports almost stopped.'
-draft: true
+draft: false
 order: 2
 ---
-
-This is a draft. Keep the product and people general, and keep the wording about earlier support neutral.
 
 ## Starting point
 
@@ -47,4 +45,4 @@ cause were a major source of customer complaints.
 ## What this means for you
 
 If your software has a long list of problems and nobody can say what to fix first, the answer is usually not to start
-over. It's to rank by what costs you most and work down. That's what Project Rescue does.
+over. It's to rank by what costs you most and work down. That's what Software Rescue does.

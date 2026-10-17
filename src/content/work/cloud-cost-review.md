@@ -7,12 +7,9 @@ summary: 'I went through a commerce platform''s Azure environment resource by re
 problem: 'The cloud bill had grown with unused and over-provisioned resources, and nobody had gone through it line by line.'
 fix: 'I walked through the environment resource by resource. I removed anything unused and moved anything over-provisioned to a lower tier, after checking what depended on it.'
 result: 'Monthly cloud spend was significantly reduced, with nothing the platform relied on switched off by mistake.'
-draft: true
-order: 3
+draft: false
+order: 4
 ---
-
-This is a draft. Confirm what you're comfortable publishing, and keep the company general. Don't claim a SOC 2
-certification or audit result, or security expertise beyond what's accurate.
 
 ## The starting point
 

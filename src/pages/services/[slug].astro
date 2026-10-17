@@ -4,6 +4,7 @@ import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import CTABand from '../../components/CTABand.astro';
 import FAQ from '../../components/FAQ.astro';
+import SampleReport from '../../components/SampleReport.astro';
 import { services, type Service } from '../../data/services';
 import { bookingHref, bookingIsExternal } from '../../data/site';
 import { ph } from '../../lib/ph';
@@ -72,6 +73,14 @@ const service = Astro.props.s as Service;
       </aside>
     </div>
   </section>
+
+  {
+    service.slug === 'workflow-checkup' && (
+      <div class="wrap pb-16 md:pb-24">
+        <SampleReport />
+      </div>
+    )
+  }
 
   <!-- 4. Process -->
   <section class="bg-white">
