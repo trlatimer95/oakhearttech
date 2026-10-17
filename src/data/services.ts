@@ -20,7 +20,7 @@ export interface Service {
   faqs: { q: string; a: string }[];
 }
 
-const TAX = 'Prices exclude applicable Washington sales tax.';
+const TAX = 'Prices exclude any applicable sales tax, which varies by state.';
 
 export const services: Service[] = [
   {
@@ -45,7 +45,7 @@ export const services: Service[] = [
     ],
     includesTitle: 'What you get',
     includes: [
-      'A 60–90 minute working session, remote, or in person near Spokane',
+      'A 60–90 minute working session, remote or in person near Spokane (travel to a customer can be discussed in certain cases)',
       'A walk through how work actually moves through your business, from lead to paid invoice',
       'A written report with 3–5 prioritized fixes',
       'For each fix: an estimated cost and the time it should save',
@@ -142,7 +142,7 @@ export const services: Service[] = [
       },
       {
         q: 'Can you work with my whole team?',
-        a: 'Yes. Every setup includes a hand-off walkthrough, and I can run a longer team session on request, in person around Spokane or remotely.',
+        a: 'Yes. Every setup includes a hand-off walkthrough, and I can run a longer team session on request, in person around Spokane or remotely. I’m open to discussing travel to a customer in certain cases.',
       },
     ],
   },
@@ -396,6 +396,10 @@ export const services: Service[] = [
       {
         q: 'Does it need VR headsets?',
         a: 'Not always. Some training works well on a regular computer or tablet. We pick the format that suits the skill and the budget.',
+      },
+      {
+        q: 'Have you released a VR project?',
+        a: 'Yes. I have a VR title live on the Meta Quest store, I’m the sole developer on a multiplayer VR training simulator, and I’m a Unity Certified User in VR Development and Programming. See the Oakheart Interactive page for more.',
       },
     ],
   },

@@ -63,7 +63,10 @@ const faqs = [
     q: 'What does a typical project cost?',
     a: 'It depends on scope, which is why I start with a fixed-price Workflow Checkup, $395, credited toward any project that follows. Larger work is quoted after the checkup, and my hourly rate for ad hoc work is $125.',
   },
-  { q: 'Do you work with businesses outside Spokane?', a: 'Yes. Most work is done remotely, with video calls and shared documents. I’m happy to meet in person around Spokane.' },
+  {
+    q: 'Do you work with businesses outside Spokane?',
+    a: 'Yes. Most work is done remotely, with video calls and shared documents. I’m happy to meet in person around Spokane, and I’m open to discussing travel to a customer in certain cases.',
+  },
   {
     q: 'Who owns the software you build?',
     a: 'You do, once you’ve paid. I keep my own reusable tools and grant you a license to use them in your project.',
@@ -78,7 +81,7 @@ const faqs = [
   },
   {
     q: 'Do you charge sales tax?',
-    a: 'Yes, for Washington clients. Washington taxes most software and IT services, and it’s itemized on every quote. Clients outside Washington may not be charged Washington tax.',
+    a: 'It depends on the state. Washington recently began treating technology services as taxable, so Washington clients are charged sales tax, itemized on every quote. Clients elsewhere are taxed according to their own state’s rules, and I’ll confirm what applies when I quote.',
   },
 ];
 ---
@@ -295,11 +298,11 @@ const faqs = [
       <div>
         <p class="eyebrow">Who you'd work with</p>
         <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">Software engineer. Small business owner.</h2>
-        <p class="prose-measure mt-4 text-lg text-muted">
-          I'm Tyler. I've spent more than eight years building, fixing and improving software, and I also own a
-          contracting company, so I've felt how much time a business loses to clumsy tools and manual work. Oakheart
-          brings those two sides together.
-        </p>
+        <div class="prose-measure mt-4 space-y-3 text-lg text-muted">
+          <p>I'm Tyler, a software engineer with more than eight years of experience building, fixing and improving software.</p>
+          <p>I also own a contracting company, so I've felt firsthand how much time a business loses to clumsy tools and manual work.</p>
+          <p>Oakheart brings those two sides together: engineering skill, and an owner's sense of what actually matters.</p>
+        </div>
         <div class="mt-8 grid gap-6 md:grid-cols-3">
           {
             why.map((w) => (
@@ -368,8 +371,8 @@ const faqs = [
         <p class="eyebrow">Beyond business software</p>
         <h2 class="mt-3 text-2xl text-paper md:text-3xl">Interactive training and simulation.</h2>
         <p class="mt-3 text-paper/80">
-          I also build interactive and VR training, including work on VR EMS training, and I'm developing games under
-          Oakheart Interactive.
+          I also build interactive and VR training, including a multiplayer simulator for fire departments. I've released
+          a VR title on the Meta Quest store, and I'm developing games under Oakheart Interactive.
         </p>
       </div>
       <div class="flex flex-wrap gap-4">

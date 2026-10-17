@@ -92,7 +92,27 @@ import { site } from '../data/site';
   </section>
 </BaseLayout>
 
-<script is:inline src="https://web3forms.com/client/script.js" async defer></script>
+<script is:inline>
+  // Load the captcha only when someone starts using the form. That keeps third-party cookies and scripts off the page
+  // until they're needed, which is better for privacy and for page speed.
+  (function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var loaded = false;
+    function load() {
+      if (loaded) return;
+      loaded = true;
+      var s = document.createElement('script');
+      s.src = 'https://web3forms.com/client/script.js';
+      s.async = true;
+      s.defer = true;
+      document.body.appendChild(s);
+    }
+    ['focusin', 'pointerdown', 'keydown', 'touchstart'].forEach(function (e) {
+      form.addEventListener(e, load, { once: true, passive: true });
+    });
+  })();
+</script>
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
