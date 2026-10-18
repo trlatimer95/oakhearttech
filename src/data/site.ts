@@ -19,7 +19,7 @@ export const site = {
   // Blank = the form renders but tells visitors to email instead.
   web3formsAccessKey: '4a1738a7-aa5b-43c8-803b-ae24d56e97db',
   // Cloudflare Web Analytics token. Blank = analytics script not included.
-  analyticsToken: '',
+  analyticsToken: 'dfdca334fcae4908b671f638a9906f6d',
 };
 
 export const bookingHref = site.bookingUrl || '/contact#book';
