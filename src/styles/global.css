@@ -2,8 +2,9 @@
 
 /* Design tokens from the brief (section 5). If the final logo uses a different blue, update here and recheck contrast. */
 @theme {
-  --color-royal: #1f3f99;
-  --color-royal-dark: #17307a;
+  /* Primary navy matches the logo (#152D5C). The oak/gold accent below already matches the logo's gold. */
+  --color-royal: #152d5c;
+  --color-royal-dark: #0e2147;
   --color-ink: #0e1a33;
   --color-text: #1a1d24;
   --color-muted: #5b616e;
