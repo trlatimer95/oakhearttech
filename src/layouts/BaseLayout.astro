@@ -19,8 +19,14 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
+  '@id': `${site.url}/#business`,
   name: site.name,
   url: site.url,
+  description:
+    'Software consultancy for small businesses: software rescue, process automation, software and cloud cost reviews, practical AI implementation and custom software.',
+  logo: new URL('/images/logo.png', site.url).toString(),
+  image: new URL('/og-image.png', site.url).toString(),
+  knowsAbout: ['Software rescue', 'Process automation', 'Software cost reduction', 'C# and .NET', 'Azure', 'Unity and VR'],
   email: site.email,
   telephone: site.phone ? `+1${site.phone.replace(/\D/g, '')}` : undefined,
   founder: { '@type': 'Person', name: 'Tyler Latimer' },
@@ -29,7 +35,7 @@ const jsonLd = {
     { '@type': 'Country', name: 'United States' },
   ],
   address: { '@type': 'PostalAddress', addressLocality: 'Spokane', addressRegion: 'WA', addressCountry: 'US' },
-  sameAs: [site.linkedin, site.github].filter(Boolean),
+  sameAs: [site.linkedin, site.github, site.facebook].filter(Boolean),
 };
 ---
 

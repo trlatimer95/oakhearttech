@@ -3,6 +3,8 @@ title: 'A VR training simulator for fire departments'
 client: 'Confidential client'
 service: 'Interactive & VR Training'
 origin: 'contract'
+seoTitle: 'Multiplayer VR Training Simulator'
+seoDescription: 'A multiplayer VR simulator that lets fire departments train together on real calls, even when crews are in different places.'
 summary: 'A VR simulator that lets fire departments train together on real calls, even when crews are in different places. I''m the sole developer.'
 problem: 'Emergency medical skills are hard to practice realistically, and crews want to rehearse the calls they actually run, together, without everyone having to be in the same room.'
 fix: 'I designed and built the simulator in Unity and C#, with networked multiplayer on Photon Fusion and an outside artist for the 3D models. I own the code, the multiplayer sync, the interactions and the performance.'
@@ -36,4 +38,4 @@ between users has to be network-aware.
 
 Building a networked, scenario-driven simulator end to end is the same skill set needed for business training and
 simulation work: interaction design, multiplayer, and performance on headsets. See
-[Interactive & VR Training](/services/interactive-vr) for what I can build for you.
+[Interactive & VR Training](/services/interactive-vr/) for what I can build for you.

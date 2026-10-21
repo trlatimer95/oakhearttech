@@ -12,6 +12,9 @@ const work = defineCollection({
     problem: z.string(),
     fix: z.string(),
     result: z.string(),
+    // Search-result title (about 37 characters) and description (about 120 to 155 characters).
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
     // Who the work was for. Shown on the page so it isn't mistaken for an Oakheart client project.
     origin: z.enum(['employee', 'own', 'contract']).default('employee'),
     // Set to false once the case study has real, approved content.

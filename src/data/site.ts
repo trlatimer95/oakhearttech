@@ -14,6 +14,8 @@ export const site = {
   // Personal profiles for now; swap to Oakheart company profiles once created.
   linkedin: 'https://www.linkedin.com/in/tlatimer95/',
   github: 'https://github.com/trlatimer95',
+  // Facebook page. Update this to the short address (facebook.com/oakhearttech) once a username is set.
+  facebook: 'https://www.facebook.com/profile.php?id=61595471947636',
 
   // Web3Forms access key (public by design). Get one at web3forms.com using tyler@oakhearttech.com.
   // Blank = the form renders but tells visitors to email instead.

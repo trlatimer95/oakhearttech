@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
         {
           services.map((s) => (
             <li>
-              <a class="text-paper/80 hover:text-white" href={`/services/${s.slug}`}>
+              <a class="text-paper/80 hover:text-white" href={`/services/${s.slug}/`}>
                 {s.title}
               </a>
             </li>
@@ -48,12 +48,13 @@ const year = new Date().getFullYear();
     <div>
       <h2 class="font-sans text-sm font-semibold tracking-widest text-brass uppercase">Company</h2>
       <ul class="mt-4 space-y-2">
-        <li><a class="text-paper/80 hover:text-white" href="/about">About</a></li>
-        <li><a class="text-paper/80 hover:text-white" href="/work">Work</a></li>
-        <li><a class="text-paper/80 hover:text-white" href="/interactive">Interactive</a></li>
-        <li><a class="text-paper/80 hover:text-white" href="/contact">Contact</a></li>
+        <li><a class="text-paper/80 hover:text-white" href="/about/">About</a></li>
+        <li><a class="text-paper/80 hover:text-white" href="/work/">Work</a></li>
+        <li><a class="text-paper/80 hover:text-white" href="/interactive/">Interactive</a></li>
+        <li><a class="text-paper/80 hover:text-white" href="/contact/">Contact</a></li>
         {site.linkedin && <li><a class="text-paper/80 hover:text-white" href={site.linkedin}>LinkedIn</a></li>}
         {site.github && <li><a class="text-paper/80 hover:text-white" href={site.github}>GitHub</a></li>}
+        {site.facebook && <li><a class="text-paper/80 hover:text-white" href={site.facebook}>Facebook</a></li>}
       </ul>
     </div>
   </div>
@@ -61,8 +62,8 @@ const year = new Date().getFullYear();
     <div class="wrap flex flex-col gap-2 py-5 text-sm text-paper/70 sm:flex-row sm:justify-between">
       <p>© {year} Oakheart Technologies. All rights reserved.</p>
       <p class="flex gap-5">
-        <a class="hover:text-white" href="/privacy">Privacy</a>
-        <a class="hover:text-white" href="/terms">Terms</a>
+        <a class="hover:text-white" href="/privacy/">Privacy</a>
+        <a class="hover:text-white" href="/terms/">Terms</a>
       </p>
     </div>
   </div>

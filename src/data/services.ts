@@ -2,6 +2,8 @@
 export interface Service {
   slug: string;
   title: string;
+  // Page title for search results and browser tabs (keep to about 37 characters; the site name is added after it).
+  seoTitle: string;
   icon: 'clipboard' | 'plug' | 'code' | 'lifebuoy' | 'headset' | 'gauge' | 'users';
   badge?: string;
   summary: string;
@@ -26,6 +28,7 @@ export const services: Service[] = [
   {
     slug: 'workflow-checkup',
     title: 'Workflow Checkup',
+    seoTitle: 'Workflow Checkup: Find What to Fix',
     icon: 'clipboard',
     badge: 'Start here',
     summary: 'A working session and a written plan: the 3–5 fixes worth making first, with cost and time saved for each.',
@@ -77,6 +80,7 @@ export const services: Service[] = [
   {
     slug: 'ai-implementation',
     title: 'Practical AI Implementation',
+    seoTitle: 'Practical AI Implementation',
     icon: 'users',
     summary: 'Find where AI actually helps your business, set it up properly, and know where it doesn’t belong.',
     price: 'AI checkup $495',
@@ -149,6 +153,7 @@ export const services: Service[] = [
   {
     slug: 'automation-integrations',
     title: 'Automation & Integrations',
+    seoTitle: 'Business Process Automation',
     icon: 'plug',
     summary: 'Find the manual process behind the busywork, then connect the tools so the data moves on its own.',
     price: 'Quoted after the checkup',
@@ -199,6 +204,7 @@ export const services: Service[] = [
   {
     slug: 'custom-software',
     title: 'Custom Software & Websites',
+    seoTitle: 'Custom Software & Websites',
     icon: 'code',
     summary: 'When off-the-shelf doesn’t fit: purpose-built tools and websites that do their job and are yours to keep.',
     price: 'Quoted after discovery',
@@ -243,6 +249,7 @@ export const services: Service[] = [
   {
     slug: 'software-rescue',
     title: 'Software Rescue',
+    seoTitle: 'Software Rescue for Stalled Projects',
     icon: 'lifebuoy',
     summary: 'A stalled, abandoned or broken software project or website, assessed honestly and either fixed or replaced.',
     price: 'Assessment from $595',
@@ -296,12 +303,13 @@ export const services: Service[] = [
   {
     slug: 'software-cost-review',
     title: 'Software & Subscription Cost Review',
+    seoTitle: 'Software Subscription Cost Review',
     icon: 'gauge',
     summary: 'Find the overlapping tools, unused seats and over-tiered plans you’re paying for, then have me set up what I recommend.',
     price: 'Assessment from $395',
     priceNote: `The assessment is a fixed-price first step from $395, set so it pays for itself quickly, and credited toward the implementation. Setting up what I recommend is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
-      'A fixed-price assessment of your software subscriptions (CRMs, project tools, Microsoft 365 and more): find overlapping tools, unused seats and over-tiered plans, with a written list of what to consolidate, and help setting it up.',
+      'Find overlapping tools, unused seats and oversized plans in your software subscriptions, with a written list of savings and help setting it up.',
     heroTitle: 'Stop paying for software you don’t use, or use twice.',
     heroLead:
       'Subscriptions pile up, and tools quietly overlap. I go through what you pay for, find the overlap and waste, and give you a written list of what to consolidate, drop or downgrade, with the monthly saving for each.',
@@ -363,6 +371,7 @@ export const services: Service[] = [
   {
     slug: 'interactive-vr',
     title: 'Interactive & VR Training',
+    seoTitle: 'VR & Interactive Training',
     icon: 'headset',
     summary: 'Interactive training and simulation, including VR, for teams that need people to practice before it counts.',
     price: 'Project-based',

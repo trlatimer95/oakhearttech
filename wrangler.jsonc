@@ -1,11 +1,12 @@
 {
-  // Must match the existing Worker name (oakhearttech.<account>.workers.dev), or deploy creates a new Worker.
+  // Must match the existing Worker name, or deploy creates a new Worker.
   // Static assets only: no Worker code. The contact form posts directly to Web3Forms from the browser.
   "name": "oakhearttech",
   "compatibility_date": "2026-10-01",
-  // Keep the workers.dev address on. Custom domains (oakhearttech.com) are added in the Cloudflare dashboard,
-  // under the Worker's Settings > Domains & Routes, not here.
-  "workers_dev": true,
+  // The site is served on oakhearttech.com (a custom domain added in the Cloudflare dashboard, under the Worker's
+  // Domains tab). The default *.workers.dev addresses are turned off so there is only one public copy of the site.
+  "workers_dev": false,
+  "preview_urls": false,
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page"
