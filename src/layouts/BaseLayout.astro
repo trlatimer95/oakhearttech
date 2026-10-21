@@ -22,6 +22,7 @@ const jsonLd = {
   name: site.name,
   url: site.url,
   email: site.email,
+  telephone: site.phone ? `+1${site.phone.replace(/\D/g, '')}` : undefined,
   founder: { '@type': 'Person', name: 'Tyler Latimer' },
   areaServed: [
     { '@type': 'City', name: 'Spokane', containedInPlace: { '@type': 'State', name: 'Washington' } },
