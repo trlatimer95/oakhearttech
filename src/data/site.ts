@@ -4,7 +4,7 @@ export const site = {
   url: 'https://oakhearttech.com',
   email: 'tyler@oakhearttech.com',
   location: 'Spokane, WA',
-  tagline: 'Software that works the way your business does.',
+  tagline: 'Careful engineering. Efficient processes. Problems solved at the source.',
 
   // Microsoft Bookings page URL. Until this is set, "Book a call" buttons go to /contact#book.
   bookingUrl: 'https://bookings.cloud.microsoft/book/OakheartTechnologies1@oakhearttech.com/',
