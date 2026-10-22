@@ -29,7 +29,7 @@ const jsonLd = {
   knowsAbout: ['Software rescue', 'Process automation', 'Software cost reduction', 'C# and .NET', 'Azure', 'Unity and VR'],
   email: site.email,
   telephone: site.phone ? `+1${site.phone.replace(/\D/g, '')}` : undefined,
-  founder: { '@type': 'Person', name: 'Tyler Latimer' },
+  founder: { '@type': 'Person', name: 'Tyler Latimer', sameAs: [site.linkedinFounder] },
   areaServed: [
     { '@type': 'City', name: 'Spokane', containedInPlace: { '@type': 'State', name: 'Washington' } },
     { '@type': 'Country', name: 'United States' },

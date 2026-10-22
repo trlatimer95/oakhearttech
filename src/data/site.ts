@@ -11,11 +11,11 @@ export const site = {
   // Optional. Leave blank to publish no phone number.
   // This is also the TRL Home Solutions number. Swap it here if a separate business line is set up later.
   phone: '(208) 553-6162',
-  // Personal profiles for now; swap to Oakheart company profiles once created.
-  linkedin: 'https://www.linkedin.com/in/tlatimer95/',
-  github: 'https://github.com/trlatimer95',
-  // Facebook page. Update this to the short address (facebook.com/oakhearttech) once a username is set.
-  facebook: 'https://www.facebook.com/profile.php?id=61595471947636',
+  // Company LinkedIn Page, plus Tyler's personal profile (used only as the founder's sameAs in the JSON-LD).
+  linkedin: 'https://www.linkedin.com/company/oakheart-technologies',
+  linkedinFounder: 'https://www.linkedin.com/in/tlatimer95/',
+  github: 'https://github.com/Oakheart-Technologies',
+  facebook: 'https://www.facebook.com/oakhearttech',
 
   // Web3Forms access key (public by design). Get one at web3forms.com using tyler@oakhearttech.com.
   // Blank = the form renders but tells visitors to email instead.
