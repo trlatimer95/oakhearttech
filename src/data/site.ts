@@ -1,6 +1,7 @@
 // One place for everything the owner still needs to supply. Empty strings are treated as "not set yet".
 export const site = {
   name: 'Oakheart Technologies',
+  legalName: 'Oakheart Technologies LLC',
   url: 'https://oakhearttech.com',
   email: 'tyler@oakhearttech.com',
   location: 'Spokane, WA',
