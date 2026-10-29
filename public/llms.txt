@@ -9,7 +9,7 @@ Oakheart Technologies is a software consultancy in Spokane, Washington, serving 
 - [Software Rescue](https://oakhearttech.com/services/software-rescue/): assessing and repairing stalled, broken or AI-built software and websites
 - [Automation and Integrations](https://oakhearttech.com/services/automation-integrations/): connecting existing tools so data isn't re-typed
 - [Software and Subscription Cost Review](https://oakhearttech.com/services/software-cost-review/): finding overlapping, unused and oversized subscriptions
-- [Practical AI Implementation](https://oakhearttech.com/services/ai-implementation/): finding where AI helps, and using plain scripts where exact results matter
+- [Practical AI Implementation](https://oakhearttech.com/services/ai-implementation/): finding where AI helps, then building checked workflows for lead intake, follow-up and customer updates, with plain scripts where exact results matter
 - [Custom Software and Websites](https://oakhearttech.com/services/custom-software/)
 - [Interactive and VR Training](https://oakhearttech.com/services/interactive-vr/)
 
