@@ -8,3 +8,7 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Image filenames aren't hashed, so a shorter lifetime; rename a file when it changes.
+/images/*
+  Cache-Control: public, max-age=2592000

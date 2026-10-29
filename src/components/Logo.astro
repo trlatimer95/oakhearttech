@@ -10,8 +10,8 @@ interface Props {
 const { variant = 'lockup', tone = 'color', class: cls = '' } = Astro.props;
 
 const sources = {
-  lockup: { color: '/images/logo.png', light: '/images/logo-light.png', w: 720, h: 234 },
-  emblem: { color: '/images/icon.png', light: '/images/icon-light.png', w: 229, h: 256 },
+  lockup: { color: '/images/logo.webp', light: '/images/logo-light.webp', w: 400, h: 130 },
+  emblem: { color: '/images/icon.webp', light: '/images/icon-light.webp', w: 72, h: 80 },
 };
 const s = sources[variant];
 const src = tone === 'light' ? s.light : s.color;
