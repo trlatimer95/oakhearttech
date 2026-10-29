@@ -10,7 +10,7 @@ const { items } = Astro.props;
   {
     items.map((i) => (
       <details class="group px-5 py-4">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-ink">
+        <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold text-ink">
           {i.q}
           <span class="text-2xl leading-none text-royal transition-transform group-open:rotate-45" aria-hidden="true">
             +
