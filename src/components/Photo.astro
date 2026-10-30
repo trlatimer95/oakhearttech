@@ -1,0 +1,30 @@
+---
+// Responsive image served from public/images. `name` is the path without the "-{width}.webp" suffix;
+// one file per entry in `widths` must exist. `width` and `height` are the largest variant's pixel size.
+interface Props {
+  name: string;
+  alt: string;
+  widths: number[];
+  width: number;
+  height: number;
+  sizes?: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'auto';
+}
+const { name, alt, widths, width, height, sizes = '100vw', class: cls = '', loading = 'lazy', fetchpriority } = Astro.props;
+const sorted = [...widths].sort((a, b) => a - b);
+---
+
+<img
+  src={`${name}-${sorted[0]}.webp`}
+  srcset={sorted.map((w) => `${name}-${w}.webp ${w}w`).join(', ')}
+  sizes={sizes}
+  width={width}
+  height={height}
+  alt={alt}
+  class={cls}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding="async"
+/>

@@ -1,4 +1,14 @@
 // Service copy follows the brief. Prices are placeholders until the owner decides them.
+// A responsive image in public/images: `name` is the path without the "-{width}.webp" suffix.
+export interface Figure {
+  name: string;
+  alt: string;
+  caption?: string;
+  widths: number[];
+  width: number;
+  height: number;
+}
+
 export interface Service {
   slug: string;
   title: string;
@@ -19,6 +29,12 @@ export interface Service {
   processTitle: string;
   process: { title: string; text: string }[];
   stance?: string;
+  // Optional dedicated section, linkable at #websites.
+  websites?: { title: string; text: string; items: string[] };
+  // Optional photos and illustrations, shown after the "what you get" section.
+  figures?: Figure[];
+  // Optional photo beside the hero text.
+  heroImage?: Figure;
   faqs: { q: string; a: string }[];
 }
 
@@ -34,6 +50,40 @@ export const services: Service[] = [
     summary: 'A working session and a written plan: the 3–5 fixes worth making first, with cost and time saved for each.',
     price: '$395',
     priceNote: `Fixed price, credited toward any project that follows. ${TAX}`,
+    figures: [
+      {
+        name: '/images/office/checkup-report-printed',
+        alt: 'The printed Workflow Checkup report and action plan for a sample business, lying on a wooden desk',
+        caption: 'The report is a real document you can hand to whoever does the work, not a slide deck. Sample business shown.',
+        widths: [800, 1600],
+        width: 1600,
+        height: 1714,
+      },
+      {
+        name: '/images/illustrations/lead-to-paid-invoice-sketch',
+        alt: 'Hand-drawn flowchart of a sample business’s lead-to-paid-invoice process, with three problem spots marked in red and three fixes listed in green',
+        caption: 'The checkup starts with a sketch of how one job moves today and where the time goes. Sample Co. is made up.',
+        widths: [1000, 2000],
+        width: 2000,
+        height: 1250,
+      },
+      {
+        name: '/images/illustrations/sample-co-systems-map',
+        alt: 'Diagram comparing a sample business’s current tools, where job details are typed three times, with a proposed setup where they are entered once and synced',
+        caption: 'A systems map from the same sample: today on the left, the proposed setup on the right, built from the tools already in place.',
+        widths: [1000, 2000],
+        width: 2000,
+        height: 1125,
+      },
+      {
+        name: '/images/office/desk-code-and-systems-map',
+        alt: 'Two monitors on a desk: code in Visual Studio on the left and the sample systems map on the right',
+        caption: 'Where the work happens: the plan on one screen, the code on the other.',
+        widths: [1000, 2000],
+        width: 2000,
+        height: 1333,
+      },
+    ],
     metaDescription:
       'A fixed-price Workflow Checkup for small businesses: a working session and a written plan of the 3–5 fixes worth making first.',
     heroTitle: 'Find out what’s actually slowing you down.',
@@ -57,7 +107,7 @@ export const services: Service[] = [
     ],
     processTitle: 'How it works',
     process: [
-      { title: 'Book', text: 'Pick a time for a free 30-minute call, or book the checkup directly.' },
+      { title: 'Book', text: 'Pick a time for a free 30-minute call, and we’ll set up the checkup from there.' },
       { title: 'Intake', text: 'A short form about your tools and what’s slowing you down.' },
       { title: 'Session', text: 'We walk through your workflow together. You show me; I ask questions.' },
       { title: 'Report', text: 'You get the written plan within 3 business days of the session.' },
@@ -84,8 +134,18 @@ export const services: Service[] = [
     icon: 'users',
     summary:
       'Find where AI actually helps, then build the workflows: lead intake, follow-up and customer updates, with plain scripts wherever exactness matters.',
-    price: 'AI checkup $495',
-    priceNote: `The checkup is a fixed $495, credited toward setup. Setup is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    price: 'AI checkup $395',
+    priceNote: `The checkup is a fixed $395, credited toward setup. Setup is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    figures: [
+      {
+        name: '/images/illustrations/lead-intake-workflow',
+        alt: 'Diagram of a lead-intake workflow in three rows: exact steps handled by scripts, language steps handled by AI, and judgment steps handled by a person, with a run log underneath',
+        caption: 'How I split a lead-intake workflow: scripts for the exact steps, AI for reading and drafting, and a person approving anything a customer sees. An illustration, not a product screenshot.',
+        widths: [1000, 2000],
+        width: 2000,
+        height: 1125,
+      },
+    ],
     metaDescription:
       'Practical AI for small and mid-size businesses: find where AI saves real time, then build checked workflows for lead intake, follow-up and customer updates.',
     heroTitle: 'Use AI where it helps. Build it so it holds up.',
@@ -139,7 +199,7 @@ export const services: Service[] = [
       },
       {
         q: 'I don’t know much about AI. Is that a problem?',
-        a: 'No. Most of my clients don’t, and don’t have the time to learn it on top of running a business. I explain what each piece does in plain language, handle the setup, and leave you with a one-page guide and a walkthrough, so you can use it and check its work without becoming an expert.',
+        a: 'No. Most small business owners don’t, and don’t have the time to learn it on top of running a business. I explain what each piece does in plain language, handle the setup, and leave you with a one-page guide and a walkthrough, so you can use it and check its work without becoming an expert.',
       },
       {
         q: 'Why not just use AI for everything?',
@@ -174,7 +234,7 @@ export const services: Service[] = [
     icon: 'plug',
     summary: 'Find the manual process behind the busywork, then connect the tools so the data moves on its own.',
     price: 'Quoted after the checkup',
-    priceNote: `Projects are quoted as a fixed price after a Workflow Checkup, based on what’s needed. Most start around $1,500. ${TAX}`,
+    priceNote: `Projects are quoted as a fixed price after a Workflow Checkup, based on what’s needed. A single small automation can cost a few hundred dollars, and larger connected sets cost much more. ${TAX}`,
     metaDescription:
       'Workflow automation and software integrations for small businesses: connect your existing tools and cut double data entry.',
     heroTitle: 'Make your tools talk to each other.',
@@ -225,7 +285,7 @@ export const services: Service[] = [
     icon: 'code',
     summary: 'When off-the-shelf doesn’t fit: purpose-built tools and websites that do their job and are yours to keep.',
     price: 'Quoted after discovery',
-    priceNote: `Quoted as a fixed price once the scope is clear, usually after a Workflow Checkup. Most projects start around $5,000. ${TAX}`,
+    priceNote: `Quoted as a fixed price once the scope is clear, usually after a Workflow Checkup. Cost scales with size: a small tool costs a fraction of a full platform build. ${TAX}`,
     metaDescription:
       'Custom software and websites for small businesses, built to fit how you work, with code and accounts handed over to you.',
     heroTitle: 'Software built to fit, not squeezed to fit.',
@@ -269,8 +329,8 @@ export const services: Service[] = [
     seoTitle: 'Software Rescue for Stalled Projects',
     icon: 'lifebuoy',
     summary: 'A stalled, abandoned or broken software project or website, assessed honestly and either fixed or replaced.',
-    price: 'Assessment from $595',
-    priceNote: `The assessment is a fixed-price first step: $595 for a small to medium codebase, larger ones quoted, and credited toward the fix. Fixes are quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    price: 'Assessment quoted per project',
+    priceNote: `The assessment is a fixed-price first step, quoted after a short look at the code because a small web app and a large platform are very different jobs. It’s credited toward the fix. Fixes are quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
       'Software rescue: an honest assessment of stalled, abandoned or AI-generated code, then a plan to finish it or replace it.',
     heroTitle: 'Your software project stalled. Let’s find out why.',
@@ -291,8 +351,17 @@ export const services: Service[] = [
       'A plain-language report on what works, what doesn’t, and what’s risky',
       'Options with estimated costs: finish it, fix parts, or rebuild',
       'A recommendation, including when rebuilding is cheaper',
-      'For websites: slow pages, errors, broken links, forms that don’t deliver, expired certificates, basic search fixes such as missing titles and descriptions, and who controls the domain and hosting',
     ],
+    websites: {
+      title: 'Websites that are slow, down or broken',
+      text: 'A website is software too, and it can be rescued the same way: look at what’s there, fix what’s hurting you, and say plainly if something isn’t worth fixing.',
+      items: [
+        'Slow pages and errors',
+        'Broken links, and contact forms that don’t deliver',
+        'Expired certificates, and who controls the domain and hosting',
+        'Basic search fixes, such as missing page titles and descriptions',
+      ],
+    },
     processTitle: 'The rescue process',
     process: [
       { title: 'Assess', text: 'I review what exists and talk to you about what it was supposed to do.' },
@@ -323,8 +392,8 @@ export const services: Service[] = [
     seoTitle: 'Software Subscription Cost Review',
     icon: 'gauge',
     summary: 'Find the overlapping tools, unused seats and over-tiered plans you’re paying for, then have me set up what I recommend.',
-    price: 'Assessment from $395',
-    priceNote: `The assessment is a fixed-price first step from $395, set so it pays for itself quickly, and credited toward the implementation. Setting up what I recommend is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    price: 'Cost review $395',
+    priceNote: `The cost review is a fixed-price first step at $395, set so it pays for itself quickly, and credited toward the implementation. Setting up what I recommend is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
       'Find overlapping tools, unused seats and oversized plans in your software subscriptions, with a written list of savings and help setting it up.',
     heroTitle: 'Stop paying for software you don’t use, or use twice.',
@@ -393,8 +462,15 @@ export const services: Service[] = [
     summary: 'Interactive training and simulation, including VR, for teams that need people to practice before it counts.',
     price: 'Project-based',
     priceNote: `Scoped per project. ${TAX}`,
+    heroImage: {
+      name: '/images/office/vr-headset-desk',
+      alt: 'A Meta Quest 2 headset and controllers on a desk, with a VR game scene on the monitor behind them',
+      widths: [600, 1200],
+      width: 1200,
+      height: 1898,
+    },
     metaDescription:
-      'Interactive and VR training and simulation software built in Unity, from a studio with hands-on experience building VR EMS training.',
+      'Interactive and VR training and simulation software built in Unity, by a studio that builds VR simulators for fire department EMS training.',
     heroTitle: 'Training people can practice, not just read.',
     heroLead:
       'Some skills are best learned by doing, in a safe place to get it wrong. I build interactive training and simulations, including VR, for businesses and organizations.',
@@ -425,7 +501,7 @@ export const services: Service[] = [
       },
       {
         q: 'Have you released a VR project?',
-        a: 'Yes. I have a VR title live on the Meta Quest store, I’m the sole developer on a multiplayer VR training simulator, and I’m a Unity Certified User in VR Development and Programming. See the Oakheart Interactive page for more.',
+        a: 'Yes. I have a VR title live on the Meta Quest store, I’m the sole developer on a multiplayer VR training simulator, and I’m a Unity Certified User in VR Development and Programming. See the Games and VR page for more.',
       },
     ],
   },

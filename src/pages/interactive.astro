@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import Logo from '../components/Logo.astro';
 import Icon from '../components/Icon.astro';
+import Photo from '../components/Photo.astro';
 import { site } from '../data/site';
 
 const built = [
@@ -45,8 +46,8 @@ const built = [
 ---
 
 <BaseLayout
-  title="Oakheart Interactive"
-  description="Oakheart Interactive: a released VR title on Meta Quest, a multiplayer VR training simulator, and game jam games from Oakheart Technologies."
+  title="Games and VR"
+  description="Games and VR from Oakheart Technologies: a released VR title on Meta Quest, a multiplayer VR training simulator, and game jam games."
 >
   <section class="on-dark relative overflow-hidden bg-ink text-paper">
     <svg
@@ -59,13 +60,26 @@ const built = [
     >
       {[16, 30, 44, 58, 72, 86, 100].map((r) => <circle cx="100" cy="100" r={r}></circle>)}
     </svg>
-    <div class="wrap section relative">
-      <Logo variant="emblem" tone="light" />
-      <p class="eyebrow mt-8">Oakheart Interactive</p>
-      <h1 class="mt-3 max-w-3xl text-4xl text-paper md:text-6xl">The games and simulation side of the studio.</h1>
-      <p class="prose-measure mt-6 text-xl text-paper/80">
-        The same engineering and the same standards as the business work, aimed at things that are fun to build.
-      </p>
+    <div class="wrap section relative grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
+      <div>
+        <Logo variant="emblem" tone="light" />
+        <p class="eyebrow mt-8">Games and VR</p>
+        <h1 class="mt-3 max-w-3xl text-4xl text-paper md:text-6xl">The games and simulation side of the studio.</h1>
+        <p class="prose-measure mt-6 text-xl text-paper/80">
+          The same engineering and the same standards as the business work, aimed at things that are fun to build.
+        </p>
+      </div>
+      <Photo
+        name="/images/office/tyler-vr-headset-hero"
+        alt="Tyler reaching up to hang a Meta Quest headset on the rack above his desk"
+        widths={[1000, 2000]}
+        width={2000}
+        height={1567}
+        sizes="(min-width: 768px) 40vw, 100vw"
+        class="w-full rounded-2xl border border-white/10 shadow-lg"
+        loading="eager"
+        fetchpriority="high"
+      />
     </div>
   </section>
 
@@ -134,7 +148,7 @@ const built = [
           If you have a training simulation or an interactive idea you'd like built, or you just want to hear when the
           next game is ready, send me a note.
         </p>
-        <Button href={`mailto:${site.email}?subject=Oakheart%20Interactive`} variant="secondary" class="mt-5">
+        <Button href={`mailto:${site.email}?subject=Games%20and%20VR`} variant="secondary" class="mt-5">
           Get in touch
         </Button>
       </div>

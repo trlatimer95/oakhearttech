@@ -7,9 +7,7 @@ import CTABand from '../components/CTABand.astro';
 import FAQ from '../components/FAQ.astro';
 import SampleReport from '../components/SampleReport.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
-import { services } from '../data/services';
 import { bookingHref, bookingIsExternal } from '../data/site';
-import { ph } from '../lib/ph';
 import { originShort } from '../lib/origin';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
@@ -21,14 +19,14 @@ const pains = [
   { icon: 'gauge', text: 'Paying for several tools, with no clear picture of what’s used or what overlaps', href: '/services/software-cost-review/' },
   { icon: 'code', text: 'A one-off problem no off-the-shelf tool solves', href: '/services/custom-software/' },
   { icon: 'lifebuoy', text: 'A software project that stalled, was abandoned, or was built with AI and now breaks', href: '/services/software-rescue/' },
-  { icon: 'globe', text: 'A website that’s slow, down or full of broken links', href: '/services/software-rescue/' },
+  { icon: 'globe', text: 'A website that’s slow, down or full of broken links', href: '/services/software-rescue/#websites' },
 ];
 
 // Figures come from the case studies. Keep them identical to what those pages say.
 const proof = [
-  { figure: '200+', label: 'defects fixed over my time on machine-control software, with new reports nearly stopping' },
+  { figure: '300+', label: 'open defects on machine-control software, all eventually fixed, with new reports nearly stopping' },
   { figure: '10+ steps → 1', label: 'a weekly spreadsheet routine replaced with a one-screen form' },
-  { figure: '$700 → $250', label: 'monthly software cost in my own business after consolidating overlapping tools' },
+  { figure: '$700+ → ~$250', label: 'monthly software cost in my own business after consolidating overlapping tools' },
 ];
 
 const checkup = [
@@ -38,16 +36,9 @@ const checkup = [
   'A written action plan you keep, whether or not you hire me',
 ];
 
-const rank = [
-  { t: 'Customer pain', d: 'What hurts the people who use it or pay for it, first. If they’re about to leave, it goes to the top.' },
-  { t: 'Risk', d: 'Anything that can stop the business or lose data: failures, missing backups, single points of failure.' },
-  { t: 'Efficiency', d: 'What wastes the most hours or money each week, and what can be removed rather than improved.' },
-  { t: 'Everything else', d: 'Nice-to-haves wait. Fixing in small, verified steps beats a big risky change.' },
-];
-
 const steps = [
   { t: 'Listen', d: 'A free call to understand what’s broken and what it’s costing you.' },
-  { t: 'Diagnose', d: 'The Workflow Checkup, or a code review for software: a written plan with priorities, costs and time saved.' },
+  { t: 'Diagnose', d: 'The Workflow Checkup, or a code review for software: a written plan that ranks every issue by what it costs you, with time and cost to fix.' },
   { t: 'Fix', d: 'Fixed-scope work with regular check-ins, so there are no surprises.' },
   { t: 'Hand off', d: 'Documentation, a walkthrough, and you own everything you paid for.' },
 ];
@@ -61,7 +52,7 @@ const why = [
 const faqs = [
   {
     q: 'What does a typical project cost?',
-    a: 'It depends on scope, which is why I start with a fixed-price Workflow Checkup, $395, credited toward any project that follows. Larger work is quoted after the checkup, and my hourly rate for ad hoc work is $125.',
+    a: 'It depends on scope, which is why I start with a fixed-price Workflow Checkup, $395, credited toward any project that follows. Larger work is quoted after the checkup, and my hourly rate for ad hoc work is $125. Prices exclude any applicable sales tax.',
   },
   {
     q: 'Do you work with businesses outside Spokane?',
@@ -78,10 +69,6 @@ const faqs = [
   {
     q: 'What if my last developer disappeared?',
     a: 'That’s exactly what Software Rescue is for. The first step is making sure you have access to your code and accounts.',
-  },
-  {
-    q: 'Do you charge sales tax?',
-    a: 'It depends on the state. Washington recently began treating technology services as taxable, so Washington clients are charged sales tax, itemized on every quote. Clients elsewhere are taxed according to their own state’s rules, and I’ll confirm what applies when I quote.',
   },
 ];
 ---
@@ -159,40 +146,15 @@ const faqs = [
           ))
         }
       </ul>
+      <p class="mt-8">
+        <a href="/services/" class="inline-flex min-h-11 items-center font-semibold text-royal underline underline-offset-4"
+          >See all services</a
+        >
+      </p>
     </div>
   </section>
 
-  <!-- 3. Services -->
-  <section>
-    <div class="wrap section">
-      <p class="eyebrow">Services</p>
-      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">Tell me what's broken. I'll tell you what it takes to fix it.</h2>
-      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {
-          services.filter((s) => s.slug !== 'interactive-vr').map((s) => (
-            <a href={`/services/${s.slug}/`} class="card reveal group relative block p-7 transition-shadow hover:shadow-lg">
-              {s.badge && (
-                <span class="absolute top-5 right-5 rounded-full bg-royal px-3 py-1 text-xs font-semibold text-white">
-                  {s.badge}
-                </span>
-              )}
-              <span class="text-royal">
-                <Icon name={s.icon} class="h-8 w-8" />
-              </span>
-              <h3 class="mt-4 text-2xl">{s.title}</h3>
-              <p class="mt-2 text-muted">{s.summary}</p>
-              <p class="mt-5 font-semibold text-ink" set:html={ph(s.price)} />
-              <span class="mt-2 flex items-center gap-1 font-semibold text-royal group-hover:gap-2">
-                Learn more <Icon name="arrow" class="h-4 w-4" />
-              </span>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. Entry offer -->
+  <!-- 3. Entry offer -->
   <section class="bg-white">
     <div class="wrap section grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-16">
       <div>
@@ -234,6 +196,12 @@ const faqs = [
             <dd class="mt-0.5 text-muted">Written report within 3 business days of the session.</dd>
           </div>
           <div>
+            <dt class="font-semibold text-ink">Different question?</dt>
+            <dd class="mt-0.5 text-muted">
+              The same price covers a software cost review or an AI checkup, if one of those is the bigger question.
+            </dd>
+          </div>
+          <div>
             <dt class="font-semibold text-ink">Bigger than that?</dt>
             <dd class="mt-0.5 text-muted">
               A review across a whole company is quoted separately. I'll tell you on the free call.
@@ -247,7 +215,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 5. Featured work -->
+  <!-- 4. Featured work -->
   {
     work.length > 0 && (
       <section>
@@ -281,7 +249,7 @@ const faqs = [
     )
   }
 
-  <!-- 6. Founder and trust -->
+  <!-- 5. Founder and trust -->
   <section class="bg-white">
     <div class="wrap section grid gap-10 md:grid-cols-[auto_1fr] md:gap-14">
       <figure class="mx-auto w-full max-w-[12rem] md:mx-0">
@@ -318,7 +286,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 7. How I work -->
+  <!-- 6. How I work -->
   <section>
     <div class="wrap section">
       <p class="eyebrow">How I work</p>
@@ -337,34 +305,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 8. How I diagnose -->
-  <section class="bg-white">
-    <div class="wrap section grid gap-10 md:grid-cols-[1fr_1.4fr] md:gap-16">
-      <div>
-        <p class="eyebrow">How I diagnose</p>
-        <h2 class="mt-3 text-3xl md:text-4xl">Rank by what costs you most, then work down.</h2>
-        <p class="mt-4 text-muted">
-          When there's a long list of problems, the answer is rarely to start over. I rank every issue by its cost to you
-          and fix them in that order, in small steps that I verify as I go.
-        </p>
-      </div>
-      <ol class="space-y-5">
-        {
-          rank.map((r, i) => (
-            <li class="reveal flex gap-4 border-b border-line pb-5 last:border-0">
-              <span class="font-serif text-3xl font-semibold text-oak">{i + 1}</span>
-              <div>
-                <h3 class="text-xl">{r.t}</h3>
-                <p class="mt-1 text-muted">{r.d}</p>
-              </div>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <!-- 9. Interactive & VR strip (secondary) -->
+  <!-- 7. Games and VR strip (secondary) -->
   <section class="on-dark bg-ink text-paper">
     <div class="wrap flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between">
       <div class="max-w-2xl">
@@ -372,17 +313,17 @@ const faqs = [
         <h2 class="mt-3 text-2xl text-paper md:text-3xl">Interactive training and simulation.</h2>
         <p class="mt-3 text-paper/80">
           I also build interactive and VR training, including a multiplayer simulator for fire departments. I've released
-          a VR title on the Meta Quest store, and I'm developing games under Oakheart Interactive.
+          a VR title on the Meta Quest store, and I'm developing more games.
         </p>
       </div>
       <div class="flex flex-wrap gap-4">
         <Button href="/services/interactive-vr/" variant="light">Interactive & VR training</Button>
-        <Button href="/interactive/" variant="outline-light">Oakheart Interactive</Button>
+        <Button href="/interactive/" variant="outline-light">Games &amp; VR</Button>
       </div>
     </div>
   </section>
 
-  <!-- 10. FAQ -->
+  <!-- 8. FAQ -->
   <section>
     <div class="wrap section">
       <p class="eyebrow">FAQ</p>

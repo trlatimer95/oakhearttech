@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTABand from '../components/CTABand.astro';
+import Photo from '../components/Photo.astro';
 
 // Experience is described by area, without employer names or dates. Case studies stay anonymized to match.
 const areas = [
@@ -70,18 +71,32 @@ const certs = [
         </p>
       </div>
     </div>
-    <figure class="mx-auto w-full max-w-[14rem] md:mx-0 md:justify-self-end">
-      <img
-        src="/images/tyler-latimer.webp"
-        alt="Tyler Latimer"
-        width="448"
-        height="448"
-        class="aspect-square w-full rounded-2xl border border-line object-cover shadow-sm"
-        loading="eager"
-        fetchpriority="high"
-      />
-      <figcaption class="mt-3 text-sm text-muted">Tyler Latimer, founder. Spokane, WA.</figcaption>
-    </figure>
+    <div class="mx-auto flex w-full max-w-[14rem] flex-col gap-8 md:mx-0 md:max-w-[20rem] md:justify-self-end">
+      <figure class="w-full max-w-[14rem]">
+        <img
+          src="/images/tyler-latimer.webp"
+          alt="Tyler Latimer"
+          width="448"
+          height="448"
+          class="aspect-square w-full rounded-2xl border border-line object-cover shadow-sm"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <figcaption class="mt-3 text-sm text-muted">Tyler Latimer, founder. Spokane, WA.</figcaption>
+      </figure>
+      <figure>
+        <Photo
+          name="/images/office/tyler-at-desk-coding"
+          alt="Tyler at his desk, working in Unity and Visual Studio across two monitors"
+          widths={[640, 1280]}
+          width={1280}
+          height={1828}
+          sizes="(min-width: 768px) 20rem, 14rem"
+          class="w-full rounded-2xl border border-line shadow-sm"
+        />
+        <figcaption class="mt-3 text-sm text-muted">At work in the home office.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section class="bg-white">
