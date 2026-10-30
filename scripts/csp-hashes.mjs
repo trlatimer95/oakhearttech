@@ -30,5 +30,5 @@ const headersPath = join(dist, '_headers');
 if (!existsSync(headersPath)) throw new Error('dist/_headers not found');
 const headers = readFileSync(headersPath, 'utf8');
 if (!headers.includes(TOKEN)) throw new Error(`${TOKEN} not found in _headers`);
-writeFileSync(headersPath, headers.replace(TOKEN, [...hashes].sort().join(' ')));
+writeFileSync(headersPath, headers.replaceAll(TOKEN, [...hashes].sort().join(' ')));
 console.log(`CSP: allowed ${hashes.size} inline script hash(es); 'unsafe-inline' removed from script-src.`);

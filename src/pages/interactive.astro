@@ -6,6 +6,7 @@ import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
 import { site } from '../data/site';
 
+// This page is the one that stays dark all the way down: the 3D castle scene in the hero is the showcase.
 const built = [
   {
     icon: 'headset',
@@ -35,7 +36,7 @@ const built = [
   },
   {
     icon: 'code',
-    title: 'Mushroom Reborn',
+    title: 'Fungi Reborn',
     tag: 'GameDev.tv game jam',
     text: 'A second GameDev.tv game jam entry, built under the same tight deadline. Also playable now.',
     href: 'https://trlatimer.itch.io/mushroom-reborn',
@@ -49,69 +50,58 @@ const built = [
   title="Games and VR"
   description="Games and VR from Oakheart Technologies: a released VR title on Meta Quest, a multiplayer VR training simulator, and game jam games."
 >
-  <section class="on-dark relative overflow-hidden bg-ink text-paper">
-    <svg
-      class="pointer-events-none absolute -right-48 -bottom-48 h-[46rem] w-[46rem] text-brass opacity-[0.08]"
-      viewBox="0 0 200 200"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1"
-      aria-hidden="true"
-    >
-      {[16, 30, 44, 58, 72, 86, 100].map((r) => <circle cx="100" cy="100" r={r}></circle>)}
-    </svg>
-    <div class="wrap section relative grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
-      <div>
-        <Logo variant="emblem" tone="light" />
-        <p class="eyebrow mt-8">Games and VR</p>
-        <h1 class="mt-3 max-w-3xl text-4xl text-paper md:text-6xl">The games and simulation side of the studio.</h1>
-        <p class="prose-measure mt-6 text-xl text-paper/80">
-          The same engineering and the same standards as the business work, aimed at things that are fun to build.
-        </p>
+  <!-- 1. Hero: a low-poly castle you can look around, drawn in WebGL. Falls back to a plain gradient. -->
+  <section id="vr-hero" class="on-dark scene-host relative overflow-hidden bg-[#070b14] text-[#e9edf5]">
+    <canvas id="scene" class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
+    <div class="scene-shade pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="wrap relative z-[1] flex min-h-[min(86vh,800px)] flex-col justify-center py-16 md:py-24">
+      <Logo variant="emblem" tone="light" class="self-start" />
+      <p class="eyebrow mt-8">Interactive training, VR and games</p>
+      <h1 class="mt-3 max-w-[11em] text-4xl text-white md:text-6xl lg:text-7xl">Worlds people can walk into.</h1>
+      <p class="mt-6 max-w-[28em] text-xl text-[#b8c1d4]">
+        The same engineering behind my business software, applied to VR training, simulation and games. On a desktop,
+        move your mouse to look around the castle.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <Button href="https://www.meta.com/experiences/the-castle-experience/6122799184408683/" external variant="light">
+          See the Castle Experience
+        </Button>
+        <Button href="/services/interactive-vr/" variant="outline-light">Talk about a training project</Button>
       </div>
-      <Photo
-        name="/images/office/tyler-vr-headset-hero"
-        alt="Tyler reaching up to hang a Meta Quest headset on the rack above his desk"
-        widths={[500, 1000, 2000]}
-        width={2000}
-        height={1567}
-        sizes="(min-width: 768px) 40vw, 100vw"
-        class="w-full rounded-2xl border border-white/10 shadow-lg"
-        loading="eager"
-        fetchpriority="high"
-      />
     </div>
+    <p class="scene-hint pointer-events-none absolute right-7 bottom-6 z-[1] hidden items-center gap-2 text-xs text-[#8a94a8] md:flex" aria-hidden="true">
+      <i></i>Move to look around · scroll for more
+    </p>
   </section>
 
-  <section>
+  <!-- 2. Projects -->
+  <section class="on-dark bg-[#070b14] text-[#e9edf5]">
     <div class="wrap section">
       <p class="eyebrow">What I've built</p>
-      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">From game jams to a published VR title.</h2>
-      <p class="prose-measure mt-4 text-muted">
+      <h2 class="mt-3 max-w-2xl text-3xl text-white md:text-4xl">From game jams to a published VR title.</h2>
+      <p class="prose-measure mt-4 text-[#aab6cc]">
         I'm a Unity Certified User in both VR Development and Programming, and I've worked on interactive projects at
-        every size, from a weekend game to a multi-year simulator. I also keep a bench of solo prototypes where I
-        test mechanics, VR interactions and tools.
+        every size, from a weekend game to a multi-year simulator. I also keep a bench of solo prototypes where I test
+        mechanics, VR interactions and tools.
       </p>
       <div class="mt-10 grid gap-6 md:grid-cols-2">
         {
           built.map((b) => (
-            <div class="card reveal flex flex-col p-7">
+            <div class="reveal flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-7 transition-transform hover:-translate-y-1">
               <div class="flex items-center justify-between gap-4">
-                <span class="text-royal">
+                <span class="text-brass">
                   <Icon name={b.icon} class="h-8 w-8" />
                 </span>
-                <span class="rounded-full border border-line bg-paper px-3 py-1 text-xs font-semibold text-oak">
-                  {b.tag}
-                </span>
+                <span class="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-brass">{b.tag}</span>
               </div>
-              <h3 class="mt-4 text-2xl">{b.title}</h3>
-              <p class="mt-2 flex-1 text-muted">{b.text}</p>
+              <h3 class="mt-4 text-2xl text-white">{b.title}</h3>
+              <p class="mt-2 flex-1 text-[#aab6cc]">{b.text}</p>
               {b.href && (
                 <a
                   href={b.href}
                   target={b.external ? '_blank' : undefined}
                   rel={b.external ? 'noopener noreferrer' : undefined}
-                  class="mt-4 font-semibold text-royal underline underline-offset-4"
+                  class="mt-4 inline-flex min-h-11 items-center font-semibold text-brass underline underline-offset-4"
                 >
                   {b.linkText}
                   {b.external && <span class="sr-only"> (opens in a new tab)</span>}
@@ -124,11 +114,12 @@ const built = [
     </div>
   </section>
 
-  <section class="bg-white">
-    <div class="wrap section grid gap-10 md:grid-cols-2">
+  <!-- 3. What's next -->
+  <section class="on-dark night border-t border-white/10">
+    <div class="wrap section grid gap-10 md:grid-cols-2 md:items-start">
       <div>
-        <h2 class="text-3xl md:text-4xl">What's next</h2>
-        <div class="prose-measure mt-4 space-y-4">
+        <h2 class="text-3xl text-white md:text-4xl">What's next</h2>
+        <div class="prose-measure mt-4 space-y-4 text-[#d7deeb]">
           <p>
             Interactive work sits alongside the consulting. The training simulator is still in development, and I'm
             working on new game ideas that aren't ready to show yet. When there's something new to play, it'll be
@@ -136,22 +127,258 @@ const built = [
           </p>
           <p>
             For business and organizational training, see
-            <a class="font-semibold text-royal underline underline-offset-4" href="/services/interactive-vr/"
+            <a class="font-semibold text-brass underline underline-offset-4" href="/services/interactive-vr/"
               >Interactive &amp; VR Training</a
             >.
           </p>
         </div>
+        <Photo
+          name="/images/office/tyler-vr-headset-hero"
+          alt="Tyler reaching up to hang a Meta Quest headset on the rack above his desk"
+          widths={[500, 1000, 2000]}
+          width={2000}
+          height={1567}
+          sizes="(min-width: 768px) 45vw, 100vw"
+          class="mt-8 w-full rounded-2xl border border-white/10 shadow-lg"
+        />
       </div>
-      <div class="card self-start p-7">
-        <h2 class="text-2xl">Have something in mind?</h2>
-        <p class="mt-2 text-muted">
+      <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-7 md:sticky md:top-24">
+        <h2 class="text-2xl text-white">Have something in mind?</h2>
+        <p class="mt-2 text-[#aab6cc]">
           If you have a training simulation or an interactive idea you'd like built, or you just want to hear when the
           next game is ready, send me a note.
         </p>
-        <Button href={`mailto:${site.email}?subject=Games%20and%20VR`} variant="secondary" class="mt-5">
-          Get in touch
-        </Button>
+        <Button href={`mailto:${site.email}?subject=Games%20and%20VR`} variant="brass" class="mt-5">Get in touch</Button>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // A small low-poly scene: terrain, water, a castle with a flag, trees and stars. The camera drifts slowly and
+  // follows the pointer a little. Three.js is loaded only on this page, and only after the page is up.
+  async function start() {
+    const canvas = document.getElementById('scene') as HTMLCanvasElement | null;
+    const host = document.getElementById('vr-hero');
+    if (!canvas || !host) return;
+    let THREE: typeof import('three');
+    try {
+      THREE = await import('three');
+    } catch {
+      host.classList.add('no-scene');
+      return;
+    }
+    let renderer: import('three').WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    } catch {
+      host.classList.add('no-scene');
+      return;
+    }
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0b1426);
+    scene.fog = new THREE.Fog(0x0b1426, 40, 120);
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 400);
+
+    scene.add(new THREE.HemisphereLight(0x9fb6e0, 0x1a1208, 0.9));
+    const sun = new THREE.DirectionalLight(0xffd9a0, 1.6);
+    sun.position.set(-30, 40, 20);
+    scene.add(sun);
+    const rim = new THREE.DirectionalLight(0x6fa0ff, 0.6);
+    rim.position.set(30, 15, -30);
+    scene.add(rim);
+
+    const PLATEAU = 7.7;
+    const flat = (color: number) => new THREE.MeshStandardMaterial({ color, flatShading: true, roughness: 0.95 });
+    // Ground height: a flat plateau under the castle that ramps down past the walls, a moat, and hills at the edges.
+    const height = (x: number, z: number) => {
+      const d = Math.hypot(x, z);
+      const t = Math.min(Math.max((d - 13) / 5, 0), 1); // 0 on the plateau (which clears the towers), 1 beyond it
+      let h = (Math.sin(x * 0.09) * Math.cos(z * 0.08) * 2.2 + Math.sin(x * 0.21 + z * 0.17) * 0.8) * t;
+      h += PLATEAU * (1 - t);
+      h -= d > 22 && d < 34 ? 2.5 : 0;
+      h += d > 48 ? (d - 48) * 0.35 : 0;
+      return h;
+    };
+
+    // terrain and water
+    const terrain = new THREE.PlaneGeometry(160, 160, 70, 70);
+    terrain.rotateX(-Math.PI / 2);
+    const pos = terrain.attributes.position;
+    for (let i = 0; i < pos.count; i++) pos.setY(i, height(pos.getX(i), pos.getZ(i)));
+    terrain.computeVertexNormals();
+    scene.add(new THREE.Mesh(terrain, flat(0x3f5a34)));
+    const water = new THREE.Mesh(
+      new THREE.PlaneGeometry(160, 160),
+      new THREE.MeshStandardMaterial({ color: 0x2a4a72, roughness: 0.75, metalness: 0, transparent: true, opacity: 0.85 }),
+    );
+    water.rotation.x = -Math.PI / 2;
+    water.position.y = -0.6;
+    scene.add(water);
+
+    // castle
+    const castle = new THREE.Group();
+    castle.position.y = PLATEAU - 0.5; // walls sit slightly into the ground
+    scene.add(castle);
+    const stone = flat(0xb9ac95);
+    const dark = flat(0x8d8070);
+    const roof = flat(0x7a3b2e);
+    const box = (w: number, h: number, d: number, x: number, y: number, z: number, m = stone) => {
+      const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m);
+      b.position.set(x, y, z);
+      castle.add(b);
+      return b;
+    };
+    box(5, 9, 5, 0, 4.5, 0);
+    const keepRoof = new THREE.Mesh(new THREE.ConeGeometry(4.2, 4, 4), roof);
+    keepRoof.position.set(0, 11, 0);
+    keepRoof.rotation.y = Math.PI / 4;
+    castle.add(keepRoof);
+    const towers: [number, number][] = [
+      [-7, -7],
+      [7, -7],
+      [7, 7],
+      [-7, 7],
+    ];
+    towers.forEach(([x, z]) => {
+      const t = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.8, 7, 8), stone);
+      t.position.set(x, 3.5, z);
+      castle.add(t);
+      const c = new THREE.Mesh(new THREE.ConeGeometry(2.1, 3.2, 8), roof);
+      c.position.set(x, 8.6, z);
+      castle.add(c);
+    });
+    for (let i = 0; i < 4; i++) {
+      const [x1, z1] = towers[i];
+      const [x2, z2] = towers[(i + 1) % 4];
+      box(Math.abs(x2 - x1) || 1.2, 4, Math.abs(z2 - z1) || 1.2, (x1 + x2) / 2, 2, (z1 + z2) / 2, dark);
+      for (let k = -5; k <= 5; k += 2) {
+        const cx = (x1 + x2) / 2 + (x1 === x2 ? 0 : k);
+        const cz = (z1 + z2) / 2 + (z1 === z2 ? 0 : k);
+        box(0.8, 0.8, 0.8, cx, 4.4, cz, dark);
+      }
+    }
+    box(2, 2.6, 0.6, 0, 1.3, -7.4, flat(0x3a2a1c));
+    box(0.12, 3, 0.12, 0, 14.2, 0, flat(0x333333));
+    const flag = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.8, 1),
+      new THREE.MeshStandardMaterial({ color: 0xc9a464, side: THREE.DoubleSide, flatShading: true }),
+    );
+    flag.position.set(0.95, 15.1, 0);
+    castle.add(flag);
+
+    // trees
+    const leaf = flat(0x2c4a2c);
+    const trunk = flat(0x4a3420);
+    for (let i = 0; i < 70; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const d = 36 + Math.random() * 30;
+      const x = Math.cos(a) * d;
+      const z = Math.sin(a) * d;
+      const g = new THREE.Group();
+      const c = new THREE.Mesh(new THREE.ConeGeometry(1.2 + Math.random(), 3.5 + Math.random() * 2, 6), leaf);
+      c.position.y = 2.6;
+      const s = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.25, 1.2, 5), trunk);
+      s.position.y = 0.6;
+      g.add(c, s);
+      g.position.set(x, height(x, z), z);
+      scene.add(g);
+    }
+
+    // stars
+    const starGeo = new THREE.BufferGeometry();
+    const stars: number[] = [];
+    for (let i = 0; i < 500; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const e = Math.random() * 0.5 + 0.15;
+      const r = 180;
+      stars.push(Math.cos(a) * Math.cos(e) * r, Math.sin(e) * r, Math.sin(a) * Math.cos(e) * r);
+    }
+    starGeo.setAttribute('position', new THREE.Float32BufferAttribute(stars, 3));
+    scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.7, sizeAttenuation: true, fog: false })));
+
+    // pointer parallax, sizing, and the render loop (paused while the tab is hidden)
+    let mx = 0;
+    let my = 0;
+    let tx = 0;
+    let ty = 0;
+    host.addEventListener('pointermove', (e) => {
+      const r = host.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+    });
+    function size() {
+      const w = host!.clientWidth;
+      const h = host!.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      if (w > 920) camera.setViewOffset(w, h, -w * 0.3, 0, w, h);
+      else camera.clearViewOffset();
+      camera.updateProjectionMatrix();
+    }
+    addEventListener('resize', size);
+    size();
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const t0 = performance.now();
+    function loop(now: number) {
+      requestAnimationFrame(loop);
+      if (document.hidden) return;
+      const t = (now - t0) / 1000;
+      mx += (tx - mx) * 0.05;
+      my += (ty - my) * 0.05;
+      const a = (reduce ? 0 : t * 0.06) + mx * 0.7 + 0.6;
+      camera.position.set(Math.cos(a) * 62, 20 - my * 8, Math.sin(a) * 62);
+      camera.lookAt(0, 6, 0);
+      flag.rotation.y = reduce ? 0 : Math.sin(t * 3) * 0.25;
+      renderer.render(scene, camera);
+    }
+    requestAnimationFrame(loop);
+  }
+  start();
+</script>
+
+<style>
+  .scene-host.no-scene {
+    background: radial-gradient(ellipse at 70% 40%, #1b2d4f, #070b14);
+  }
+  .scene-host.no-scene canvas {
+    display: none;
+  }
+  /* Keeps the copy readable over the scene: dark on the left, fading to the scene on the right. */
+  .scene-shade {
+    background:
+      linear-gradient(90deg, rgb(7 11 20 / 0.92) 0%, rgb(7 11 20 / 0.55) 40%, transparent 70%),
+      linear-gradient(0deg, #070b14 0%, transparent 30%);
+  }
+  .scene-hint i {
+    width: 18px;
+    height: 28px;
+    border: 1.5px solid #8a94a8;
+    border-radius: 10px;
+    position: relative;
+  }
+  .scene-hint i::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 5px;
+    width: 2px;
+    height: 6px;
+    background: #8a94a8;
+    transform: translateX(-50%);
+    animation: wheel 1.6s infinite;
+  }
+  @keyframes wheel {
+    to {
+      transform: translate(-50%, 8px);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scene-hint i::after {
+      animation: none;
+    }
+  }
+</style>

@@ -15,6 +15,8 @@
 
   --font-serif: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Handwritten notes on the blueprint boards. */
+  --font-hand: 'Kalam', 'Segoe Print', 'Comic Sans MS', cursive;
 }
 
 @layer base {
@@ -76,6 +78,99 @@
   }
   .on-dark .eyebrow {
     color: var(--color-brass);
+  }
+  /* Night: the dark workshop surface used for the header, page heroes, CTA band and footer. */
+  .night {
+    background-color: #0b1324;
+    color: #e9edf5;
+  }
+  /* Adds the warm glow and faint grid behind a hero. The element needs position: relative. */
+  .night-glow::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(closest-side, rgb(201 164 100 / 0.16), transparent 70%);
+    pointer-events: none;
+  }
+  .night-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 70% 40%, #000 20%, transparent 75%);
+    pointer-events: none;
+  }
+  /* Blueprint: a night-blue drafting grid for the "how a fix works" moments. Children that must sit above the glow use position: relative. */
+  .blueprint {
+    position: relative;
+    background-color: #0d1b38;
+    color: #e9edf5;
+    border-top: 1px solid #23304d;
+    background-image:
+      linear-gradient(rgb(143 196 255 / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(143 196 255 / 0.1) 1px, transparent 1px),
+      linear-gradient(rgb(143 196 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(143 196 255 / 0.045) 1px, transparent 1px);
+    background-size:
+      120px 120px,
+      120px 120px,
+      24px 24px,
+      24px 24px;
+  }
+  .blueprint::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgb(201 164 100 / 0.1), transparent 60%);
+    pointer-events: none;
+  }
+  .bp-label {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: #8fc4ff;
+  }
+  /* A hand-drawn red underline that draws itself once the element gets .go (see CheckupBoard's observer). */
+  .mark {
+    position: relative;
+    white-space: nowrap;
+  }
+  .mark svg {
+    position: absolute;
+    left: -4%;
+    bottom: -0.12em;
+    width: 108%;
+    height: 0.42em;
+    overflow: visible;
+  }
+  .mark path {
+    fill: none;
+    stroke: #ff8a7a;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+  }
+  .mark.go path {
+    animation: underline 1s 0.4s ease-out forwards;
+  }
+  @keyframes underline {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mark path,
+    .mark.go path {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
   }
   .prose-measure {
     max-width: 66ch;

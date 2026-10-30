@@ -1,0 +1,14 @@
+---
+// The night-blue page hero that frames every page: warm glow top-right, faint grid fading to the edges.
+// Put the eyebrow, heading, lead and any actions in the slot; use light text colors inside (it sets .on-dark).
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+
+<section class:list={['on-dark night night-glow relative overflow-hidden', cls]}>
+  <div class="wrap relative z-[1] pt-10 pb-14 md:pt-14 md:pb-20">
+    <slot />
+  </div>
+</section>

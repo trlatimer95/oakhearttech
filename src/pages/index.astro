@@ -5,7 +5,8 @@ import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
 import CTABand from '../components/CTABand.astro';
 import FAQ from '../components/FAQ.astro';
-import SampleReport from '../components/SampleReport.astro';
+import CheckupBoard from '../components/CheckupBoard.astro';
+import Photo from '../components/Photo.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
 import { bookingHref, bookingIsExternal } from '../data/site';
 import { originShort } from '../lib/origin';
@@ -18,29 +19,22 @@ const pains = [
   { icon: 'users', text: 'Leads and customer updates handled by hand, or AI used where a simple tool would do better', href: '/services/ai-implementation/' },
   { icon: 'gauge', text: 'Paying for several tools, with no clear picture of what’s used or what overlaps', href: '/services/software-cost-review/' },
   { icon: 'code', text: 'A one-off problem no off-the-shelf tool solves', href: '/services/custom-software/' },
-  { icon: 'lifebuoy', text: 'A software project that stalled, was abandoned, or was built with AI and now breaks', href: '/services/software-rescue/' },
-  { icon: 'globe', text: 'A website that’s slow, down or full of broken links', href: '/services/software-rescue/#websites' },
+  { icon: 'lifebuoy', text: 'A software project or website that stalled, was abandoned, or breaks when you touch it', href: '/services/software-rescue/' },
+  { icon: 'clipboard', text: 'Numbers you can only see after an hour of exporting and pasting', href: '/services/dashboards-reporting/' },
 ];
 
 // Figures come from the case studies. Keep them identical to what those pages say.
 const proof = [
   { figure: '300+', label: 'open defects on machine-control software, all eventually fixed, with new reports nearly stopping' },
   { figure: '10+ steps → 1', label: 'a weekly spreadsheet routine replaced with a one-screen form' },
-  { figure: '$700+ → ~$250', label: 'monthly software cost in my own business after consolidating overlapping tools' },
+  { figure: '−64%', label: 'monthly software cost in my own business, from $700+ down to about $250, after consolidating overlapping tools' },
 ];
 
-const checkup = [
-  'A review of one business workflow and the tools behind it',
-  'The most expensive or time-consuming bottlenecks, ranked',
-  '3–5 prioritized fixes, each with cost, effort and time saved',
-  'A written action plan you keep, whether or not you hire me',
-];
-
-const steps = [
-  { t: 'Listen', d: 'A free call to understand what’s broken and what it’s costing you.' },
-  { t: 'Diagnose', d: 'The Workflow Checkup, or a code review for software: a written plan that ranks every issue by what it costs you, with time and cost to fix.' },
-  { t: 'Fix', d: 'Fixed-scope work with regular check-ins, so there are no surprises.' },
-  { t: 'Hand off', d: 'Documentation, a walkthrough, and you own everything you paid for.' },
+// The three beats of a Workflow Checkup, under the board.
+const checkupSteps = [
+  { t: 'Map it together', d: 'One working session, in person in Spokane or over a video call. We walk one workflow from first contact to paid.' },
+  { t: 'Mark the leaks', d: 'Double entry, manual steps, missed follow-ups and tools you pay for twice. Each one gets a time or dollar cost.' },
+  { t: 'Get the fix list', d: 'A written report with the three fixes worth doing first. It’s yours to keep, whether or not you hire me.' },
 ];
 
 const why = [
@@ -76,50 +70,117 @@ const faqs = [
 <BaseLayout
   fullTitle
   title="Oakheart Technologies: Fix Broken Software & Processes"
+  headerTone="dark"
   description="I fix broken software and manual processes for small businesses: rescue, automation, cost reviews and custom software. Spokane, WA and remote."
 >
-  <!-- 1. Hero -->
-  <section class="relative overflow-hidden">
-    <svg
-      class="pointer-events-none absolute -top-40 -right-40 h-[44rem] w-[44rem] text-oak opacity-[0.06]"
-      viewBox="0 0 200 200"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.2"
-      aria-hidden="true"
-    >
-      {[18, 32, 46, 60, 74, 88].map((r) => <circle cx="100" cy="100" r={r}></circle>)}
-    </svg>
-    <div class="wrap relative section">
-      <p class="eyebrow">Software for small business, from someone who runs one</p>
-      <h1 class="mt-4 max-w-4xl text-[2.5rem] leading-[1.08] md:text-7xl">
-        I fix what's broken and make the rest run better.
-      </h1>
-      <p class="prose-measure mt-6 text-xl text-muted">
-        Failing software, manual processes and runaway costs: diagnosed, fixed and handed over with documentation. Based
-        in Spokane, working locally and remotely.
-      </p>
-      <div class="mt-9 flex flex-wrap gap-4">
-        <Button href={bookingHref} external={bookingIsExternal}>Book a free 30-minute call</Button>
-        <Button href="/work/" variant="secondary">See the results</Button>
+  <!-- 1. Hero: "workshop at night" -->
+  <section class="on-dark night night-glow relative overflow-hidden">
+    <div class="wrap relative z-[1] pt-12 pb-16 md:pt-16 md:pb-24">
+      <div class="grid items-center gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
+        <div>
+          <p class="eyebrow [text-wrap:balance]">Software for small business, from someone who runs one</p>
+          <h1 class="mt-4 max-w-4xl text-[2.5rem] leading-[1.04] text-white md:text-6xl lg:text-[4.25rem]">
+            I fix what's broken and make the rest <em class="font-normal text-brass">run better.</em>
+          </h1>
+          <p class="prose-measure mt-6 text-xl text-[#b8c1d4]">
+            Failing software, manual processes and runaway costs: diagnosed, fixed and handed over with documentation.
+            Based in Spokane, working locally and remotely.
+          </p>
+          <div class="mt-9 flex flex-wrap gap-4">
+            <Button href={bookingHref} external={bookingIsExternal} variant="brass">Book a free 30-minute call</Button>
+            <Button href="/work/" variant="outline-light">See the results</Button>
+          </div>
+          <p class="live mt-8 inline-flex items-center gap-2.5 text-sm text-[#9fd3a8]">
+            <i aria-hidden="true"></i>Live example: an intake agent answering a new lead
+          </p>
+        </div>
+        <div class="laptop">
+          <div class="screen">
+            <div class="vp">
+              <iframe
+                src="/console/"
+                title="Animated example: an intake agent reads a new request, checks it against the rules, and drafts a reply for approval"
+                loading="lazy"
+                tabindex="-1"></iframe>
+            </div>
+          </div>
+          <div class="base"></div>
+          <p class="mt-5 text-center text-[0.8rem] text-[#7f8aa3]">
+            A made-up example. Every step is either a script, AI, or you, and nothing is sent until you approve it.
+          </p>
+        </div>
       </div>
-      <dl class="mt-12 grid gap-6 border-t border-line pt-8 sm:grid-cols-3">
+      <dl class="mt-16 grid gap-6 border-t border-[#23304d] pt-8 sm:grid-cols-3 md:mt-20">
         {
           proof.map((p) => (
-            <div>
-              <dt class="font-serif text-3xl font-semibold text-royal md:text-4xl">{p.figure}</dt>
-              <dd class="mt-1 text-sm text-muted">{p.label}</dd>
+            <div class="sm:border-l sm:border-[#23304d] sm:pl-7 sm:first:border-0 sm:first:pl-0">
+              <dt class="font-serif text-4xl font-semibold text-white md:text-5xl">{p.figure}</dt>
+              <dd class="mt-2 max-w-[24em] text-sm leading-relaxed text-[#97a2b9]">{p.label}</dd>
             </div>
           ))
         }
       </dl>
-      <p class="mt-8 text-sm font-medium text-muted">
+      <p class="mt-8 text-sm font-medium text-[#97a2b9]">
         Software engineer · Owner of TRL Home Solutions · Based in Spokane, WA · Working locally and remotely
       </p>
     </div>
   </section>
 
-  <!-- 2. What's broken -->
+  <!-- 2. Blueprint: the Workflow Checkup -->
+  <section id="checkup" class="on-dark blueprint scroll-mt-20">
+    <div class="wrap relative py-16 md:py-24">
+      <p class="bp-label">// start here · workflow checkup</p>
+      <h2 class="mt-3 max-w-[18em] text-3xl leading-[1.08] text-white md:text-5xl">
+        Here's how a job moves today, and where it{' '}
+        <span class="mark" data-draw>leaks.<svg viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M4 20 C 60 8, 140 26, 200 14 S 280 10, 296 18"></path></svg></span>
+      </h2>
+      <p class="mt-4 max-w-[38em] text-lg leading-relaxed text-[#aab6cc]">
+        One working session on one workflow. I map it like this, mark where the time and money go in red, and write up
+        the fixes worth making first in green.
+      </p>
+      <div class="mt-9">
+        <CheckupBoard />
+      </div>
+
+      <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_0.95fr] lg:items-start">
+        {
+          checkupSteps.map((s, i) => (
+            <div class="border-t-[1.5px] border-dashed border-[#4a5b85] pt-4">
+              <p class="font-hand text-3xl leading-none text-brass">0{i + 1}</p>
+              <h3 class="mt-3 text-xl text-white">{s.t}</h3>
+              <p class="mt-2 text-[0.95rem] leading-relaxed text-[#aab6cc]">{s.d}</p>
+            </div>
+          ))
+        }
+        <figure class="report relative mx-auto w-full max-w-[22rem] sm:col-span-2 lg:col-span-1 lg:-mt-8">
+          <span class="tape" aria-hidden="true"></span>
+          <Photo
+            name="/images/office/checkup-report-printed"
+            alt="The printed Workflow Checkup report and action plan for a sample business, lying on a wooden desk"
+            widths={[500, 800, 1600]}
+            width={1600}
+            height={1714}
+            sizes="(min-width: 1024px) 22rem, 90vw"
+            class="aspect-[4/4.3] w-full bg-[#f4f1ea] object-cover p-2.5 pb-11 shadow-[0_24px_50px_-20px_#000]"
+          />
+          <figcaption class="font-hand absolute right-0 bottom-2 left-0 text-center text-lg text-ink">what you walk away with</figcaption>
+        </figure>
+      </div>
+
+      <div class="mt-14 flex flex-wrap items-center gap-5 rounded-2xl border border-[#2c3a5e] bg-[#0b1324]/70 px-6 py-6 md:px-7">
+        <div>
+          <p class="font-serif text-2xl font-semibold text-white">Workflow Checkup · $395</p>
+          <p class="mt-1 text-[0.95rem] text-[#aab6cc]">Pick the focus: a workflow, software costs, where AI fits, or reporting. Credited in full toward any project that comes out of it.</p>
+        </div>
+        <div class="flex flex-wrap gap-3 md:ml-auto">
+          <Button href={bookingHref} external={bookingIsExternal} variant="brass">Book a free 30-minute call</Button>
+          <Button href="/services/workflow-checkup/" variant="outline-light">See what's included</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. What's broken -->
   <section class="bg-white">
     <div class="wrap section">
       <p class="eyebrow">What's broken?</p>
@@ -151,67 +212,6 @@ const faqs = [
           >See all services</a
         >
       </p>
-    </div>
-  </section>
-
-  <!-- 3. Entry offer -->
-  <section class="bg-white">
-    <div class="wrap section grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-start md:gap-16">
-      <div>
-        <p class="eyebrow">Start here</p>
-        <h2 class="mt-3 text-3xl md:text-4xl">Start with a Workflow Checkup.</h2>
-        <p class="mt-4 text-muted">
-          Not sure what to fix first? In one working session and a short written report, you find out where the time and
-          money are going and what to do about it, before you commit to anything bigger.
-        </p>
-        <ul class="mt-6 space-y-3">
-          {
-            checkup.map((c) => (
-              <li class="flex gap-3">
-                <span class="mt-0.5 text-royal">
-                  <Icon name="check" />
-                </span>
-                <span>{c}</span>
-              </li>
-            ))
-          }
-        </ul>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <Button href={bookingHref} external={bookingIsExternal}>Book a free 30-minute call</Button>
-          <Button href="/services/workflow-checkup/" variant="secondary">See what's included</Button>
-        </div>
-      </div>
-      <aside class="card p-7">
-        <p class="font-serif text-5xl font-semibold text-ink">$395</p>
-        <p class="mt-1 font-semibold text-oak">Fixed price, credited toward any project that follows</p>
-        <dl class="mt-6 space-y-4 text-sm">
-          <div>
-            <dt class="font-semibold text-ink">Scope</dt>
-            <dd class="mt-0.5 text-muted">
-              One workflow and up to about five tools or systems, with a 60–90 minute working session.
-            </dd>
-          </div>
-          <div>
-            <dt class="font-semibold text-ink">Turnaround</dt>
-            <dd class="mt-0.5 text-muted">Written report within 3 business days of the session.</dd>
-          </div>
-          <div>
-            <dt class="font-semibold text-ink">Different question?</dt>
-            <dd class="mt-0.5 text-muted">
-              The same price covers a software cost review or an AI checkup, if one of those is the bigger question.
-            </dd>
-          </div>
-          <div>
-            <dt class="font-semibold text-ink">Bigger than that?</dt>
-            <dd class="mt-0.5 text-muted">
-              A review across a whole company is quoted separately. I'll tell you on the free call.
-            </dd>
-          </div>
-        </dl>
-      </aside>
-    </div>
-    <div class="wrap pb-16 md:pb-24">
-      <SampleReport />
     </div>
   </section>
 
@@ -252,14 +252,15 @@ const faqs = [
   <!-- 5. Founder and trust -->
   <section class="bg-white">
     <div class="wrap section grid gap-10 md:grid-cols-[auto_1fr] md:gap-14">
-      <figure class="mx-auto w-full max-w-[12rem] md:mx-0">
-        <img
-          src="/images/tyler-latimer.webp"
-          alt="Tyler Latimer"
-          width="448"
-          height="448"
-          loading="lazy"
-          class="aspect-square w-full rounded-2xl border border-line object-cover shadow-sm"
+      <figure class="mx-auto w-full max-w-[14rem] md:mx-0">
+        <Photo
+          name="/images/office/tyler-at-desk-coding"
+          alt="Tyler Latimer at his desk, working across two monitors"
+          widths={[400, 640, 1280]}
+          width={1280}
+          height={1828}
+          sizes="14rem"
+          class="aspect-[4/5] w-full rounded-2xl border border-line object-cover shadow-sm"
         />
         <figcaption class="mt-3 text-sm text-muted">Tyler Latimer, founder</figcaption>
       </figure>
@@ -286,27 +287,8 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 6. How I work -->
-  <section>
-    <div class="wrap section">
-      <p class="eyebrow">How I work</p>
-      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">Listen. Diagnose. Fix. Hand off.</h2>
-      <ol class="mt-10 grid gap-6 md:grid-cols-4">
-        {
-          steps.map((s, i) => (
-            <li class="reveal">
-              <span class="font-serif text-4xl font-semibold text-oak">{i + 1}</span>
-              <h3 class="mt-2 text-xl">{s.t}</h3>
-              <p class="mt-2 text-muted">{s.d}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <!-- 7. Games and VR strip (secondary) -->
-  <section class="on-dark bg-ink text-paper">
+  <!-- 6. Games and VR strip (secondary) -->
+  <section class="on-dark night">
     <div class="wrap flex flex-col gap-6 py-14 md:flex-row md:items-center md:justify-between">
       <div class="max-w-2xl">
         <p class="eyebrow">Beyond business software</p>
@@ -323,7 +305,7 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 8. FAQ -->
+  <!-- 7. FAQ -->
   <section>
     <div class="wrap section">
       <p class="eyebrow">FAQ</p>
@@ -336,3 +318,90 @@ const faqs = [
 
   <CTABand />
 </BaseLayout>
+
+<style>
+  /* The report photo, taped to the board at a slight angle. */
+  .report {
+    transform: rotate(-2.2deg);
+  }
+  .tape {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 110px;
+    height: 28px;
+    background: rgb(201 164 100 / 0.5);
+    transform: translateX(-50%) rotate(4deg);
+    z-index: 1;
+  }
+  .live i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #5fd27a;
+    box-shadow: 0 0 0 0 rgb(95 210 122 / 0.6);
+    animation: live-pulse 1.8s infinite;
+  }
+  @keyframes live-pulse {
+    to {
+      box-shadow: 0 0 0 10px rgb(95 210 122 / 0);
+    }
+  }
+  /* The "laptop": a tilted screen that straightens a little on hover. The console page scales itself to fit. */
+  .laptop {
+    perspective: 1600px;
+  }
+  .screen {
+    border-radius: 14px 14px 4px 4px;
+    background: #05080f;
+    padding: 12px;
+    border: 1px solid #2a3552;
+    box-shadow:
+      0 40px 80px -30px rgb(0 0 0 / 0.8),
+      inset 0 0 0 1px rgb(255 255 255 / 0.03);
+    transform: rotateY(-9deg) rotateX(3deg);
+    transform-origin: left center;
+    transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .laptop:hover .screen {
+    transform: rotateY(-3deg) rotateX(1deg);
+  }
+  .vp {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #0b1529;
+  }
+  .vp iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    pointer-events: none;
+  }
+  .base {
+    height: 16px;
+    margin: 0 -4%;
+    background: linear-gradient(#2b344a, #121828);
+    border-radius: 0 0 18px 18px;
+    transform: rotateY(-9deg) rotateX(3deg);
+    transform-origin: left center;
+  }
+  @media (max-width: 1023px) {
+    .screen,
+    .base,
+    .laptop:hover .screen {
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .live i {
+      animation: none;
+    }
+    .screen {
+      transition: none;
+    }
+  }
+</style>

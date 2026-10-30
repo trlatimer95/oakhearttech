@@ -4,9 +4,16 @@ import Icon from './Icon.astro';
 import Button from './Button.astro';
 import { bookingHref, bookingIsExternal } from '../data/site';
 
+interface Props {
+  tone?: 'light' | 'dark';
+}
+const { tone = 'dark' } = Astro.props;
+const dark = tone === 'dark';
+
 const links = [
   { href: '/services/', label: 'Services' },
   { href: '/work/', label: 'Work' },
+  { href: '/interactive/', label: 'Games & VR' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -14,9 +21,14 @@ const path = Astro.url.pathname;
 const isActive = (href: string) => path.startsWith(href);
 ---
 
-<header class="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
+<header
+  class:list={[
+    'sticky top-0 z-40 border-b backdrop-blur',
+    dark ? 'on-dark border-white/10 bg-[#0b1324]/95 text-paper' : 'border-line bg-paper/95',
+  ]}
+>
   <div class="wrap flex items-center justify-between py-3">
-    <a href="/" aria-label="Oakheart Technologies, home"><Logo /></a>
+    <a href="/" aria-label="Oakheart Technologies, home"><Logo tone={dark ? 'light' : 'color'} /></a>
 
     <nav aria-label="Main" class="hidden items-center gap-7 md:flex">
       {
@@ -25,20 +37,28 @@ const isActive = (href: string) => path.startsWith(href);
             href={l.href}
             aria-current={isActive(l.href) ? 'page' : undefined}
             class:list={[
-              'text-[0.95rem] font-medium hover:text-royal',
-              isActive(l.href) ? 'text-royal' : 'text-text',
+              'text-[0.95rem] font-medium',
+              dark ? 'hover:text-white' : 'hover:text-royal',
+              dark ? (isActive(l.href) ? 'text-white' : 'text-paper/75') : isActive(l.href) ? 'text-royal' : 'text-text',
             ]}
           >
             {l.label}
           </a>
         ))
       }
-      <Button href={bookingHref} external={bookingIsExternal} class="!px-4 !py-2 text-[0.95rem]">Book a free call</Button>
+      <Button
+        href={bookingHref}
+        external={bookingIsExternal}
+        variant={dark ? 'outline-light' : 'primary'}
+        class="!px-4 !py-2 text-[0.95rem]"
+      >
+        Book a free call
+      </Button>
     </nav>
 
     <button
       id="menu-toggle"
-      class="rounded-lg p-2.5 text-ink md:hidden"
+      class:list={['rounded-lg p-2.5 md:hidden', dark ? 'text-paper' : 'text-ink']}
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="Open menu"
@@ -47,16 +67,25 @@ const isActive = (href: string) => path.startsWith(href);
     </button>
   </div>
 
-  <nav id="mobile-menu" aria-label="Mobile" class="hidden border-t border-line bg-paper md:hidden">
+  <nav
+    id="mobile-menu"
+    aria-label="Mobile"
+    class:list={['hidden border-t md:hidden', dark ? 'border-white/10 bg-[#0b1324]' : 'border-line bg-paper']}
+  >
     <div class="wrap flex flex-col gap-1 py-3">
       {
         links.map((l) => (
-          <a href={l.href} class="rounded-lg px-2 py-3 text-lg font-medium text-ink hover:bg-white">
+          <a
+            href={l.href}
+            class:list={['rounded-lg px-2 py-3 text-lg font-medium', dark ? 'text-paper hover:bg-white/10' : 'text-ink hover:bg-white']}
+          >
             {l.label}
           </a>
         ))
       }
-      <Button href={bookingHref} external={bookingIsExternal} class="mt-2">Book a free 30-minute call</Button>
+      <Button href={bookingHref} external={bookingIsExternal} variant={dark ? 'brass' : 'primary'} class="mt-2">
+        Book a free 30-minute call
+      </Button>
     </div>
   </nav>
 </header>

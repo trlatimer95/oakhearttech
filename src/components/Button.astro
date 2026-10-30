@@ -1,7 +1,7 @@
 ---
 interface Props {
   href: string;
-  variant?: 'primary' | 'secondary' | 'light' | 'outline-light';
+  variant?: 'primary' | 'secondary' | 'light' | 'outline-light' | 'brass';
   class?: string;
   external?: boolean;
 }
@@ -11,6 +11,7 @@ const styles = {
   secondary: 'bg-transparent text-royal border-royal hover:bg-royal hover:text-white',
   light: 'bg-paper text-ink border-paper hover:bg-white',
   'outline-light': 'bg-transparent text-paper border-paper/60 hover:border-paper hover:bg-white/10',
+  brass: 'bg-brass text-ink border-brass shadow-[0_10px_30px_-10px_rgb(201_164_100/0.6)] hover:bg-[#d4b273] hover:border-[#d4b273]',
 };
 ---
 

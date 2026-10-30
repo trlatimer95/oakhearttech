@@ -1,15 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
+import PageHero from '../components/PageHero.astro';
 ---
 
 <BaseLayout title="Page not found" description="That page doesn’t exist." noindex>
-  <section class="wrap section text-center">
+  <PageHero class="text-center">
     <p class="eyebrow">404</p>
-    <h1 class="mt-3 text-4xl md:text-6xl">That page has moved or doesn’t exist.</h1>
-    <div class="mt-8 flex justify-center gap-4">
-      <Button href="/">Back to home</Button>
-      <Button href="/contact/" variant="secondary">Contact</Button>
+    <h1 class="mt-3 text-4xl text-white md:text-6xl">That page has moved or doesn’t exist.</h1>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <Button href="/" variant="brass">Back to home</Button>
+      <Button href="/contact/" variant="outline-light">Contact</Button>
     </div>
-  </section>
+  </PageHero>
 </BaseLayout>

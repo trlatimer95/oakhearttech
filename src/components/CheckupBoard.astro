@@ -1,0 +1,279 @@
+---
+// The hand-drawn "lead to paid invoice" board from the Workflow Checkup, drawn in as it scrolls into view.
+// Sample business; the figures are made up. `tone` picks the starting surface; `toggle` shows the night/paper switch.
+interface Props {
+  tone?: 'night' | 'paper';
+  toggle?: boolean;
+  label?: string;
+}
+const { tone = 'night', toggle = true, label = 'a real Checkup board, for a sample business ↓' } = Astro.props;
+---
+
+<div data-board>
+  <div class="tools">
+    <span class="note">{label}</span>
+    {
+      toggle && (
+        <>
+          <button type="button" class="pill" aria-pressed={String(tone === 'night')} data-tone="night">night board</button>
+          <button type="button" class="pill" aria-pressed={String(tone === 'paper')} data-tone="paper">paper board</button>
+        </>
+      )
+    }
+    <button type="button" class="pill" data-replay>↻ replay</button>
+  </div>
+  <div class:list={['board', tone]} data-surface>
+    <svg
+      class="drawn"
+      viewBox="0 0 1200 430"
+      role="img"
+      aria-label="Hand-drawn flow from new lead to paid invoice, with three problems marked and their fixes listed underneath: typed once, one quote template, reminders on day 2 and 7, about 10 hours a week back"
+    >
+      <defs>
+        <marker id="board-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0 0 L10 5 L0 10" fill="none" stroke-width="1.8"></path>
+        </marker>
+      </defs>
+      <!-- boxes -->
+      <g>
+        <path class="ln" style="--d:0s;--l:560" d="M40 150 q-4 -42 6 -46 l150 -2 q8 2 8 10 l2 80 q-2 8 -10 8 l-148 2 q-8 -4 -8 -12 z"></path>
+        <text class="fade fk" style="--d:.5s" x="122" y="148" text-anchor="middle" font-size="26" font-weight="700">New lead</text>
+        <text class="fade fk2" style="--d:.6s" x="122" y="176" text-anchor="middle" font-size="18">form · call · text</text>
+        <path class="ln" style="--d:.5s;--l:120" d="M210 150 C 240 148, 262 152, 292 150" marker-end="url(#board-arrow)"></path>
+        <path class="ln" style="--d:.6s;--l:560" d="M300 150 q-2 -44 8 -46 l150 0 q8 2 8 10 l0 80 q-2 8 -10 8 l-148 0 q-8 -2 -8 -10 z"></path>
+        <text class="fade fk" style="--d:1.1s" x="384" y="148" text-anchor="middle" font-size="26" font-weight="700">Log it</text>
+        <text class="fade fk2" style="--d:1.2s" x="384" y="176" text-anchor="middle" font-size="18">spreadsheet</text>
+        <path class="ln" style="--d:1.1s;--l:120" d="M472 150 C 502 152, 524 148, 554 150" marker-end="url(#board-arrow)"></path>
+        <path class="ln" style="--d:1.2s;--l:560" d="M562 150 q0 -44 8 -46 l150 2 q8 0 8 8 l0 82 q0 8 -10 8 l-148 -2 q-8 0 -8 -10 z"></path>
+        <text class="fade fk" style="--d:1.7s" x="646" y="148" text-anchor="middle" font-size="26" font-weight="700">Quote</text>
+        <text class="fade fk2" style="--d:1.8s" x="646" y="176" text-anchor="middle" font-size="18">copy old Word doc</text>
+        <path class="ln" style="--d:1.7s;--l:120" d="M734 150 C 764 148, 786 152, 816 150" marker-end="url(#board-arrow)"></path>
+        <path class="ln" style="--d:1.8s;--l:560" d="M824 150 q-2 -42 8 -46 l150 0 q8 2 8 10 l0 80 q0 8 -10 8 l-148 0 q-8 0 -8 -10 z"></path>
+        <text class="fade fk" style="--d:2.3s" x="908" y="148" text-anchor="middle" font-size="26" font-weight="700">Do the job</text>
+        <text class="fade fk2" style="--d:2.4s" x="908" y="176" text-anchor="middle" font-size="18">crew + texts</text>
+        <path class="ln" style="--d:2.3s;--l:120" d="M996 150 C 1026 152, 1048 148, 1074 150" marker-end="url(#board-arrow)"></path>
+        <path class="ln" style="--d:2.4s;--l:440" d="M1082 150 q0 -40 8 -42 l90 0 q8 2 8 10 l0 76 q0 8 -10 8 l-88 0 q-8 0 -8 -10 z"></path>
+        <text class="fade fg" style="--d:2.9s" x="1136" y="146" text-anchor="middle" font-size="24" font-weight="700">Paid</text>
+        <text class="fade fk2" style="--d:3s" x="1136" y="174" text-anchor="middle" font-size="18">invoice</text>
+      </g>
+      <!-- problems -->
+      <g>
+        <circle class="ln cr" style="--d:3.2s;--l:120" cx="384" cy="70" r="17"></circle>
+        <text class="fade fr" style="--d:3.4s" x="384" y="78" text-anchor="middle" font-size="22" font-weight="700">1</text>
+        <text class="fade fr" style="--d:3.5s" x="410" y="58" font-size="21">typed 3 times</text>
+        <circle class="ln cr" style="--d:3.6s;--l:120" cx="646" cy="70" r="17"></circle>
+        <text class="fade fr" style="--d:3.8s" x="646" y="78" text-anchor="middle" font-size="22" font-weight="700">2</text>
+        <text class="fade fr" style="--d:3.9s" x="672" y="58" font-size="21">~20 min each, by hand</text>
+        <circle class="ln cr" style="--d:4s;--l:120" cx="908" cy="70" r="17"></circle>
+        <text class="fade fr" style="--d:4.2s" x="908" y="78" text-anchor="middle" font-size="22" font-weight="700">3</text>
+        <text class="fade fr" style="--d:4.3s" x="934" y="58" font-size="21">no follow-up</text>
+      </g>
+      <!-- fixes -->
+      <g>
+        <path class="ln cg thin" style="--d:4.8s;--l:2400" d="M40 270 l1150 0"></path>
+        <text class="fade fg" style="--d:5s" x="40" y="258" font-size="22" font-weight="700">Fix first ↓</text>
+        <path class="ln cg" style="--d:5.1s;--l:200" d="M384 204 C 380 230, 388 250, 384 300" marker-end="url(#board-arrow)"></path>
+        <text class="fade fg" style="--d:5.4s" x="384" y="332" text-anchor="middle" font-size="22">form → sheet → QuickBooks,</text>
+        <text class="fade fg" style="--d:5.5s" x="384" y="360" text-anchor="middle" font-size="22">typed once</text>
+        <path class="ln cg" style="--d:5.6s;--l:200" d="M646 204 C 650 230, 642 250, 646 300" marker-end="url(#board-arrow)"></path>
+        <text class="fade fg" style="--d:5.9s" x="646" y="332" text-anchor="middle" font-size="22">one quote template,</text>
+        <text class="fade fg" style="--d:6s" x="646" y="360" text-anchor="middle" font-size="22">fills itself in</text>
+        <path class="ln cg" style="--d:6.1s;--l:200" d="M908 204 C 904 230, 912 250, 908 300" marker-end="url(#board-arrow)"></path>
+        <text class="fade fg" style="--d:6.4s" x="908" y="332" text-anchor="middle" font-size="22">reminders on day 2</text>
+        <text class="fade fg" style="--d:6.5s" x="908" y="360" text-anchor="middle" font-size="22">and day 7</text>
+        <path class="ln cr thick" style="--d:6.9s;--l:420" d="M1026 326 C 1052 292, 1186 294, 1190 346 C 1194 404, 1042 410, 1026 364 C 1020 346, 1024 336, 1034 326"></path>
+        <text class="fade fk" style="--d:7.2s" x="1108" y="350" text-anchor="middle" font-size="26" font-weight="700">≈ 10 hrs</text>
+        <text class="fade fk" style="--d:7.3s" x="1108" y="376" text-anchor="middle" font-size="18">a week back</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+  // Draw each board (and any element marked data-draw) the first time it scrolls into view.
+  const io = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('go');
+          io.unobserve(e.target);
+        }
+      }),
+    { threshold: 0.35 },
+  );
+  document.querySelectorAll('[data-board] .drawn, [data-draw]').forEach((el) => io.observe(el));
+
+  document.querySelectorAll<HTMLElement>('[data-board]').forEach((root) => {
+    const surface = root.querySelector<HTMLElement>('[data-surface]')!;
+    const drawn = root.querySelector<SVGElement>('.drawn')!;
+    const tones = [...root.querySelectorAll<HTMLButtonElement>('[data-tone]')];
+    tones.forEach((b) =>
+      b.addEventListener('click', () => {
+        tones.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        surface.classList.remove('night', 'paper');
+        surface.classList.add(b.dataset.tone!);
+      }),
+    );
+    root.querySelector('[data-replay]')?.addEventListener('click', () => {
+      drawn.classList.remove('go');
+      void drawn.getBoundingClientRect();
+      drawn.classList.add('go');
+    });
+  });
+</script>
+
+<style>
+  .tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.875rem;
+  }
+  .note {
+    font-family: var(--font-hand);
+    font-size: 1.25rem;
+    color: #e8dcc3;
+    margin-right: auto;
+  }
+  .pill {
+    font-family: var(--font-hand);
+    font-size: 1.1875rem;
+    line-height: 1.3;
+    color: #e8dcc3;
+    background: transparent;
+    border: 1.5px solid #4a5b85;
+    border-radius: 999px;
+    padding: 0.35rem 0.95rem;
+    min-height: 2.75rem;
+    cursor: pointer;
+  }
+  .pill[aria-pressed='true'] {
+    background: #e8dcc3;
+    color: var(--color-ink);
+    border-color: #e8dcc3;
+  }
+  .board {
+    border-radius: 0.5rem;
+    padding: 0.625rem;
+    transition:
+      background 0.4s,
+      border-color 0.4s;
+  }
+  .board svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .board text {
+    font-family: var(--font-hand);
+  }
+  .board.night {
+    --k: #eef2fa;
+    --k2: #9fb0cc;
+    --r: #ff8a7a;
+    --g: #7fd492;
+    background: rgb(8 16 34 / 0.55);
+    border: 1px dashed #3d5080;
+    box-shadow: inset 0 0 60px rgb(143 196 255 / 0.05);
+  }
+  .board.paper {
+    --k: #0e1a33;
+    --k2: #5b616e;
+    --r: #b3261e;
+    --g: #2f6b3a;
+    background: #fbfaf6;
+    border: 1px solid #d9dde6;
+    box-shadow: 0 30px 60px -30px #000;
+    background-image:
+      linear-gradient(rgb(21 45 92 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(21 45 92 / 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .ln {
+    fill: none;
+    stroke: var(--k);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .board.night .ln {
+    filter: drop-shadow(0 0 3px rgb(238 242 250 / 0.25));
+  }
+  .cr {
+    stroke: var(--r);
+  }
+  .cg {
+    stroke: var(--g);
+  }
+  .thin {
+    stroke-width: 2.2;
+  }
+  .thick {
+    stroke-width: 3;
+  }
+  .fk {
+    fill: var(--k);
+  }
+  .fk2 {
+    fill: var(--k2);
+  }
+  .fr {
+    fill: var(--r);
+  }
+  .fg {
+    fill: var(--g);
+  }
+  marker path {
+    stroke: var(--k);
+  }
+  /* Lines are hidden behind their own dash offset until .go lands, then "drawn" in, in order. */
+  .drawn .ln {
+    stroke-dasharray: var(--l, 900);
+    stroke-dashoffset: var(--l, 900);
+  }
+  .drawn.go .ln {
+    animation: draw 1s ease-out forwards;
+    animation-delay: var(--d, 0s);
+  }
+  .fade {
+    opacity: 0;
+  }
+  .drawn.go .fade {
+    animation: fin 0.5s ease-out forwards;
+    animation-delay: var(--d, 0s);
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes fin {
+    to {
+      opacity: 1;
+    }
+  }
+  @media (max-width: 920px) {
+    .board {
+      overflow-x: auto;
+    }
+    .board svg {
+      min-width: 900px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .drawn .ln,
+    .drawn.go .ln {
+      animation: none;
+      stroke-dashoffset: 0;
+    }
+    .fade,
+    .drawn.go .fade {
+      animation: none;
+      opacity: 1;
+    }
+    .board {
+      transition: none;
+    }
+  }
+</style>

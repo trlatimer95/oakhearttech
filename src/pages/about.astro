@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTABand from '../components/CTABand.astro';
 import Photo from '../components/Photo.astro';
+import PageHero from '../components/PageHero.astro';
 
 // Experience is described by area, without employer names or dates. Case studies stay anonymized to match.
 const areas = [
@@ -50,11 +51,12 @@ const certs = [
   title="About Tyler Latimer"
   description="Oakheart Technologies is run by Tyler Latimer, a software engineer with 8+ years of experience who also owns a contracting and handyman business."
 >
-  <section class="wrap section grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-start">
+  <PageHero>
+    <div class="grid gap-12 md:grid-cols-[1.4fr_1fr] md:items-start">
     <div>
       <p class="eyebrow">About</p>
-      <h1 class="mt-3 text-4xl md:text-6xl">An engineer who also runs a small business.</h1>
-      <div class="prose-measure mt-8 space-y-5 text-lg">
+      <h1 class="mt-3 text-4xl text-white md:text-6xl">An engineer who also runs a small business.</h1>
+      <div class="prose-measure mt-8 space-y-5 text-lg text-[#d7deeb]">
         <p>
           I'm Tyler Latimer, a software engineer with more than eight years of experience in C# and .NET. I've built
           enterprise systems, commerce platforms and machine-control software, and I've taken over struggling software and
@@ -78,11 +80,11 @@ const certs = [
           alt="Tyler Latimer"
           width="448"
           height="448"
-          class="aspect-square w-full rounded-2xl border border-line object-cover shadow-sm"
+          class="aspect-square w-full rounded-2xl border border-white/15 object-cover shadow-lg"
           loading="eager"
           fetchpriority="high"
         />
-        <figcaption class="mt-3 text-sm text-muted">Tyler Latimer, founder. Spokane, WA.</figcaption>
+        <figcaption class="mt-3 text-sm text-[#aab6cc]">Tyler Latimer, founder. Spokane, WA.</figcaption>
       </figure>
       <figure>
         <Photo
@@ -92,13 +94,14 @@ const certs = [
           width={1280}
           height={1828}
           sizes="(min-width: 768px) 20rem, 14rem"
-          class="w-full rounded-2xl border border-line shadow-sm"
+          class="w-full rounded-2xl border border-white/15 shadow-lg"
           loading="eager"
         />
-        <figcaption class="mt-3 text-sm text-muted">At work in the home office.</figcaption>
+        <figcaption class="mt-3 text-sm text-[#aab6cc]">At work in the home office.</figcaption>
       </figure>
     </div>
-  </section>
+    </div>
+  </PageHero>
 
   <section class="bg-white">
     <div class="wrap section">

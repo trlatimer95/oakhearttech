@@ -1,0 +1,305 @@
+---
+// Animated, made-up example of a lead-intake workflow. Shown inside a frame on the home page; not a real product.
+// Standalone page (no site header or footer), kept out of search results and the sitemap.
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lead intake agent · Sample Co. (example)</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <div class="stage" id="stage">
+      <div class="top">
+        <img src="/images/icon-light.webp" alt="" width="72" height="80" />
+        <span class="t">Lead intake agent</span><span class="ws">Sample Co. · example</span>
+        <div class="tabs"><span class="on">Live</span><span>Run log</span><span>Rules</span><span>Templates</span><span>Settings</span></div>
+        <div class="right">
+          <div class="status"><span class="dot"></span>Running</div>
+          <span class="clock" id="clock">10:41:58 AM</span>
+          <div class="av">TL</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="st"><span>Leads today</span><b>5</b></div>
+        <div class="st"><span>Replies sent</span><b style="color: var(--pp)">3</b></div>
+        <div class="st"><span>Waiting for you</span><b style="color: var(--ai)">1</b></div>
+        <div class="st"><span>Flagged</span><b style="color: var(--red)">1</b></div>
+        <div class="st"><span>Avg. time to first reply</span><b>4 min</b></div>
+      </div>
+
+      <div class="cols">
+        <div class="pn">
+          <div class="ph"><b>Current run</b><span class="id">#1043</span></div>
+          <div class="step" data-i="0"><div class="ic"></div><div><div class="nm">New lead received</div><div class="ds">Website form · logged and timestamped</div></div><div><span class="lane l-sc">Script</span><div class="ts">10:41:52</div></div></div>
+          <div class="step" data-i="1"><div class="ic"></div><div><div class="nm">Read the request</div><div class="ds">6 details found · 1.8 s</div></div><div><span class="lane l-ai">AI</span><div class="ts">10:41:53</div></div></div>
+          <div class="step" data-i="2"><div class="ic"></div><div><div class="nm">Check service area</div><div class="ds">Spokane Valley · inside area</div></div><div><span class="lane l-sc">Script</span><div class="ts">10:41:55</div></div></div>
+          <div class="step" data-i="3"><div class="ic"></div><div><div class="nm">Check for duplicates</div><div class="ds">No match by phone or email · new customer</div></div><div><span class="lane l-sc">Script</span><div class="ts">10:41:55</div></div></div>
+          <div class="step" data-i="4"><div class="ic"></div><div><div class="nm">Create records</div><div class="ds">QuickBooks customer + draft estimate</div></div><div><span class="lane l-sc">Script</span><div class="ts">10:41:56</div></div></div>
+          <div class="step" data-i="5"><div class="ic"></div><div><div class="nm">Draft the reply</div><div class="ds">"Repair estimate" template · open times from calendar</div></div><div><span class="lane l-ai">AI</span><div class="ts">10:41:57</div></div></div>
+          <div class="step wait" data-i="6"><div class="ic"></div><div><div class="nm">Your approval</div><div class="ds">Nothing is sent until you approve</div></div><div><span class="lane l-pp">Person</span><div class="ts">—</div></div></div>
+          <div class="step wait" data-i="7"><div class="ic"></div><div><div class="nm">Send &amp; set reminders</div><div class="ds">Follow-up on day 2 and day 7 if no reply</div></div><div><span class="lane l-sc">Script</span><div class="ts">—</div></div></div>
+          <div class="trace" id="trace"></div>
+        </div>
+
+        <div class="pn">
+          <div class="ph"><b>Incoming</b><span>Received 10:41 AM</span></div>
+          <div class="msg">
+            <div class="mh"><div class="mav">DW</div><div><b>Dana Whitfield</b><span>dana.w@example.com · (509) 555-0143</span></div><span class="src">Website form</span></div>
+            <div class="body">Hi, our back deck has a few <mark>soft boards near the stairs</mark> and <mark>one railing post is loose</mark>. It's about <mark>12x16</mark>, maybe <mark>15 years old</mark>. Could someone take a look <mark>this week or next</mark>? We're in <mark>Spokane Valley</mark> off Sullivan. Thanks!</div>
+          </div>
+          <div class="ph" style="margin-top: 22px"><b>What the AI read</b><span>checked against your rules</span></div>
+          <div class="fields">
+            <div class="fr" data-i="1"><span class="k">Job type</span><span class="v">Deck repair · boards + railing</span><span class="ok">Matches “Repairs”</span></div>
+            <div class="fr" data-i="1"><span class="k">Size / age</span><span class="v">~12 × 16 ft · ~15 years</span><span></span></div>
+            <div class="fr" data-i="1"><span class="k">Urgency</span><span class="v">Soon · loose railing</span><span class="warn">Safety noted</span></div>
+            <div class="fr" data-i="2"><span class="k">Location</span><span class="v">Spokane Valley</span><span class="ok">In service area</span></div>
+            <div class="fr" data-i="3"><span class="k">Customer</span><span class="v">New</span><span class="ok">No duplicate</span></div>
+            <div class="fr" data-i="1"><span class="k">Wants</span><span class="v">Site visit this week or next</span><span></span></div>
+          </div>
+          <div class="ph" style="margin-top: 22px"><b>QuickBooks</b><span>created by the agent</span></div>
+          <div class="msg" style="padding: 14px 18px">
+            <div style="display: flex; justify-content: space-between; font-size: 14px"><span><b style="font-size: 15px">Estimate E-2187</b> · Dana Whitfield</span><span class="warn" style="color: var(--sc)">Draft · not sent</span></div>
+            <div class="fr est" style="opacity: 1; grid-template-columns: 1fr auto; margin-top: 8px"><span class="v">On-site assessment</span><span class="k">No charge</span></div>
+            <div class="fr est" style="opacity: 1; grid-template-columns: 1fr auto"><span class="v">Deck board replacement</span><span class="k">After visit</span></div>
+            <div class="fr est" style="opacity: 1; grid-template-columns: 1fr auto; padding-bottom: 0"><span class="v">Railing post repair</span><span class="k">After visit</span></div>
+          </div>
+        </div>
+
+        <div class="pn">
+          <div class="ph"><b>Draft reply</b><span class="drafting" id="drafting"><i></i><i></i><i></i>&nbsp;Drafting</span></div>
+          <div class="to">To <b>Dana Whitfield</b> · Subject <b>Re: Deck repair in Spokane Valley</b></div>
+          <div class="ed" id="ed"></div>
+          <div class="checks">
+            <div class="ck" data-c="0"><span class="b"></span><div>Uses approved template<small>“Repair estimate” · last edited Oct 12</small></div></div>
+            <div class="ck" data-c="1"><span class="b"></span><div>Times taken from the calendar, not guessed<small>Thu 1–4 pm · Fri 8–11 am</small></div></div>
+            <div class="ck" data-c="2"><span class="b"></span><div>No prices promised<small>Quote follows the site visit</small></div></div>
+            <div class="ck" data-c="3"><span class="b"></span><div>Safety concern acknowledged<small>Loose railing post</small></div></div>
+          </div>
+          <div class="btns">
+            <button class="btn pri" id="approve" type="button" tabindex="-1">Approve &amp; send</button>
+            <button class="btn" type="button" tabindex="-1">Edit</button>
+            <button class="btn" type="button" tabindex="-1">Call instead</button>
+            <span class="note" id="note">Waiting for draft…</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const DRAFT = `Hi Dana,
+
+Thanks for reaching out. Soft boards by the stairs and a loose railing post are worth looking at soon, so I'd like to get you on the schedule this week.
+
+I have openings Thursday 1–4 pm or Friday 8–11 am for a free on-site look. It takes about 20 minutes, and you'll have a written quote the same day.
+
+Which time works better for you?
+
+Sam
+Sample Co. · (509) 555-0100`;
+      // ?still shows a single frozen frame; reduced-motion users get the same.
+      const still =
+        new URLSearchParams(location.search).has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const $ = (s: string) => document.querySelector(s) as HTMLElement;
+      const $$ = (s: string) => [...document.querySelectorAll(s)] as HTMLElement[];
+      const TR: [string, string][] = [
+        ['10:41:52', '<span class="k">form.received</span> id=1043 source=website'],
+        ['10:41:53', '<span class="y">ai.read</span> fields=6 confidence=0.94'],
+        ['10:41:55', '<span class="k">rules.area</span> "Spokane Valley" <span class="g">→ in_area</span>'],
+        ['10:41:55', '<span class="k">rules.dedupe</span> phone,email <span class="g">→ none</span>'],
+        ['10:41:56', '<span class="k">qbo.customer.create</span> <span class="g">ok</span> · estimate draft <span class="g">ok</span>'],
+        ['10:41:57', '<span class="y">ai.draft</span> template="Repair estimate" slots=2'],
+        ['10:42:04', '<span class="k">await.approval</span> owner notified'],
+      ];
+      const trace = (n: number) => ($('#trace').innerHTML = TR.slice(0, n).map((t) => `<div>${t[0]}  ${t[1]}</div>`).join(''));
+      function setStep(n: number, active: boolean) {
+        $$('.step').forEach((e) => {
+          const i = +e.dataset.i!;
+          e.classList.toggle('done', i < n);
+          e.classList.toggle('active', i === n && active);
+        });
+        $$('.fr:not(.est)').forEach((e) => e.classList.toggle('on', +e.dataset.i! < n));
+        trace(Math.min(n + (active ? 1 : 0), TR.length));
+      }
+      const setChecks = (k: number) => $$('.ck').forEach((e) => e.classList.toggle('on', +e.dataset.c! < k));
+      function setDraft(n: number, typing: boolean) {
+        $('#ed').innerHTML =
+          DRAFT.slice(0, n).replace(/&/g, '&amp;').replace(/</g, '&lt;') + (typing ? '<span class="caret"></span>' : '');
+      }
+      function ready(on: boolean) {
+        $('#approve').classList.toggle('ready', on);
+        $('#drafting').style.visibility = on ? 'hidden' : 'visible';
+        $('#note').textContent = on ? 'Ready for your review · nothing sent yet' : 'Waiting for draft…';
+        const s6 = $('.step[data-i="6"]');
+        s6.classList.toggle('active', on);
+        s6.style.opacity = on ? '1' : '';
+      }
+      const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+      const t0 = Date.parse('2026-10-29T10:41:52');
+      let clockOff = 0;
+      const tick = () =>
+        ($('#clock').textContent = new Date(t0 + clockOff).toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          second: '2-digit',
+        }));
+      async function loop() {
+        for (;;) {
+          clockOff = 0;
+          setDraft(0, false);
+          setChecks(0);
+          ready(false);
+          for (let i = 0; i <= 5; i++) {
+            setStep(i, true);
+            await sleep(i === 1 ? 1400 : 800);
+            clockOff += 1000;
+          }
+          setStep(5, true);
+          for (let c = 0; c <= DRAFT.length; c += 2) {
+            setDraft(c, true);
+            setChecks(Math.floor((c / DRAFT.length) * 4.3));
+            await sleep(28);
+            if (c % 70 === 0) clockOff += 1000;
+          }
+          setDraft(DRAFT.length, false);
+          setChecks(4);
+          setStep(6, false);
+          ready(true);
+          trace(TR.length);
+          await sleep(9000);
+        }
+      }
+      // The stage is laid out at 1920x1080 and scaled to whatever frame it sits in.
+      function fit() {
+        const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+        const st = $('#stage');
+        st.style.transform = `scale(${s})`;
+        st.style.marginLeft = `${(innerWidth - 1920 * s) / 2}px`;
+        st.style.marginTop = `${(innerHeight - 1080 * s) / 2}px`;
+      }
+      addEventListener('resize', fit);
+      fit();
+      setInterval(tick, 250);
+      if (still) {
+        setStep(5, true);
+        setDraft(Math.floor(DRAFT.length * 0.72), true);
+        setChecks(3);
+        clockOff = 5000;
+        tick();
+        trace(6);
+      } else {
+        loop();
+      }
+    </script>
+
+    <style is:global>
+      :root {
+        --bg: #0b1529;
+        --panel: #111e38;
+        --panel2: #0e1a31;
+        --line: rgb(255 255 255 / 0.08);
+        --tx: #e8ecf4;
+        --mu: #98a3b8;
+        --sc: #9fb3d9;
+        --ai: #d8b46e;
+        --pp: #7fcf98;
+        --red: #e08a7f;
+        --serif: 'Fraunces Variable', Georgia, serif;
+        --sans: 'Inter Variable', system-ui, sans-serif;
+        --mono: ui-monospace, Menlo, Consolas, monospace;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { background: var(--bg); overflow: hidden; }
+      body { font-family: var(--sans); color: var(--tx); -webkit-font-smoothing: antialiased; }
+      .stage { position: relative; width: 1920px; height: 1080px; transform-origin: 0 0; }
+      .top { height: 72px; display: flex; align-items: center; gap: 16px; padding: 0 36px; border-bottom: 1px solid var(--line); background: #091224; }
+      .top img { height: 38px; width: auto; }
+      .top .t { font: 600 22px var(--serif); }
+      .top .ws { font-size: 14px; color: var(--mu); border: 1px solid var(--line); padding: 4px 10px; border-radius: 6px; margin-left: 4px; }
+      .tabs { display: flex; gap: 6px; margin-left: 40px; }
+      .tabs span { font-size: 15px; color: var(--mu); padding: 8px 14px; border-radius: 8px; }
+      .tabs span.on { color: #fff; background: rgb(255 255 255 / 0.07); }
+      .right { margin-left: auto; display: flex; align-items: center; gap: 18px; }
+      .status { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #cfe9d7; background: rgb(127 207 152 / 0.12); border: 1px solid rgb(127 207 152 / 0.35); padding: 7px 14px; border-radius: 999px; }
+      .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--pp); animation: pulse 1.6s infinite; }
+      @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgb(127 207 152 / 0.6); } 70% { box-shadow: 0 0 0 9px rgb(127 207 152 / 0); } 100% { box-shadow: 0 0 0 0 rgb(127 207 152 / 0); } }
+      .clock { font: 500 15px var(--mono); color: var(--mu); }
+      .av { width: 34px; height: 34px; border-radius: 50%; background: #1d2d52; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #cbd5ea; }
+      .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; padding: 22px 36px 0; }
+      .st { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; }
+      .st span { font-size: 13px; color: var(--mu); }
+      .st b { display: block; font: 600 30px var(--serif); margin-top: 2px; }
+      .cols { display: grid; grid-template-columns: 520px 600px 1fr; gap: 18px; padding: 18px 36px 0; }
+      .pn { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; height: 830px; padding: 20px 22px; position: relative; overflow: hidden; }
+      .ph { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+      .ph b { font: 700 12px var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--mu); }
+      .ph span { font-size: 13px; color: var(--mu); }
+      .ph .id { font: 600 13px var(--mono); color: #cbd5ea; background: rgb(255 255 255 / 0.06); padding: 3px 8px; border-radius: 5px; }
+      .step { display: grid; grid-template-columns: 30px 1fr auto; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); opacity: 0.28; transition: opacity 0.35s; }
+      .step.done, .step.active { opacity: 1; }
+      .ic { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #44506a; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+      .step.done .ic { background: var(--pp); border-color: var(--pp); }
+      .step.done .ic::after { content: ''; width: 10px; height: 6px; border-left: 2.5px solid #0b1529; border-bottom: 2.5px solid #0b1529; transform: rotate(-45deg) translate(1px, -1px); }
+      .step.active .ic { border-color: var(--ai); border-top-color: transparent; animation: spin 0.9s linear infinite; }
+      .step.wait .ic { border-style: dashed; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .step .nm { font-size: 16px; font-weight: 600; }
+      .step .ds { font-size: 13.5px; color: var(--mu); margin-top: 3px; line-height: 1.35; }
+      .lane { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 5px; height: fit-content; margin-top: 3px; }
+      .l-sc { color: var(--sc); background: rgb(159 179 217 / 0.12); }
+      .l-ai { color: var(--ai); background: rgb(216 180 110 / 0.13); }
+      .l-pp { color: var(--pp); background: rgb(127 207 152 / 0.12); }
+      .ts { font: 12.5px var(--mono); color: #6f7a90; margin-top: 6px; text-align: right; }
+      .trace { position: absolute; left: 22px; right: 22px; bottom: 18px; background: #08101f; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font: 12.5px/1.65 var(--mono); color: #7d879b; height: 150px; overflow: hidden; }
+      .trace .k { color: #aeb8cc; }
+      .trace .g { color: var(--pp); }
+      .trace .y { color: var(--ai); }
+      .msg { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+      .mh { display: flex; align-items: center; gap: 12px; }
+      .mav { width: 38px; height: 38px; border-radius: 50%; background: #2a3b61; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #d6def0; }
+      .mh b { font-size: 16px; }
+      .mh span { display: block; font-size: 13px; color: var(--mu); margin-top: 1px; }
+      .mh .src { margin-left: auto; font-size: 12px; color: var(--sc); border: 1px solid rgb(159 179 217 / 0.3); padding: 3px 9px; border-radius: 999px; }
+      .body { font-size: 15.5px; line-height: 1.55; color: #d7deeb; margin-top: 12px; }
+      .body mark { background: rgb(216 180 110 / 0.18); color: #f1dfb8; border-radius: 3px; padding: 0 2px; }
+      .fields { margin-top: 16px; }
+      .fr { display: grid; grid-template-columns: 130px 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); font-size: 15px; opacity: 0.25; transition: opacity 0.35s; }
+      .fr.on { opacity: 1; }
+      .fr .k { color: var(--mu); font-size: 13.5px; }
+      .fr .v { font-weight: 500; }
+      .ok { color: var(--pp); font-size: 12.5px; font-weight: 600; }
+      .warn { color: var(--ai); font-size: 12.5px; font-weight: 600; }
+      .to { font-size: 13.5px; color: var(--mu); padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+      .to b { color: #cbd5ea; font-weight: 500; }
+      .ed { font-size: 16.5px; line-height: 1.62; color: #eef1f7; padding: 16px 2px; min-height: 300px; white-space: pre-wrap; }
+      .caret { display: inline-block; width: 2px; height: 20px; background: var(--ai); vertical-align: -4px; margin-left: 1px; animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      .drafting { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ai); }
+      .drafting i { width: 6px; height: 6px; border-radius: 50%; background: var(--ai); animation: bob 1s infinite; }
+      .drafting i:nth-child(2) { animation-delay: 0.15s; }
+      .drafting i:nth-child(3) { animation-delay: 0.3s; }
+      @keyframes bob { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+      .checks { border-top: 1px solid var(--line); padding-top: 12px; }
+      .ck { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #cbd5ea; padding: 6px 0; opacity: 0.25; transition: opacity 0.35s; }
+      .ck.on { opacity: 1; }
+      .ck .b { flex: none; width: 18px; height: 18px; border-radius: 5px; background: rgb(127 207 152 / 0.18); border: 1.5px solid var(--pp); margin-top: 1px; position: relative; }
+      .ck .b::after { content: ''; position: absolute; left: 4px; top: 3px; width: 7px; height: 4px; border-left: 2px solid var(--pp); border-bottom: 2px solid var(--pp); transform: rotate(-45deg); }
+      .ck small { color: var(--mu); display: block; font-size: 12.5px; margin-top: 1px; }
+      .btns { position: absolute; left: 22px; right: 22px; bottom: 20px; display: flex; gap: 12px; align-items: center; }
+      .btn { font: 600 15px var(--sans); padding: 13px 20px; border-radius: 10px; border: 1.5px solid rgb(255 255 255 / 0.18); color: #dfe5f0; background: transparent; }
+      .btn.pri { background: var(--pp); border-color: var(--pp); color: #0b1529; opacity: 0.35; transition: opacity 0.3s; }
+      .btn.pri.ready { opacity: 1; animation: glow 1.8s infinite; }
+      @keyframes glow { 0% { box-shadow: 0 0 0 0 rgb(127 207 152 / 0.55); } 70% { box-shadow: 0 0 0 12px rgb(127 207 152 / 0); } 100% { box-shadow: 0 0 0 0 rgb(127 207 152 / 0); } }
+      .btns .note { margin-left: auto; font-size: 13px; color: var(--mu); }
+      @media (prefers-reduced-motion: reduce) {
+        .dot, .step.active .ic, .caret, .drafting i, .btn.pri.ready { animation: none; }
+      }
+    </style>
+  </body>
+</html>

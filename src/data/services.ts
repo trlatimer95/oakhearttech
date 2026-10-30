@@ -35,6 +35,10 @@ export interface Service {
   figures?: Figure[];
   // Optional photo beside the hero text.
   heroImage?: Figure;
+  // Show the hand-drawn Checkup board in the "how it works" band.
+  board?: boolean;
+  // The focus areas a visitor can pick for the checkup (only the Workflow Checkup has this).
+  focus?: { title: string; intro: string; items: { t: string; d: string }[] };
   faqs: { q: string; a: string }[];
 }
 
@@ -47,8 +51,9 @@ export const services: Service[] = [
     seoTitle: 'Workflow Checkup: Find What to Fix',
     icon: 'clipboard',
     badge: 'Start here',
-    summary: 'A working session and a written plan: the 3–5 fixes worth making first, with cost and time saved for each.',
-    price: '$395',
+    board: true,
+    summary: 'One working session on the focus you choose, then a written plan: the 3–5 fixes worth making first, with cost and time saved for each.',
+    price: 'Checkup $395, fixed',
     priceNote: `Fixed price, credited toward any project that follows. ${TAX}`,
     figures: [
       {
@@ -88,7 +93,17 @@ export const services: Service[] = [
       'A fixed-price Workflow Checkup for small businesses: a working session and a written plan of the 3–5 fixes worth making first.',
     heroTitle: 'Find out what’s actually slowing you down.',
     heroLead:
-      'You know something is inefficient. You just don’t know what to fix first. The Workflow Checkup gives you a short, written, prioritized plan, so you can decide with real numbers in front of you.',
+      'You know something is inefficient. You just don’t know what to fix first. The Workflow Checkup gives you a short, written, prioritized plan, so you can decide with real numbers in front of you. Every project starts here, and you pick the focus: a workflow, software costs, where AI fits, or the numbers you wish you could see.',
+    focus: {
+      title: 'Choose your focus',
+      intro: 'Every checkup is one working session and one written, ranked plan. You pick what we look at.',
+      items: [
+        { t: 'A workflow', d: 'One job from first contact to paid, such as lead to invoice. Where the time goes, and the fixes worth making first.' },
+        { t: 'Software costs', d: 'Every subscription, what it’s for, what overlaps and what to drop, with the monthly saving for each.' },
+        { t: 'Where AI fits', d: 'Step by step, which parts of a process should use AI, which should be a plain script, and which should stay manual.' },
+        { t: 'Reporting', d: 'The numbers you wish you could see, where each one lives today, and what it would take to put them on one screen.' },
+      ],
+    },
     signsTitle: 'Is this you?',
     signs: [
       'You know work takes longer than it should, but not where the time goes.',
@@ -134,8 +149,8 @@ export const services: Service[] = [
     icon: 'users',
     summary:
       'Find where AI actually helps, then build the workflows: lead intake, follow-up and customer updates, with plain scripts wherever exactness matters.',
-    price: 'AI checkup $395',
-    priceNote: `The checkup is a fixed $395, credited toward setup. Setup is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    price: 'Starts with a Workflow Checkup, $395',
+    priceNote: `The first step is a Workflow Checkup with an AI focus: $395, fixed, credited toward setup. Setup is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     figures: [
       {
         name: '/images/illustrations/lead-intake-workflow',
@@ -164,7 +179,7 @@ export const services: Service[] = [
     ],
     includesTitle: 'What you get',
     includes: [
-      'The AI checkup: a step-by-step review of how a process runs today',
+      'A Workflow Checkup with an AI focus: a step-by-step review of how a process runs today',
       'A written plan that says, for each step, whether it should use AI, a script or automation, or stay manual, and why',
       'An honest range of time saved for each, based on your own tasks',
       'Clear rules for what information should never go into AI tools',
@@ -178,7 +193,7 @@ export const services: Service[] = [
     processTitle: 'How it works',
     process: [
       { title: 'Listen', text: 'A free call to understand your business and what you want from AI.' },
-      { title: 'Evaluate', text: 'The AI checkup: a written plan for what uses AI, what uses a script and what stays manual.' },
+      { title: 'Evaluate', text: 'The Workflow Checkup, AI focus: a written plan for what uses AI, what uses a script and what stays manual.' },
       { title: 'Build', text: 'Set up the workflows you choose, with logging, checks and a person approving customer-facing messages.' },
       { title: 'Hand off', text: 'A walkthrough for your team and support as you put it to use.' },
     ],
@@ -275,6 +290,69 @@ export const services: Service[] = [
       {
         q: 'What happens if a connected tool changes?',
         a: 'Integrations can break when a vendor changes something. I document how each one works, so you or another developer can fix it, and I can quote ongoing support if you want it.',
+      },
+    ],
+  },
+  {
+    slug: 'dashboards-reporting',
+    title: 'Dashboards & Reporting',
+    seoTitle: 'Dashboards & Business Reporting',
+    icon: 'gauge',
+    summary: 'The numbers you wish you could see, pulled from the tools you already use and kept current on one screen.',
+    price: 'Starts with a Workflow Checkup, $395',
+    priceNote: `The first step is a Workflow Checkup with a reporting focus: $395, fixed, credited toward the build. The dashboard itself is quoted as a fixed price after it, based on how many sources it draws from and how clean they are. ${TAX}`,
+    metaDescription:
+      'Dashboards and reporting for small and mid-size businesses: the numbers you need, pulled from accounting, CRM and job tracking, kept current on one screen.',
+    heroTitle: 'The numbers you wish you could see, on one screen.',
+    heroLead:
+      'Most businesses already have the data. It’s in QuickBooks, a CRM, a job tracker and a few spreadsheets, and getting an answer means an hour of exporting and pasting, so nobody looks until something goes wrong. I connect the sources, agree the numbers that matter, and build a dashboard that stays current on its own.',
+    signsTitle: 'Sound familiar?',
+    signs: [
+      'The monthly report takes someone a day of copying and pasting, and it’s out of date by the time it’s read.',
+      'Two people answer “how are we doing?” with different numbers.',
+      'You can’t see open quotes, jobs in progress and cash coming in without opening three tools.',
+      'You export to Excel every week to build the same chart.',
+      'Your tools have reports built in, but none of them show what you actually need.',
+      'You’re growing, and gut feel isn’t enough anymore.',
+    ],
+    includesTitle: 'What you get',
+    includes: [
+      'A Workflow Checkup with a reporting focus: the numbers you need, where each one lives today, and what’s manual',
+      'A short list of the metrics worth tracking, with an agreed definition for each, so everyone reads the same number',
+      'Connections to the tools you already use: accounting, CRM, job or project tracking, spreadsheets',
+      'A dashboard built for how you’ll use it: a morning glance, a weekly review, or a screen in the office',
+      'Scheduled summaries by email where that’s more useful than a screen',
+      'Checks on the data, so a broken connection shows up as a warning, not as a wrong number',
+      'Documentation and a hand-off walkthrough. You own the dashboard and the connections.',
+    ],
+    processTitle: 'How it works',
+    process: [
+      { title: 'Listen', text: 'A free call about the questions you want answered and where the data lives.' },
+      { title: 'Checkup', text: 'The Workflow Checkup, reporting focus: a written plan of the metrics, the sources and the build.' },
+      { title: 'Build', text: 'Connect the sources, define the numbers, build the screens, and check them against what you know to be true.' },
+      { title: 'Hand off', text: 'A walkthrough for your team, documentation, and a check-in once it has run for a month.' },
+    ],
+    stance: 'A dashboard is only worth having if people trust it. I spend the time on getting the numbers right before making them pretty.',
+    faqs: [
+      {
+        q: 'What tools do you work with?',
+        a: 'Whatever holds your numbers: QuickBooks and other accounting tools, CRMs, job and project trackers, Microsoft 365, Google Sheets and plain exports. I build in tools such as Power BI or Looker Studio when they fit, or a small custom web dashboard when they don’t.',
+      },
+      {
+        q: 'How much does a dashboard cost?',
+        a: 'It depends on how many sources it draws from and how clean they are. A single dashboard on one tidy source is a modest fixed-price project. Several sources, messy data or custom views cost more, and I quote it after the checkup so there are no surprises.',
+      },
+      {
+        q: 'Does my data leave my systems?',
+        a: 'Only as far as the dashboard tool you choose, and I’ll explain exactly what goes where before anything is connected. Read-only access wherever possible, and you hold the credentials.',
+      },
+      {
+        q: 'Can it replace the reports my tools already have?',
+        a: 'Often the built-in reports are fine for one tool. The gap is across tools: sales in one, costs in another, jobs in a third. That’s what a dashboard is for. If a built-in report already answers the question, I’ll say so.',
+      },
+      {
+        q: 'Do you work with larger businesses?',
+        a: 'Yes. I work with businesses from a crew of three to a few hundred people. Larger companies usually have more sources and more people who need the same number, which is where agreed definitions matter most.',
       },
     ],
   },
@@ -392,8 +470,8 @@ export const services: Service[] = [
     seoTitle: 'Software Subscription Cost Review',
     icon: 'gauge',
     summary: 'Find the overlapping tools, unused seats and over-tiered plans you’re paying for, then have me set up what I recommend.',
-    price: 'Cost review $395',
-    priceNote: `The cost review is a fixed-price first step at $395, set so it pays for itself quickly, and credited toward the implementation. Setting up what I recommend is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    price: 'Starts with a Workflow Checkup, $395',
+    priceNote: `The first step is a Workflow Checkup with a cost focus: $395, fixed, set so it pays for itself quickly, and credited toward the implementation. Setting up what I recommend is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
     metaDescription:
       'Find overlapping tools, unused seats and oversized plans in your software subscriptions, with a written list of savings and help setting it up.',
     heroTitle: 'Stop paying for software you don’t use, or use twice.',
@@ -424,7 +502,7 @@ export const services: Service[] = [
       { title: 'Inventory', text: 'Bank or card statements, invoices and admin exports. Read-only access at most.' },
       { title: 'Analyze', text: 'Go through every line: used, unused, overlapping or too big.' },
       { title: 'Report', text: 'A written list within 5 business days, ranked by savings.' },
-      { title: 'Implement', text: 'Optional: I set up the changes, quoted after the report and credited with your assessment fee.' },
+      { title: 'Implement', text: 'Optional: I set up the changes, quoted after the report and credited with your checkup fee.' },
     ],
     stance: 'If there are no meaningful savings to find, I’ll tell you. Sometimes the answer is to keep what you have.',
     faqs: [
@@ -434,7 +512,7 @@ export const services: Service[] = [
       },
       {
         q: 'Can you set up what you recommend?',
-        a: 'Yes. Many clients ask me to. That can mean setting up QuickBooks integrations, building out Asana projects and automations, or moving your data between tools. It’s quoted after the report, and your assessment fee is credited toward it.',
+        a: 'Yes. Many clients ask me to. That can mean setting up QuickBooks integrations, building out Asana projects and automations, or moving your data between tools. It’s quoted after the report, and your checkup fee is credited toward it.',
       },
       {
         q: 'Will you make me switch tools?',
@@ -514,6 +592,7 @@ const displayOrder = [
   'automation-integrations',
   'software-cost-review',
   'ai-implementation',
+  'dashboards-reporting',
   'custom-software',
   'interactive-vr',
 ];

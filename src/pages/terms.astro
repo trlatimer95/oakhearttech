@@ -1,12 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import { site } from '../data/site';
 ---
 
 <BaseLayout title="Website Terms" description="Terms of use for the Oakheart Technologies website, including prices, examples and results, links, and limits of liability.">
+  <PageHero>
+    <h1 class="text-4xl text-white md:text-5xl">Website Terms</h1>
+  </PageHero>
   <article class="wrap section">
-    <h1 class="text-4xl md:text-5xl">Website Terms</h1>
-    <div class="prose-measure mt-8 space-y-5 [&_h2]:mt-8 [&_h2]:text-2xl">
+    <div class="prose-measure space-y-5 [&_h2]:mt-8 [&_h2]:text-2xl">
       <p>Last updated: October 2026</p>
       <p>
         These terms cover your use of this website, which is operated by Oakheart Technologies LLC in Spokane, WA. By using
