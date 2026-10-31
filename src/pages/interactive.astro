@@ -50,7 +50,7 @@ const built = [
   title="Games and VR"
   description="Games and VR from Oakheart Technologies: a released VR title on Meta Quest, a multiplayer VR training simulator, and game jam games."
 >
-  <!-- 1. Hero: a low-poly castle you can look around, drawn in WebGL. Falls back to a plain gradient. -->
+  <!-- 1. Hero: a low-poly castle you can look around, drawn in WebGL. Phones, reduced motion and failures get a still of it instead. -->
   <section id="vr-hero" class="on-dark scene-host relative overflow-hidden bg-[#070b14] text-[#e9edf5]">
     <canvas id="scene" class="absolute inset-0 block h-full w-full" aria-hidden="true"></canvas>
     <div class="scene-shade pointer-events-none absolute inset-0" aria-hidden="true"></div>
@@ -59,8 +59,8 @@ const built = [
       <p class="eyebrow mt-8">Interactive training, VR and games</p>
       <h1 class="mt-3 max-w-[11em] text-4xl text-white md:text-6xl lg:text-7xl">Worlds people can walk into.</h1>
       <p class="mt-6 max-w-[28em] text-xl text-[#b8c1d4]">
-        The same engineering behind my business software, applied to VR training, simulation and games. On a desktop,
-        move your mouse to look around the castle.
+        The same engineering behind my business software, applied to VR training, simulation and games.
+        <span class="scene-mouse hidden min-[921px]:inline">&nbsp;Move your mouse to look around the castle.</span>
       </p>
       <div class="mt-8 flex flex-wrap gap-4">
         <Button href="https://www.meta.com/experiences/the-castle-experience/6122799184408683/" external variant="light">
@@ -69,7 +69,7 @@ const built = [
         <Button href="/services/interactive-vr/" variant="outline-light">Talk about a training project</Button>
       </div>
     </div>
-    <p class="scene-hint pointer-events-none absolute right-7 bottom-6 z-[1] hidden items-center gap-2 text-xs text-[#8a94a8] md:flex" aria-hidden="true">
+    <p class="scene-hint pointer-events-none absolute right-7 bottom-6 z-[1] hidden items-center gap-2 text-xs text-[#8a94a8] min-[921px]:flex" aria-hidden="true">
       <i></i>Move to look around · scroll for more
     </p>
   </section>
@@ -155,11 +155,12 @@ const built = [
 
 <script>
   // A small low-poly scene: terrain, water, a castle with a flag, trees and stars. The camera drifts slowly and
-  // follows the pointer a little. Three.js is loaded only on this page, and only after the page is up.
+  // follows the pointer a little. Three.js is loaded only on this page, and only after the page is up. Phones and
+  // reduced-motion visitors skip it and see the still in the styles below; keep this query matching those rules.
   async function start() {
     const canvas = document.getElementById('scene') as HTMLCanvasElement | null;
     const host = document.getElementById('vr-hero');
-    if (!canvas || !host) return;
+    if (!canvas || !host || matchMedia('(max-width: 920px), (prefers-reduced-motion: reduce)').matches) return;
     let THREE: typeof import('three');
     try {
       THREE = await import('three');
@@ -319,7 +320,6 @@ const built = [
     }
     addEventListener('resize', size);
     size();
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const t0 = performance.now();
     function loop(now: number) {
       requestAnimationFrame(loop);
@@ -327,10 +327,10 @@ const built = [
       const t = (now - t0) / 1000;
       mx += (tx - mx) * 0.05;
       my += (ty - my) * 0.05;
-      const a = (reduce ? 0 : t * 0.06) + mx * 0.7 + 0.6;
+      const a = t * 0.06 + mx * 0.7 + 0.6;
       camera.position.set(Math.cos(a) * 62, 20 - my * 8, Math.sin(a) * 62);
       camera.lookAt(0, 6, 0);
-      flag.rotation.y = reduce ? 0 : Math.sin(t * 3) * 0.25;
+      flag.rotation.y = Math.sin(t * 3) * 0.25;
       renderer.render(scene, camera);
     }
     requestAnimationFrame(loop);
@@ -339,17 +339,65 @@ const built = [
 </script>
 
 <style>
+  /* The still of the scene, for when WebGL fails and for reduced motion. */
   .scene-host.no-scene {
-    background: radial-gradient(ellipse at 70% 40%, #1b2d4f, #070b14);
+    background: #070b14 url('/images/interactive/castle-1600.webp') 34vw center / auto 100% no-repeat;
   }
-  .scene-host.no-scene canvas {
+  .scene-host.no-scene canvas,
+  .scene-host.no-scene .scene-mouse,
+  .scene-host.no-scene .scene-hint {
     display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scene-host {
+      background: #070b14 url('/images/interactive/castle-1600.webp') 34vw center / auto 100% no-repeat;
+    }
+    .scene-host canvas,
+    .scene-mouse,
+    .scene-hint {
+      display: none;
+    }
   }
   /* Keeps the copy readable over the scene: dark on the left, fading to the scene on the right. */
   .scene-shade {
     background:
       linear-gradient(90deg, rgb(7 11 20 / 0.92) 0%, rgb(7 11 20 / 0.55) 40%, transparent 70%),
       linear-gradient(0deg, #070b14 0%, transparent 30%);
+  }
+  /* The still doesn't fill a desktop hero, so the shade hides its edges. */
+  @media (min-width: 921px) {
+    .scene-host.no-scene .scene-shade {
+      background:
+        linear-gradient(90deg, #070b14 38%, transparent 62%), linear-gradient(270deg, #070b14 0%, transparent 12%),
+        linear-gradient(0deg, #070b14 0%, transparent 30%);
+    }
+  }
+  @media (min-width: 921px) and (prefers-reduced-motion: reduce) {
+    .scene-shade {
+      background:
+        linear-gradient(90deg, #070b14 38%, transparent 62%), linear-gradient(270deg, #070b14 0%, transparent 12%),
+        linear-gradient(0deg, #070b14 0%, transparent 30%);
+    }
+  }
+  /* Phones: the still sits below the copy and fades up into the page. */
+  @media (max-width: 920px) {
+    .scene-host,
+    .scene-host.no-scene {
+      padding-bottom: 56vw;
+      background: #070b14 url('/images/interactive/castle-800.webp') center bottom / 100% auto no-repeat;
+    }
+    .scene-host > .wrap {
+      min-height: 0;
+      padding-bottom: 0;
+    }
+    .scene-host canvas {
+      display: none;
+    }
+    .scene-shade {
+      background:
+        linear-gradient(180deg, #070b14 calc(100% - 67vw), transparent calc(100% - 50vw)),
+        linear-gradient(0deg, #070b14 0%, transparent 12vw);
+    }
   }
   .scene-hint i {
     width: 18px;
