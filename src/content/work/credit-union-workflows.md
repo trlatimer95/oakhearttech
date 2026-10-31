@@ -10,7 +10,7 @@ problem: 'Departments ran on spreadsheets and manual data entry, many stored on 
 fix: 'I spent time with each business unit, mapped how they really worked, and built single-page forms that calculate and write straight to the database. I also built scripts to bulk-load very large data files and integrated separate systems with the core platform.'
 result: 'One department went from a 10+ step weekly process to a one-screen entry with a handful of clicks. Other processes went from around eight steps to a single form submission, and key data moved out of personal spreadsheets into the core platform.'
 draft: false
-order: 5
+order: 2
 ---
 
 ## The approach

@@ -10,7 +10,7 @@ problem: 'More than 300 open defects, at least 50 of them critical or at risk of
 fix: 'I learned the software and the hardware it drives. A long-serving staff engineer handled customer communication and decided what the correct result should be, while I worked in the code. Together we ranked every issue by customer pain, safety and production impact, and I fixed them in that order. One of the biggest wins was finding why boards got stuck during handoffs inside the machine.'
 result: 'Most of the critical issues were resolved within about six months, and I eventually fixed every one of the 300+ defects that had been open. Customer satisfaction improved, and new issue reports almost stopped.'
 draft: false
-order: 2
+order: 1
 ---
 
 ## Starting point

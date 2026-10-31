@@ -103,6 +103,17 @@ const service = Astro.props.s as Service;
             ))
           }
         </ul>
+        {
+          service.liveSites?.map((s) => (
+            <p class="mt-6 text-muted">
+              Live example:{' '}
+              <a href={s.href} target="_blank" rel="noopener" class="font-semibold text-royal underline underline-offset-4">
+                {s.name}
+              </a>
+              , {s.note}.
+            </p>
+          ))
+        }
       </div>
       <aside class="card self-start p-7">
         <p class="eyebrow">Price</p>
@@ -145,6 +156,25 @@ const service = Astro.props.s as Service;
   }
 
   {
+    service.intakeDemo && (
+      <div class="wrap hidden pb-16 md:block md:pb-24">
+        <h2 class="text-3xl md:text-4xl">What an intake workflow looks like</h2>
+        <div class="mt-6 aspect-video overflow-hidden rounded-xl border border-line bg-[#0b1529] shadow-sm">
+          <iframe
+            src="/console/intake/"
+            title="Animated example: an intake agent reads a new request, checks it against the rules, and drafts a reply for approval"
+            loading="lazy"
+            tabindex="-1"
+            class="pointer-events-none h-full w-full border-0"></iframe>
+        </div>
+        <p class="mt-3 text-sm text-muted">
+          A made-up example. Every step is either a script, AI, or you, and nothing is sent until you approve it.
+        </p>
+      </div>
+    )
+  }
+
+  {
     service.figures && (
       <div class="wrap pb-16 md:pb-24">
         <div class:list={['grid gap-8', service.figures.length > 1 ? 'md:grid-cols-2' : 'mx-auto max-w-3xl']}>
@@ -167,7 +197,7 @@ const service = Astro.props.s as Service;
       {
         service.board && (
           <div class="mt-9">
-            <CheckupBoard label="a real Checkup board, for a sample business ↓" />
+            <CheckupBoard />
           </div>
         )
       }

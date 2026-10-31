@@ -1,14 +1,14 @@
 ---
-title: 'Significantly reducing cloud spend on a commerce platform'
+title: 'Cutting cloud spend by about 20% on a commerce platform'
 client: 'Commerce platform company'
 service: 'Software & Subscription Cost Review'
 origin: 'employee'
 seoTitle: 'Cutting Cloud Spend on Azure'
-seoDescription: 'How a line-by-line review of an Azure environment removed unused resources and significantly reduced monthly cloud spend.'
-summary: 'I went through a commerce platform''s Azure environment resource by resource, removed what was unused and lowered over-provisioned tiers, and significantly reduced monthly cloud spend.'
+seoDescription: 'How a line-by-line review of an Azure environment removed unused resources and cut monthly cloud spend by about 20%.'
+summary: 'I went through a commerce platform''s Azure environment resource by resource, removed what was unused and lowered over-provisioned tiers, and cut monthly cloud spend by about 20%.'
 problem: 'The cloud bill had grown with unused and over-provisioned resources, and nobody had gone through it line by line.'
 fix: 'I walked through the environment resource by resource. I removed anything unused and moved anything over-provisioned to a lower tier, after checking what depended on it.'
-result: 'Monthly cloud spend was significantly reduced, with nothing the platform relied on switched off by mistake.'
+result: 'Monthly cloud spend fell by about 20%, with nothing the platform relied on switched off by mistake.'
 draft: false
 order: 4
 ---
@@ -28,11 +28,11 @@ cloud bill had grown faster than the business needed.
 
 ## What changed
 
-- Monthly Azure spend was significantly reduced.
+- Monthly Azure spend fell by about 20%.
 - Nothing the platform relied on was switched off by mistake, because each change was checked first.
 
-## Why it matters for small business
+## Why it matters for your business
 
-Small shops overspend on software and cloud too, just at a smaller scale. The same walkthrough, line by line, works
-for a $250 monthly bill as well as a $25k one. It's the heart of the Software & Subscription Cost Review, with cloud
+Overspending on software and cloud happens at every size. The same walkthrough, line by line, works for a small
+monthly bill as well as a very large one. It's the heart of the Software & Subscription Cost Review, with cloud
 resources as an add-on.

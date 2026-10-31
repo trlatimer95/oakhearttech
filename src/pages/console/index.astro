@@ -1,0 +1,274 @@
+---
+// Animated, made-up example of one job from request to paid, with a problem caught and fixed along the way.
+// Shown inside a frame on the home page; not a real product. Standalone page (no site header or footer), kept out
+// of search results and the sitemap. Landscape frames get a 960x540 stage; portrait frames (phones) a 480x600 one.
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+
+const steps = [
+  { nm: 'Request received', ds: 'Customer and job created, no retyping', lane: 'Script' },
+  { nm: 'Estimate sent to QuickBooks', ds: 'Draft estimate E-2187', lane: 'Script' },
+  { nm: 'Quote drafted', ds: 'From site-visit notes, you approve it', lane: 'AI' },
+  { nm: 'Quote signed online', ds: 'Crew booked for Thursday', lane: 'Script' },
+  { nm: 'Job marked complete', ds: 'From the crew’s phone', lane: 'Person' },
+  { nm: 'Invoice sent', ds: 'Same day, $1,860', lane: 'Script' },
+  { nm: 'Paid and closed', ds: 'Matched in QuickBooks', lane: 'Script' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Job tracker · Sample Co. (example)</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <div class="stage" id="stage">
+      <div class="top">
+        <img src="/images/icon-light.webp" alt="" width="72" height="80" />
+        <span class="t">Job tracker</span><span class="ws">Sample Co. · example</span>
+        <div class="right">
+          <div class="status" id="status"><span class="dot"></span><span id="statusTx">All in sync</span></div>
+          <span class="clock" id="clock">Mon 10:41 AM</span>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="pn job">
+          <div class="who">
+            <div class="mav">DW</div>
+            <div><b>Dana Whitfield</b><span>Deck repair · Spokane Valley</span></div>
+            <span class="pill-stage" id="jobPill">New request</span>
+          </div>
+          <div class="steps">
+            {
+              steps.map((s, i) => (
+                <div class="step" data-i={i}>
+                  <div class="ic" />
+                  <div>
+                    <div class="nm">{s.nm}</div>
+                    <div class="ds">{s.ds}</div>
+                  </div>
+                  <span class:list={['lane', `l-${s.lane.toLowerCase()}`]}>{s.lane}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="pn issue" id="issue">
+            <div class="ih"><b>Estimate didn't reach QuickBooks</b><span class="pill" id="ipill">Watching</span></div>
+            <p class="ib">“Railing repair” isn't in the product list. This used to fail silently for days.</p>
+            <p class="fx"><b>Fixed.</b> You approved adding it, the estimate synced, and the check now runs on every job.</p>
+          </div>
+          <div class="pn chart">
+            <div class="ch">
+              <div><b>Days from job done to invoice</b><span>Weekly average · made-up numbers</span></div>
+              <strong id="kpi">6 days</strong>
+            </div>
+            <div class="bars" id="bars"><div class="golive" id="golive"><span>Fixes went live</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ?still shows a single frozen frame; reduced-motion users get the same.
+      const still =
+        new URLSearchParams(location.search).has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const $ = (s: string) => document.querySelector(s) as HTMLElement;
+      const $$ = (s: string) => [...document.querySelectorAll(s)] as HTMLElement[];
+      const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+      const CLOCK = ['Mon 10:41 AM', 'Mon 10:42 AM', 'Tue 2:15 PM', 'Tue 6:02 PM', 'Thu 3:40 PM', 'Thu 3:41 PM', 'Fri 9:12 AM'];
+      const STAGE = ['New request', 'Estimating', 'Quoted', 'Scheduled', 'Complete', 'Invoiced', 'Paid'];
+      const BEFORE = [6.1, 5.4, 6.8, 4.9, 6.2, 5.6, 6.4, 5.9];
+      const AFTER = [6.1, 5.4, 6.8, 4.9, 1.2, 0.5, 0.3, 0.3];
+      const bars = BEFORE.map(() => {
+        const b = document.createElement('div');
+        b.className = 'bar';
+        $('#bars').appendChild(b);
+        return b;
+      });
+      function setBars(after: boolean) {
+        bars.forEach((b, i) => {
+          b.style.height = `${((after ? AFTER : BEFORE)[i] / 7.2) * 100}%`;
+          b.classList.toggle('after', after && i >= 4);
+        });
+        $('#golive').classList.toggle('on', after);
+        $('#kpi').textContent = after ? '0.3 days' : '6 days';
+        $('#kpi').classList.toggle('good', after);
+      }
+      function setStep(n: number, active: boolean) {
+        $$('.step').forEach((e) => {
+          const i = +e.dataset.i!;
+          e.classList.toggle('done', i < n || (i === n && !active));
+          e.classList.toggle('active', i === n && active);
+        });
+        $('#clock').textContent = CLOCK[n];
+        $('#jobPill').textContent = STAGE[n];
+        $('#jobPill').classList.toggle('paid', n === 6 && !active);
+      }
+      function setIssue(state: 'idle' | 'error' | 'fixed') {
+        const bad = state === 'error';
+        $('#issue').className = `pn issue ${state}`;
+        $('#ipill').textContent = { idle: 'Watching', error: 'Needs you', fixed: 'Fixed' }[state];
+        $('.step[data-i="1"]').classList.toggle('err', bad);
+        $('#status').classList.toggle('bad', bad);
+        $('#statusTx').textContent = bad ? '1 issue' : 'All in sync';
+      }
+      function reset() {
+        setIssue('idle');
+        setBars(false);
+        setStep(0, true);
+      }
+
+      async function play() {
+        reset();
+        await sleep(1100);
+        setStep(1, true);
+        await sleep(700);
+        setIssue('error');
+        await sleep(2600);
+        setIssue('fixed');
+        setStep(1, false);
+        await sleep(1400);
+        for (let i = 2; i <= 6; i++) {
+          setStep(i, true);
+          if (i === 5) setBars(true);
+          await sleep(i === 5 ? 1500 : 900);
+        }
+        setStep(6, false);
+      }
+
+      // Portrait frames use the phone layout, set by the aspect-ratio rule in the styles below.
+      function fit() {
+        const portrait = innerHeight > innerWidth;
+        const w = portrait ? 480 : 960;
+        const h = portrait ? 600 : 540;
+        const s = Math.min(innerWidth / w, innerHeight / h);
+        const st = $('#stage');
+        st.style.transform = `scale(${s})`;
+        st.style.marginLeft = `${(innerWidth - w * s) / 2}px`;
+        st.style.marginTop = `${(innerHeight - h * s) / 2}px`;
+      }
+      addEventListener('resize', fit);
+      fit();
+
+      if (still) {
+        setIssue('fixed');
+        setBars(true);
+        setStep(6, false);
+      } else {
+        // Play twice, then rest on the finished job rather than looping behind the headline forever.
+        (async () => {
+          for (let i = 0; i < 2; i++) {
+            await play();
+            if (i === 0) await sleep(5000);
+          }
+        })();
+      }
+    </script>
+
+    <style is:global>
+      :root {
+        --bg: #0b1529;
+        --panel: #111e38;
+        --line: rgb(255 255 255 / 0.09);
+        --tx: #e8ecf4;
+        --mu: #a3aec2;
+        --sc: #9fb3d9;
+        --ai: #d8b46e;
+        --pp: #7fcf98;
+        --red: #e08a7f;
+        --serif: 'Fraunces Variable', Georgia, serif;
+        --sans: 'Inter Variable', system-ui, sans-serif;
+        --mono: ui-monospace, Menlo, Consolas, monospace;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { background: var(--bg); overflow: hidden; }
+      body { font-family: var(--sans); color: var(--tx); -webkit-font-smoothing: antialiased; }
+      .stage { position: relative; width: 960px; height: 540px; transform-origin: 0 0; }
+      .top { height: 54px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid var(--line); background: #091224; }
+      .top img { height: 30px; width: auto; }
+      .top .t { font: 600 20px var(--serif); }
+      .top .ws { font-size: 14px; color: var(--mu); }
+      .right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+      .status { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: #cfe9d7; background: rgb(127 207 152 / 0.12); border: 1px solid rgb(127 207 152 / 0.35); padding: 5px 13px; border-radius: 999px; transition: all 0.3s; }
+      .status.bad { color: #f5d3cd; background: rgb(224 138 127 / 0.18); border-color: rgb(224 138 127 / 0.6); }
+      .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--pp); }
+      .status.bad .dot { background: var(--red); }
+      .clock { font: 500 15px var(--mono); color: var(--mu); }
+      .cols { display: grid; grid-template-columns: 1.1fr 1fr; gap: 12px; padding: 12px; height: 486px; }
+      .pn { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+      .who { display: flex; align-items: center; gap: 11px; padding-bottom: 8px; }
+      .mav { width: 36px; height: 36px; flex: none; border-radius: 50%; background: #2a3b61; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #d6def0; }
+      .who b { font-size: 17px; }
+      .who span { display: block; font-size: 14px; color: var(--mu); }
+      .who .pill-stage { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--sc); border: 1px solid rgb(159 179 217 / 0.35); padding: 3px 11px; border-radius: 999px; white-space: nowrap; }
+      .who .pill-stage.paid { color: var(--pp); border-color: rgb(127 207 152 / 0.5); background: rgb(127 207 152 / 0.12); }
+      .step { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; height: 53px; border-top: 1px solid var(--line); opacity: 0.3; transition: opacity 0.3s, background 0.3s; }
+      .step.done, .step.active { opacity: 1; }
+      .ic { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #44506a; display: flex; align-items: center; justify-content: center; }
+      .step.done .ic { background: var(--pp); border-color: var(--pp); }
+      .step.done .ic::after { content: ''; width: 9px; height: 5px; border-left: 2.5px solid #0b1529; border-bottom: 2.5px solid #0b1529; transform: rotate(-45deg) translate(1px, -1px); }
+      .step.active .ic { border-color: var(--ai); border-top-color: transparent; animation: spin 0.9s linear infinite; }
+      .step.err { background: rgb(224 138 127 / 0.14); margin: 0 -8px; padding: 0 8px; border-radius: 8px; }
+      .step.err .ic { border-color: var(--red); background: var(--red); animation: none; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .nm { font-size: 16px; font-weight: 600; }
+      .ds { font-size: 14px; color: var(--mu); margin-top: 1px; }
+      .lane { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 5px; }
+      .l-script { color: var(--sc); background: rgb(159 179 217 / 0.12); }
+      .l-ai { color: var(--ai); background: rgb(216 180 110 / 0.14); }
+      .l-person { color: var(--pp); background: rgb(127 207 152 / 0.13); }
+      .side { display: grid; grid-template-rows: auto 1fr; gap: 12px; min-height: 0; }
+      .issue { min-height: 176px; transition: background 0.35s, border-color 0.35s; }
+      .issue.error { border-color: rgb(224 138 127 / 0.75); background: #3a2230; }
+      .issue.fixed { border-color: rgb(127 207 152 / 0.65); background: #15342f; }
+      .ih { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .ih b { font-size: 16px; line-height: 1.25; }
+      .pill { flex: none; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 9px; border-radius: 999px; color: var(--mu); background: rgb(255 255 255 / 0.07); }
+      .issue.error .pill { color: #ffd9d2; background: rgb(224 138 127 / 0.3); }
+      .issue.fixed .pill { color: #cdf2d8; background: rgb(127 207 152 / 0.25); }
+      .ib, .fx { font-size: 15px; line-height: 1.38; color: #d7deeb; margin-top: 8px; }
+      .fx { display: none; }
+      .fx b { color: var(--pp); }
+      .issue.fixed .ib { display: none; }
+      .issue.fixed .fx { display: block; }
+      .chart { display: flex; flex-direction: column; min-height: 0; }
+      .ch { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+      .ch b { display: block; font-size: 15px; }
+      .ch span { font-size: 13px; color: var(--mu); }
+      .ch strong { font: 600 28px var(--serif); white-space: nowrap; color: var(--tx); transition: color 0.4s; }
+      .ch strong.good { color: var(--pp); }
+      .bars { position: relative; flex: 1; min-height: 0; margin-top: 8px; display: grid; grid-template-columns: repeat(8, 1fr); gap: 9px; align-items: end; border-bottom: 1px solid rgb(255 255 255 / 0.18); }
+      .bar { border-radius: 4px 4px 0 0; background: #4a5b80; transition: height 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.5s; }
+      .bar.after { background: var(--pp); }
+      .golive { position: absolute; left: calc(50% - 1px); top: 0; bottom: 0; border-left: 2px dashed var(--ai); opacity: 0; transition: opacity 0.4s; }
+      .golive.on { opacity: 1; }
+      .golive span { position: absolute; left: 8px; top: 0; font-size: 13px; font-weight: 600; color: var(--ai); white-space: nowrap; }
+      /* Phones: the same story at a size they can read, without the step list. */
+      @media (max-aspect-ratio: 1/1) {
+        .stage { width: 480px; height: 600px; }
+        .top .ws { display: none; }
+        .cols { grid-template-columns: 1fr; grid-template-rows: auto 1fr; height: 546px; }
+        .steps { display: none; }
+        .who { padding-bottom: 0; }
+        .job { padding: 10px 14px; }
+        .nm, .ds { font-size: 16px; }
+        .ib, .fx { font-size: 17px; }
+        .ih b { font-size: 18px; }
+        .ch b { font-size: 17px; }
+        .ch span { font-size: 15px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .step.active .ic { animation: none; }
+        .bar, .status, .issue, .step { transition: none; }
+      }
+    </style>
+  </body>
+</html>

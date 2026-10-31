@@ -10,7 +10,7 @@ problem: 'A machine needed to be switched on ahead of time so it could warm up, 
 fix: 'The company supplied a relay board. I built a small desktop application that talks to it and lets them schedule when each individual relay turns on, so the machine starts warming up automatically.'
 result: 'The company now uses it to start machines warming up on a schedule, without anyone having to switch them on by hand.'
 draft: false
-order: 3
+order: 5
 ---
 
 ## The problem

@@ -37,6 +37,10 @@ export interface Service {
   heroImage?: Figure;
   // Show the hand-drawn Checkup board in the "how it works" band.
   board?: boolean;
+  // Show the animated intake console, after the "what you get" section.
+  intakeDemo?: boolean;
+  // Live sites to link beneath the "what you get" list.
+  liveSites?: { name: string; href: string; note: string }[];
   // The focus areas a visitor can pick for the checkup (only the Workflow Checkup has this).
   focus?: { title: string; intro: string; items: { t: string; d: string }[] };
   faqs: { q: string; a: string }[];
@@ -52,7 +56,7 @@ export const services: Service[] = [
     icon: 'clipboard',
     badge: 'Start here',
     board: true,
-    summary: 'One working session on the focus you choose, then a written plan: the 3–5 fixes worth making first, with cost and time saved for each.',
+    summary: 'During the working session, we evaluate the focus you choose. You then get a written report with the suggested fixes, ranked by priority, with cost and time saved for each.',
     price: 'Checkup $395, fixed',
     priceNote: `Fixed price, credited toward any project that follows. ${TAX}`,
     figures: [
@@ -90,15 +94,15 @@ export const services: Service[] = [
       },
     ],
     metaDescription:
-      'A fixed-price Workflow Checkup for small businesses: a working session and a written plan of the 3–5 fixes worth making first.',
+      'A fixed-price Workflow Checkup for small and mid-size businesses: a working session and a written report with the suggested fixes, ranked by priority.',
     heroTitle: 'Find out what’s actually slowing you down.',
     heroLead:
-      'You know something is inefficient. You just don’t know what to fix first. The Workflow Checkup gives you a short, written, prioritized plan, so you can decide with real numbers in front of you. Every project starts here, and you pick the focus: a workflow, software costs, where AI fits, or the numbers you wish you could see.',
+      'You know something is inefficient. You just don’t know what to fix first. The Workflow Checkup gives you a short written report, ranked by priority, so you can decide with real numbers in front of you. Most projects start here, and you pick the focus: a workflow, software costs, where AI fits, or the numbers you wish you could see.',
     focus: {
       title: 'Choose your focus',
-      intro: 'Every checkup is one working session and one written, ranked plan. You pick what we look at.',
+      intro: 'During the working session, we evaluate the focus you pick. You then get a written report with the suggested fixes, ranked by priority.',
       items: [
-        { t: 'A workflow', d: 'One job from first contact to paid, such as lead to invoice. Where the time goes, and the fixes worth making first.' },
+        { t: 'A workflow', d: 'One process from start to finish, such as lead to invoice. Where the time goes, and the fixes worth making first.' },
         { t: 'Software costs', d: 'Every subscription, what it’s for, what overlaps and what to drop, with the monthly saving for each.' },
         { t: 'Where AI fits', d: 'Step by step, which parts of a process should use AI, which should be a plain script, and which should stay manual.' },
         { t: 'Reporting', d: 'The numbers you wish you could see, where each one lives today, and what it would take to put them on one screen.' },
@@ -114,8 +118,8 @@ export const services: Service[] = [
     includesTitle: 'What you get',
     includes: [
       'A 60–90 minute working session, remote or in person near Spokane (travel to a customer can be discussed in certain cases)',
-      'A walk through how work actually moves through your business, from lead to paid invoice',
-      'A written report with 3–5 prioritized fixes',
+      'A discussion of the process from start to finish',
+      'A written report with the suggested fixes, ranked by priority',
       'For each fix: an estimated cost and the time it should save',
       'The checkup fee credited toward any follow-on project with me',
       'Scope: one workflow and up to about five tools or systems. A review across a whole company is quoted separately.',
@@ -124,13 +128,13 @@ export const services: Service[] = [
     process: [
       { title: 'Book', text: 'Pick a time for a free 30-minute call, and we’ll set up the checkup from there.' },
       { title: 'Intake', text: 'A short form about your tools and what’s slowing you down.' },
-      { title: 'Session', text: 'We walk through your workflow together. You show me; I ask questions.' },
-      { title: 'Report', text: 'You get the written plan within 3 business days of the session.' },
+      { title: 'Session', text: 'We discuss the process from start to finish. You show me; I ask questions.' },
+      { title: 'Report', text: 'You get the written report within a week of the session.' },
     ],
     faqs: [
       {
-        q: 'What if the answer is that you don’t need me?',
-        a: 'Then I’ll say so. Sometimes the best fix is a setting in software you already own, and the report will tell you that.',
+        q: 'What if you find nothing worth fixing?',
+        a: 'Then I’ll say so, and there’s no charge. If the best fix is something small, like a setting in software you already own, the report will tell you that.',
       },
       {
         q: 'Do I have to hire you afterward?',
@@ -140,6 +144,10 @@ export const services: Service[] = [
         q: 'What do I need to prepare?',
         a: 'Nothing beyond the intake form. It helps to have a few examples handy, like a recent quote, invoice or schedule.',
       },
+      {
+        q: 'Do you need access to my systems?',
+        a: 'Usually not. We sit down together and you show me how things work. If you’d rather I go in and evaluate them myself, you’d set me up with my own employee-level account. I only access what’s needed, I stay out of regulated data unless the work requires it, and I keep my own logins secure and use two-factor authentication. I don’t store your passwords unless it’s absolutely necessary.',
+      },
     ],
   },
   {
@@ -147,6 +155,7 @@ export const services: Service[] = [
     title: 'Practical AI Implementation',
     seoTitle: 'Practical AI Implementation',
     icon: 'users',
+    intakeDemo: true,
     summary:
       'Find where AI actually helps, then build the workflows: lead intake, follow-up and customer updates, with plain scripts wherever exactness matters.',
     price: 'Starts with a Workflow Checkup, $395',
@@ -180,7 +189,7 @@ export const services: Service[] = [
     includesTitle: 'What you get',
     includes: [
       'A Workflow Checkup with an AI focus: a step-by-step review of how a process runs today',
-      'A written plan that says, for each step, whether it should use AI, a script or automation, or stay manual, and why',
+      'A written report that says, for each step, whether it should use AI, a script or automation, or stay manual, and why',
       'An honest range of time saved for each, based on your own tasks',
       'Clear rules for what information should never go into AI tools',
       'Then, for the steps you choose, a build quoted from the plan: workflows such as lead intake and sorting, follow-up reminders, notifications and customer status updates',
@@ -193,7 +202,7 @@ export const services: Service[] = [
     processTitle: 'How it works',
     process: [
       { title: 'Listen', text: 'A free call to understand your business and what you want from AI.' },
-      { title: 'Evaluate', text: 'The Workflow Checkup, AI focus: a written plan for what uses AI, what uses a script and what stays manual.' },
+      { title: 'Evaluate', text: 'The Workflow Checkup, AI focus: a written report on what uses AI, what uses a script and what stays manual.' },
       { title: 'Build', text: 'Set up the workflows you choose, with logging, checks and a person approving customer-facing messages.' },
       { title: 'Hand off', text: 'A walkthrough for your team and support as you put it to use.' },
     ],
@@ -214,7 +223,7 @@ export const services: Service[] = [
       },
       {
         q: 'I don’t know much about AI. Is that a problem?',
-        a: 'No. Most small business owners don’t, and don’t have the time to learn it on top of running a business. I explain what each piece does in plain language, handle the setup, and leave you with a one-page guide and a walkthrough, so you can use it and check its work without becoming an expert.',
+        a: 'No. Most people running a business or a department don’t, and don’t have the time to learn it on top of their job. I explain what each piece does in plain language, handle the setup, and leave you with a one-page guide and a walkthrough, so you can use it and check its work without becoming an expert.',
       },
       {
         q: 'Why not just use AI for everything?',
@@ -251,10 +260,10 @@ export const services: Service[] = [
     price: 'Quoted after the checkup',
     priceNote: `Projects are quoted as a fixed price after a Workflow Checkup, based on what’s needed. A single small automation can cost a few hundred dollars, and larger connected sets cost much more. ${TAX}`,
     metaDescription:
-      'Workflow automation and software integrations for small businesses: connect your existing tools and cut double data entry.',
+      'Workflow automation and software integrations for small and mid-size businesses: connect your existing tools and cut double data entry.',
     heroTitle: 'Make your tools talk to each other.',
     heroLead:
-      'Most small businesses don’t need new software. They need the software they have to stop making people re-type things. I look at a manual process from start to finish, then connect your tools so the data moves on its own.',
+      'Most businesses don’t need new software. They need the software they have to stop making people re-type things. I look at a manual process from start to finish, then connect your tools so the data moves on its own.',
     signsTitle: 'Signs you need this',
     signs: [
       'A lead starts in a spreadsheet, its status is tracked there, then the quote and invoice are rebuilt by hand in your accounting software.',
@@ -328,7 +337,7 @@ export const services: Service[] = [
     processTitle: 'How it works',
     process: [
       { title: 'Listen', text: 'A free call about the questions you want answered and where the data lives.' },
-      { title: 'Checkup', text: 'The Workflow Checkup, reporting focus: a written plan of the metrics, the sources and the build.' },
+      { title: 'Checkup', text: 'The Workflow Checkup, reporting focus: a written report on the metrics, the sources and the build.' },
       { title: 'Build', text: 'Connect the sources, define the numbers, build the screens, and check them against what you know to be true.' },
       { title: 'Hand off', text: 'A walkthrough for your team, documentation, and a check-in once it has run for a month.' },
     ],
@@ -352,7 +361,7 @@ export const services: Service[] = [
       },
       {
         q: 'Do you work with larger businesses?',
-        a: 'Yes. I work with businesses from a crew of three to a few hundred people. Larger companies usually have more sources and more people who need the same number, which is where agreed definitions matter most.',
+        a: 'Yes, and I’m happy to work alongside your IT staff. Larger companies usually have more sources and more people who need the same number, which is where agreed definitions matter most.',
       },
     ],
   },
@@ -365,7 +374,7 @@ export const services: Service[] = [
     price: 'Quoted after discovery',
     priceNote: `Quoted as a fixed price once the scope is clear, usually after a Workflow Checkup. Cost scales with size: a small tool costs a fraction of a full platform build. ${TAX}`,
     metaDescription:
-      'Custom software and websites for small businesses, built to fit how you work, with code and accounts handed over to you.',
+      'Custom software and websites for small and mid-size businesses, built to fit how you work, with code and accounts handed over to you.',
     heroTitle: 'Software built to fit, not squeezed to fit.',
     heroLead:
       'Sometimes nothing off the shelf matches how your business works. I design and build the tool, or the website, that does, and I hand over everything when it’s done.',
@@ -383,6 +392,7 @@ export const services: Service[] = [
       'Code, accounts and documentation handed over to you',
       'No lock-in: another developer can pick it up',
     ],
+    liveSites: [{ name: 'TRL Home Solutions', href: 'https://trlhomesolutions.com', note: 'the website for my contracting company' }],
     processTitle: 'How a project runs',
     process: [
       { title: 'Listen', text: 'A free call to understand the business and the goal.' },
@@ -397,7 +407,7 @@ export const services: Service[] = [
       },
       {
         q: 'Do you build websites too?',
-        a: 'Yes. Small-business sites that load fast, are easy to find and are easy for you to update.',
+        a: 'Yes. Sites that load fast, are easy to find and are easy for you to update.',
       },
     ],
   },

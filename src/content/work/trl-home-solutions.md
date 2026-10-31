@@ -10,7 +10,7 @@ problem: 'Once there was a crew, job scope lived in text threads, before-and-aft
 fix: 'I mapped how a job moves from first call to paid invoice, then built a checklist for each job directly from the quote, so the crew sees everything in one place on site. After comparing about five tools aimed at contractors, I settled on two: QuickBooks for the money side and Asana for tracking.'
 result: 'Fewer missed items and miscommunications on jobs, a crew that no longer digs through text threads for scope, and software costs cut from $700+ a month to about $250.'
 draft: false
-order: 1
+order: 3
 ---
 
 ## Background
@@ -54,6 +54,8 @@ what to keep, drop or downgrade.
   with the job instead of living in a message.
 - **One place on site** where the crew sees every item, along with the documentation and photos for that job.
 - A **simpler stack**: two tools, each with a clear job.
+- The **[company website](https://trlhomesolutions.com)** and its local listings, which I set up and run, and where we
+  regularly post our work.
 
 ## Using AI where it actually helps
 

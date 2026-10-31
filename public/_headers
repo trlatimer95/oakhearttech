@@ -13,7 +13,7 @@
 /images/*
   Cache-Control: public, max-age=2592000
 
-# The animated example at /console/ is embedded in the home page, so it must allow same-origin framing.
+# The animated examples under /console/ are embedded in site pages, so they must allow same-origin framing.
 /console/*
   ! X-Frame-Options
   ! Content-Security-Policy
