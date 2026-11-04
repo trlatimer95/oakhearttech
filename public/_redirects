@@ -1,0 +1,4 @@
+# Cloudflare static-assets redirects. 302 so the destination can change later (e.g. new booking tool)
+# without browsers or printed QR codes holding on to the old one.
+/book  https://bookings.cloud.microsoft/book/OakheartTechnologies1@oakhearttech.com/  302
+/book/ https://bookings.cloud.microsoft/book/OakheartTechnologies1@oakhearttech.com/  302
