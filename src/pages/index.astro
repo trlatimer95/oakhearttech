@@ -15,12 +15,12 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 
 // Each pain leads to the service that fixes it.
 const pains = [
-  { icon: 'copy', text: 'The same data typed into several systems, or work that stalls between departments', href: '/services/automation-integrations/' },
-  { icon: 'users', text: 'Leads and customer updates handled by hand, or AI used where a simple tool would do better', href: '/services/ai-implementation/' },
+  { icon: 'copy', text: 'The same data typed into several systems', href: '/services/automation-integrations/' },
+  { icon: 'lifebuoy', text: 'Software that’s broken, stalled or abandoned, from an old system to an AI-built app that isn’t ready for real customers', href: '/services/software-rescue/' },
+  { icon: 'users', text: 'You want to use AI, but don’t know where to start or how to use it well', href: '/services/ai-implementation/' },
+  { icon: 'clipboard', text: 'Numbers you can only see after an hour of exporting and pasting', href: '/services/dashboards-reporting/' },
   { icon: 'gauge', text: 'Paying for several tools, with no clear picture of what’s used or what overlaps', href: '/services/software-cost-review/' },
   { icon: 'code', text: 'A one-off problem no off-the-shelf tool solves', href: '/services/custom-software/' },
-  { icon: 'lifebuoy', text: 'A software project, internal tool or website that stalled, was abandoned, or breaks when you touch it', href: '/services/software-rescue/' },
-  { icon: 'clipboard', text: 'Numbers you can only see after an hour of exporting and pasting', href: '/services/dashboards-reporting/' },
 ];
 
 // Figures come from the case studies. Keep them identical to what those pages say.
@@ -46,7 +46,7 @@ const why = [
 const faqs = [
   {
     q: 'What does a typical project cost?',
-    a: 'It depends on scope, which is why most projects start with a fixed-price Workflow Checkup, $395, credited toward any project that follows. Larger or more technical work starts with a discovery or assessment quoted for that project. My hourly rate for ad hoc work is $125. Prices exclude any applicable sales tax.',
+    a: 'It depends on scope, so it starts with a free 30-minute call. If there’s a fit, I quote the work in writing before anything begins, as a fixed price wherever the scope is clear enough. Small fixes are small jobs. Larger or more technical work starts with a paid review or assessment, credited toward the project that follows. Prices exclude any applicable sales tax.',
   },
   {
     q: 'Do you work with businesses outside Spokane?',
@@ -74,7 +74,7 @@ const faqs = [
   },
   {
     q: 'Can I get support after handoff?',
-    a: 'Yes. It’s usually billed at my hourly rate, $125, or quoted for specific fixes and improvements.',
+    a: 'Yes. It’s usually billed hourly, or quoted for specific fixes and improvements.',
   },
 ];
 ---
@@ -132,17 +132,56 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 2. Blueprint: the Workflow Checkup -->
+  <!-- 2. What's broken -->
+  <section class="bg-white">
+    <div class="wrap section">
+      <p class="eyebrow">What's broken?</p>
+      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">The problems I'm usually called in to fix.</h2>
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          pains.map((p) => (
+            <li class="reveal">
+              <a
+                href={p.href}
+                class="group flex h-full items-start gap-4 rounded-xl border border-line bg-paper p-5 transition-colors hover:border-royal"
+              >
+                <span class="text-royal">
+                  <Icon name={p.icon} />
+                </span>
+                <span>
+                  <span class="block font-medium text-ink">{p.text}</span>
+                  <span class="mt-2 flex items-center gap-1 text-sm font-semibold text-royal group-hover:gap-2">
+                    See how I fix this <Icon name="arrow" class="h-4 w-4" />
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-8 text-muted">
+        Email not working, or a new computer to set up?{' '}
+        <a href="/services/tech-help/" class="font-semibold text-royal underline underline-offset-4">I do everyday tech help too</a>
+      </p>
+      <p class="mt-2">
+        <a href="/services/" class="inline-flex min-h-11 items-center font-semibold text-royal underline underline-offset-4"
+          >See all services</a
+        >
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. Blueprint: how I work -->
   <section id="checkup" class="on-dark blueprint scroll-mt-20">
     <div class="wrap relative py-16 md:py-24">
-      <p class="bp-label">// start here · workflow checkup</p>
+      <p class="bp-label">// how I work</p>
       <h2 class="mt-3 max-w-[18em] text-3xl leading-[1.08] text-white md:text-5xl">
         Here's how I evaluate a{' '}
         <span class="mark" data-draw>process.<svg viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M4 20 C 60 8, 140 26, 200 14 S 280 10, 296 18"></path></svg></span>
       </h2>
       <p class="mt-4 max-w-[38em] text-lg leading-relaxed text-[#aab6cc]">
-        During the working session, we evaluate a workflow. I map it like this, mark where the time and money go in red, and write up
-        the fixes worth making first in green.
+        When a problem needs a closer look, we go through the process together. I map it like this, mark where the time and
+        money go in red, and write up the fixes worth making first in green.
       </p>
       <div class="mt-9">
         <CheckupBoard />
@@ -175,49 +214,14 @@ const faqs = [
 
       <div class="mt-14 flex flex-col items-start gap-5 rounded-2xl border border-[#2c3a5e] bg-[#0b1324]/70 px-6 py-6 md:px-7">
         <div>
-          <p class="font-serif text-2xl font-semibold text-white">Workflow Checkup · $395</p>
-          <p class="mt-1 text-[0.95rem] text-[#aab6cc]">Pick the focus: a workflow, software costs, where AI fits, or reporting. Credited in full toward any project that comes out of it.</p>
+          <p class="font-serif text-2xl font-semibold text-white">It starts with a free 30-minute call.</p>
+          <p class="mt-1 text-[0.95rem] text-[#aab6cc]">Bring one frustrating process, tool or bill. If a written review like this is the right next step, I'll say so and quote it before any work starts.</p>
         </div>
         <div class="flex flex-wrap gap-3">
           <Button href={bookingHref} external={bookingIsExternal} variant="brass">Book a free 30-minute call</Button>
-          <Button href="/services/workflow-checkup/" variant="outline-light">See what's included</Button>
+          <Button href="/services/workflow-checkup/" variant="outline-light">See the Workflow Checkup</Button>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- 3. What's broken -->
-  <section class="bg-white">
-    <div class="wrap section">
-      <p class="eyebrow">What's broken?</p>
-      <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">The problems I'm usually called in to fix.</h2>
-      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          pains.map((p) => (
-            <li class="reveal">
-              <a
-                href={p.href}
-                class="group flex h-full items-start gap-4 rounded-xl border border-line bg-paper p-5 transition-colors hover:border-royal"
-              >
-                <span class="text-royal">
-                  <Icon name={p.icon} />
-                </span>
-                <span>
-                  <span class="block font-medium text-ink">{p.text}</span>
-                  <span class="mt-2 flex items-center gap-1 text-sm font-semibold text-royal group-hover:gap-2">
-                    See how I fix this <Icon name="arrow" class="h-4 w-4" />
-                  </span>
-                </span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="mt-8">
-        <a href="/services/" class="inline-flex min-h-11 items-center font-semibold text-royal underline underline-offset-4"
-          >See all services</a
-        >
-      </p>
     </div>
   </section>
 

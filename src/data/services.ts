@@ -14,7 +14,9 @@ export interface Service {
   title: string;
   // Page title for search results and browser tabs (keep to about 37 characters; the site name is added after it).
   seoTitle: string;
-  icon: 'clipboard' | 'plug' | 'code' | 'lifebuoy' | 'headset' | 'gauge' | 'users';
+  icon: 'clipboard' | 'plug' | 'code' | 'lifebuoy' | 'headset' | 'gauge' | 'users' | 'monitor';
+  // Use call, text and email buttons instead of "Book a free call" (small jobs where nobody wants to book a slot).
+  directContact?: boolean;
   badge?: string;
   summary: string;
   price: string;
@@ -54,11 +56,10 @@ export const services: Service[] = [
     title: 'Workflow Checkup',
     seoTitle: 'Workflow Checkup: Find What to Fix',
     icon: 'clipboard',
-    badge: 'Start here',
     board: true,
     summary: 'During the working session, we evaluate the focus you choose. You then get a written report with the suggested fixes, ranked by priority, with cost and time saved for each.',
-    price: 'Checkup $395, fixed',
-    priceNote: `Fixed price, credited toward any project that follows. ${TAX}`,
+    price: 'Quoted on a free call',
+    priceNote: `We agree the focus and a fixed price on a free call, before any work starts. The fee is credited toward any project that follows. ${TAX}`,
     figures: [
       {
         name: '/images/office/checkup-report-printed',
@@ -94,10 +95,10 @@ export const services: Service[] = [
       },
     ],
     metaDescription:
-      'A fixed-price Workflow Checkup for small and mid-size businesses: a working session and a written report with the suggested fixes, ranked by priority.',
+      'A Workflow Checkup for small and mid-size businesses: a working session and a written report with the suggested fixes, ranked by priority.',
     heroTitle: 'Find out what’s actually slowing you down.',
     heroLead:
-      'You know something is inefficient. You just don’t know what to fix first. The Workflow Checkup gives you a short written report, ranked by priority, so you can decide with real numbers in front of you. Most projects start here, and you pick the focus: a workflow, software costs, where AI fits, or the numbers you wish you could see.',
+      'You know something is inefficient. You just don’t know what to fix first. The Workflow Checkup gives you a short written report, ranked by priority, so you can decide with real numbers in front of you. It’s a common next step after a free call, and you pick the focus: a workflow, software costs, where AI fits, or the numbers you wish you could see.',
     focus: {
       title: 'Choose your focus',
       intro: 'During the working session, we evaluate the focus you pick. You then get a written report with the suggested fixes, ranked by priority.',
@@ -126,7 +127,7 @@ export const services: Service[] = [
     ],
     processTitle: 'How it works',
     process: [
-      { title: 'Book', text: 'Pick a time for a free 30-minute call, and we’ll set up the checkup from there.' },
+      { title: 'Call', text: 'A free 30-minute call. If a checkup is the right next step, we agree the focus and the price there.' },
       { title: 'Intake', text: 'A short form about your tools and what’s slowing you down.' },
       { title: 'Session', text: 'We discuss the process from start to finish. You show me; I ask questions.' },
       { title: 'Report', text: 'You get the written report within a week of the session.' },
@@ -158,8 +159,8 @@ export const services: Service[] = [
     intakeDemo: true,
     summary:
       'Find where AI actually helps, then build the workflows: lead intake, follow-up and customer updates, with plain scripts wherever exactness matters.',
-    price: 'Starts with a Workflow Checkup, $395',
-    priceNote: `The first step is a Workflow Checkup with an AI focus: $395, fixed, credited toward setup. Setup is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    price: 'Quoted after a free call',
+    priceNote: `It starts with a free call. The usual next step is a Workflow Checkup with an AI focus, at a fixed price credited toward setup. Setup is quoted after, as a fixed price or hourly. ${TAX}`,
     figures: [
       {
         name: '/images/illustrations/lead-intake-workflow',
@@ -257,8 +258,8 @@ export const services: Service[] = [
     seoTitle: 'Business Process Automation',
     icon: 'plug',
     summary: 'Find the manual process behind the busywork, then connect the tools so the data moves on its own.',
-    price: 'Quoted after the checkup',
-    priceNote: `Projects are quoted as a fixed price after a Workflow Checkup, based on what’s needed. A single small automation can cost a few hundred dollars, and larger connected sets cost much more. ${TAX}`,
+    price: 'Quoted after a free call',
+    priceNote: `It starts with a free call. Projects are quoted as a fixed price once the scope is clear, often after a Workflow Checkup. A single small automation is a modest job, and larger connected sets cost more. ${TAX}`,
     metaDescription:
       'Workflow automation and software integrations for small and mid-size businesses: connect your existing tools and cut double data entry.',
     heroTitle: 'Make your tools talk to each other.',
@@ -308,8 +309,8 @@ export const services: Service[] = [
     seoTitle: 'Dashboards & Business Reporting',
     icon: 'gauge',
     summary: 'The numbers you wish you could see, pulled from the tools you already use and kept current on one screen.',
-    price: 'Starts with a Workflow Checkup, $395',
-    priceNote: `The first step is a Workflow Checkup with a reporting focus: $395, fixed, credited toward the build. The dashboard itself is quoted as a fixed price after it, based on how many sources it draws from and how clean they are. ${TAX}`,
+    price: 'Quoted after a free call',
+    priceNote: `It starts with a free call. The usual next step is a Workflow Checkup with a reporting focus, at a fixed price credited toward the build. The dashboard itself is quoted as a fixed price after it, based on how many sources it draws from and how clean they are. ${TAX}`,
     metaDescription:
       'Dashboards and reporting for small and mid-size businesses: the numbers you need, pulled from accounting, CRM and job tracking, kept current on one screen.',
     heroTitle: 'The numbers you wish you could see, on one screen.',
@@ -416,9 +417,9 @@ export const services: Service[] = [
     title: 'Software Rescue',
     seoTitle: 'Software Rescue for Stalled Projects',
     icon: 'lifebuoy',
-    summary: 'A stalled, abandoned or broken software project or website, assessed honestly and either fixed or replaced.',
+    summary: 'Old software that keeps breaking, a stalled project, or an AI-built app that isn’t ready for production: assessed honestly, then fixed or replaced.',
     price: 'Assessment quoted per project',
-    priceNote: `The assessment is a fixed-price first step, quoted after a short look at the code because a small web app and a large platform are very different jobs. It’s credited toward the fix. Fixes are quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    priceNote: `The assessment is a fixed-price first step, quoted after a short look at the code because a small web app and a large platform are very different jobs. It’s credited toward the fix. Fixes are quoted after, as a fixed price or hourly. ${TAX}`,
     metaDescription:
       'Software rescue: an honest assessment of stalled, abandoned or AI-generated code, then a plan to finish it or replace it.',
     heroTitle: 'Your software project stalled. Let’s find out why.',
@@ -480,8 +481,8 @@ export const services: Service[] = [
     seoTitle: 'Software Subscription Cost Review',
     icon: 'gauge',
     summary: 'Find the overlapping tools, unused seats and over-tiered plans you’re paying for, then have me set up what I recommend.',
-    price: 'Starts with a Workflow Checkup, $395',
-    priceNote: `The first step is a Workflow Checkup with a cost focus: $395, fixed, set so it pays for itself quickly, and credited toward the implementation. Setting up what I recommend is quoted after, as a fixed price or at $125 an hour. ${TAX}`,
+    price: 'Quoted after a free call',
+    priceNote: `It starts with a free call. The usual next step is a Workflow Checkup with a cost focus, at a fixed price set so it pays for itself quickly and credited toward the implementation. Setting up what I recommend is quoted after, as a fixed price or hourly. ${TAX}`,
     metaDescription:
       'Find overlapping tools, unused seats and oversized plans in your software subscriptions, with a written list of savings and help setting it up.',
     heroTitle: 'Stop paying for software you don’t use, or use twice.',
@@ -543,6 +544,68 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: 'tech-help',
+    title: 'Tech Help',
+    seoTitle: 'Tech Help in Spokane: Home & Office',
+    icon: 'monitor',
+    directContact: true,
+    summary:
+      'Everyday tech problems for small offices and households around Spokane: email and domains, computer setup, accounts, backups and custom PC builds.',
+    price: 'Quoted before work starts',
+    priceNote: `Tell me what’s wrong, and I’ll tell you what it will cost before I start. Small jobs are billed at a base charge, and larger ones are quoted first. ${TAX}`,
+    metaDescription:
+      'Tech help for small offices and households in Spokane, WA: email and domain problems, website moves, computer setup, backups and custom PC builds. On-site or remote.',
+    heroTitle: 'Everyday tech problems, sorted out.',
+    heroLead:
+      'Email that stopped working, a domain nobody can log in to, a new computer that needs setting up. I fix everyday tech problems for small offices and households around Spokane, on-site or remotely, and explain what I did in plain language.',
+    signsTitle: 'Sound familiar?',
+    signs: [
+      'Email stopped sending or receiving, and nobody knows why.',
+      'Your website or domain is with a provider you need to leave, and you’re afraid of breaking something.',
+      'A new computer needs setting up, or an old one needs wiping and starting fresh.',
+      'Nobody is sure who holds the logins for your domain, email or Microsoft 365 account.',
+      'There’s no backup, or nobody has checked that the backup works.',
+      'You want a PC built for the work you do, not whatever was on the shelf.',
+    ],
+    includesTitle: 'What I help with',
+    includes: [
+      'Email and domain problems: DNS records, nameservers and mail that goes missing',
+      'Moving a website or email to a new provider, with as little downtime as possible',
+      'New computer setup, and resets of old ones, with your files backed up first',
+      'Microsoft 365 and Google Workspace accounts, sharing and access',
+      'Backups, set up and tested',
+      'Custom PC builds, specified for how you’ll use them',
+      'On-site around Spokane, or remote wherever you are',
+      'A short written note of what I changed, with your logins handed back to you',
+    ],
+    processTitle: 'How it works',
+    process: [
+      { title: 'Reach out', text: 'Call, text or email and tell me what’s wrong. I usually reply the same day.' },
+      { title: 'Quote', text: 'I tell you what it’s likely to take and what it will cost before I start.' },
+      { title: 'Fix', text: 'On-site or remote. Anything that could lose data gets backed up first.' },
+      { title: 'Hand back', text: 'You get a note of what changed, and your accounts stay yours.' },
+    ],
+    stance: 'If a fix costs more than replacing the thing, I’ll tell you before you spend the money.',
+    faqs: [
+      {
+        q: 'Do you help home users, or only businesses?',
+        a: 'Both. Small offices and households around Spokane, and remote help for anyone further away.',
+      },
+      {
+        q: 'Do you come on-site?',
+        a: 'Yes, around the Spokane area. Many problems, such as email, domains and accounts, can be fixed remotely, which is usually quicker.',
+      },
+      {
+        q: 'How quickly can you help?',
+        a: 'I usually reply the same day and tell you when I can get to it. I’m not a 24-hour emergency service.',
+      },
+      {
+        q: 'Will I lose my files?',
+        a: 'Before a reset or a move, I back up what’s there and confirm with you what needs to be kept. If something can’t be backed up safely, I’ll tell you before going any further.',
+      },
+    ],
+  },
+  {
     slug: 'interactive-vr',
     title: 'Interactive & VR Training',
     seoTitle: 'VR & Interactive Training',
@@ -595,15 +658,16 @@ export const services: Service[] = [
   },
 ];
 
-// Display order everywhere (home cards, footer, services page): fix-first, build last.
+// Display order everywhere (footer, services page). Matches the "What's broken" cards on the home page.
 const displayOrder = [
-  'workflow-checkup',
-  'software-rescue',
   'automation-integrations',
-  'software-cost-review',
+  'software-rescue',
   'ai-implementation',
   'dashboards-reporting',
+  'software-cost-review',
   'custom-software',
+  'tech-help',
+  'workflow-checkup',
   'interactive-vr',
 ];
 services.sort((a, b) => displayOrder.indexOf(a.slug) - displayOrder.indexOf(b.slug));
