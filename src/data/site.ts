@@ -21,6 +21,9 @@ export const site = {
   // Web3Forms access key (public by design). Get one at web3forms.com using tyler@oakhearttech.com.
   // Blank = the form renders but tells visitors to email instead.
   web3formsAccessKey: '4a1738a7-aa5b-43c8-803b-ae24d56e97db',
+  // Cloudflare Turnstile site key for the Free Website Evaluation (public by design; the secret is a Worker secret).
+  // Local builds (npm run dev:worker) always use Cloudflare's test key instead.
+  turnstileSiteKey: '0x4AAAAAAGAMHB2dCHSLHvNQ',
   // Cloudflare Web Analytics token. Blank = analytics script not included.
   analyticsToken: 'dfdca334fcae4908b671f638a9906f6d',
 };

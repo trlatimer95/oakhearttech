@@ -5,6 +5,6 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://oakhearttech.com',
   devToolbar: { enabled: false },
-  integrations: [sitemap({ filter: (page) => !page.includes('/console/') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/console/') && !page.includes('/website-evaluation') })],
   vite: { plugins: [tailwindcss()] },
 });

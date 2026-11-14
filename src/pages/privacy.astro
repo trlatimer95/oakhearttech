@@ -30,6 +30,14 @@ import { site } from '../data/site';
         number, your messages, and any voicemail you leave, which is transcribed to text.
       </p>
       <p>
+        <strong>Free Website Evaluation.</strong> When you evaluate a website, the site records the address you entered,
+        the time, and the results, which come only from public information about that website (its pages, its
+        public DNS and domain registration records, and Google’s PageSpeed test). To limit abuse, it also stores a
+        one-way, scrambled version of your IP address, which can’t be turned back into the address. If you ask for the
+        full report, I receive the name, email address, business and phone number (if you give one) that you enter,
+        along with the results.
+      </p>
+      <p>
         Please don’t send passwords, payment card numbers, government ID numbers or other sensitive information through
         the form or booking page.
       </p>
@@ -60,7 +68,9 @@ import { site } from '../data/site';
       <p>The site uses a few outside services. Each handles information under its own privacy terms.</p>
       <ul>
         <li><strong>Cloudflare</strong> hosts the site and provides its traffic analytics. Like any web host, it processes technical data such as IP addresses to deliver pages and protect the site.</li>
-        <li><strong>Web3Forms</strong> delivers contact form messages to me by email.</li>
+        <li><strong>Web3Forms</strong> delivers contact form messages and evaluation report requests to me by email.</li>
+        <li><strong>Cloudflare Turnstile</strong> checks that a person, not a bot, is running the website evaluation. It may process device and browser information to do that.</li>
+        <li><strong>Google PageSpeed Insights</strong> measures the speed of the website you evaluate. Google receives that website’s address, not your information.</li>
         <li><strong>hCaptcha</strong> blocks spam on the contact form. It loads only when you start using the form, and it may process device and browser information to tell people from bots.</li>
         <li><strong>Microsoft</strong> provides the Bookings page and my email (Microsoft 365), so messages and bookings pass through Microsoft’s systems.</li>
         <li><strong>Quo</strong> provides the business phone line. Calls, texts and voicemails pass through Quo’s systems and the phone carriers that deliver them.</li>
@@ -82,6 +92,7 @@ import { site } from '../data/site';
       <h2>How long I keep it</h2>
       <p>
         I keep inquiry emails, texts, voicemails and booking details for as long as they’re useful for the relationship or required by law.
+        Website evaluation records are deleted automatically after 12 months.
         If we work together, information shared during the work is covered by our written agreement.
       </p>
 

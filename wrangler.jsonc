@@ -1,25 +1,66 @@
 {
   // Must match the existing Worker name, or deploy creates a new Worker.
-  // Static assets only: no Worker code. The contact form posts directly to Web3Forms from the browser.
   "name": "oakhearttech",
   "compatibility_date": "2026-10-01",
+  // A small Worker runs in front of the static site, but only for /api/* (the Free Website Evaluation).
+  // Every other path is served straight from dist/ without touching the Worker. The contact form still posts
+  // directly to Web3Forms from the browser.
+  "main": "worker/index.ts",
   // The site is served on oakhearttech.com (a custom domain added in the Cloudflare dashboard, under the Worker's
   // Domains tab). The default *.workers.dev addresses are turned off so there is only one public copy of the site.
   "workers_dev": false,
   "preview_urls": false,
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
   },
+  // Evaluation results, for the speed step, repeat visits and the report view. Create it once with:
+  //   npx wrangler d1 create oakheart-evaluations
+  // then paste the database_id it prints below, and apply the table with:
+  //   npx wrangler d1 migrations apply oakheart-evaluations --remote
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "oakheart-evaluations",
+      "database_id": "c8ad0f55-1617-4c01-bee5-d406aaa9dbed",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // Weekly clean-up of evaluations older than 12 months (Mondays, 09:00 UTC).
+  "triggers": { "crons": ["0 9 * * 1"] },
+  "observability": { "enabled": true },
+  // Secrets (set with `npx wrangler secret put <NAME>`, never written here):
+  //   TURNSTILE_SECRET  Cloudflare Turnstile secret key for the evaluation form
+  //   PSI_API_KEY       Google PageSpeed Insights API key
+  //   REPORT_PASSWORD   password for /api/report/<id>
+  //   IP_SALT           any long random string, mixed into the hashed IPs used for rate limiting
   "env": {
-    // A separate private copy for testing, deployed with: npx wrangler deploy --env staging
+    // A separate copy for testing at staging.oakhearttech.com, deployed with: npx wrangler deploy --env staging
+    // It lives under oakhearttech.com so the real Turnstile key works there (Turnstile only accepts hostnames
+    // in the Cloudflare account). The Worker runs for every path here, to add a noindex header to each page.
     "staging": {
       "name": "oakhearttech-staging",
       "workers_dev": true,
+      "routes": [{ "pattern": "staging.oakhearttech.com", "custom_domain": true }],
+      "vars": { "NOINDEX": "1" },
       "assets": {
         "directory": "./dist",
-        "not_found_handling": "404-page"
-      }
+        "binding": "ASSETS",
+        "not_found_handling": "404-page",
+        "run_worker_first": true
+      },
+      // Create with: npx wrangler d1 create oakheart-evaluations-staging
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "oakheart-evaluations-staging",
+          "database_id": "c6751d42-9865-43e7-a910-71bfbfd2a467",
+          "migrations_dir": "migrations"
+        }
+      ],
+      "triggers": { "crons": [] }
     }
   }
 }

@@ -1,0 +1,7 @@
+# Copy to .dev.vars for local development (`npm run dev:worker`). .dev.vars is git-ignored.
+# Cloudflare's always-pass Turnstile test secret; pairs with the test site key the page uses when site.ts has none.
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+# Optional locally: without a key, PageSpeed still works at a low anonymous quota.
+PSI_API_KEY=
+REPORT_PASSWORD=local-test
+IP_SALT=local-dev-salt

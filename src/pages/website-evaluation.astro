@@ -1,0 +1,143 @@
+---
+// Free Website Evaluation. The page is static; the checks run in the Worker (worker/index.ts) at /api/evaluate.
+// Kept out of search results and the sitemap until it has been calibrated on real sites (remove `noindex` at launch).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { bookingHref, site } from '../data/site';
+
+// Local builds (`npm run dev:worker`, which builds with --mode development) use Cloudflare's always-pass test key,
+// because the real key only works on oakhearttech.com and the staging address.
+const TEST_KEY = '1x00000000000000000000AA';
+const turnstileKey = import.meta.env.MODE === 'development' ? TEST_KEY : site.turnstileSiteKey || TEST_KEY;
+---
+
+<BaseLayout
+  title="Free Website Evaluation"
+  description="Check your small business website in about 30 seconds: speed on a phone, Google visibility, email deliverability, security and mobile usability, explained in plain English."
+  noindex
+>
+  <PageHero>
+    <p class="eyebrow">Free website evaluation</p>
+    <h1 class="mt-3 max-w-3xl text-4xl text-white md:text-6xl">
+      Is your website <em class="text-brass">costing you customers?</em>
+    </h1>
+    <p class="prose-measure mt-6 text-lg text-[#b8c1d4] md:text-xl">
+      Enter your web address. In about 30 seconds you’ll see how your site does on speed, Google, email, security and
+      phones, in plain English, with the fixes that matter most.
+    </p>
+
+    <form id="eval-form" class="mt-8 max-w-3xl" data-turnstile-key={turnstileKey} novalidate>
+      <label for="eval-url" class="sr-only">Your website address</label>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <input
+          id="eval-url"
+          name="url"
+          type="text"
+          inputmode="url"
+          autocomplete="url"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="yourbusiness.com"
+          required
+          class="min-w-0 flex-1 rounded-xl border-2 border-brass bg-white px-5 py-4 text-lg text-ink placeholder:text-muted/70"
+        />
+        <button
+          id="eval-submit"
+          type="submit"
+          class="rounded-xl border-2 border-brass bg-brass px-7 py-4 text-lg font-semibold text-ink hover:bg-[#d4b273] disabled:cursor-wait disabled:opacity-70"
+        >
+          Evaluate my site →
+        </button>
+      </div>
+      <div id="eval-turnstile" class="mt-3 min-h-[1px]"></div>
+      <p class="mt-3 text-sm text-[#b8c1d4]">Free. No email needed to see results. Checks only public information.</p>
+      <p id="eval-error" role="alert" class="mt-3 hidden rounded-lg bg-[#3a1d1d] px-4 py-3 text-[0.95rem] text-[#ffd9d4]"></p>
+    </form>
+
+    <ul class="mt-8 flex flex-wrap gap-2.5 text-sm text-paper/85" aria-label="What gets checked">
+      {
+        ['Speed on a phone', 'Found on Google', 'Email delivery', 'Security & upkeep', 'Mobile & usability'].map((t) => (
+          <li class="rounded-full border border-brass/45 px-3.5 py-1.5">{t}</li>
+        ))
+      }
+    </ul>
+
+    <!-- Progress, shown while the quick checks run -->
+    <div id="eval-progress" class="mt-10 hidden max-w-3xl rounded-2xl border border-white/12 bg-white/5 p-6 md:p-8" aria-live="polite">
+      <h2 class="text-2xl text-white">Evaluating <span id="eval-progress-host" class="text-brass"></span>…</h2>
+      <ul id="eval-steps" class="mt-5 grid gap-3 text-[1.05rem]"></ul>
+    </div>
+  </PageHero>
+
+  <!-- Results, filled in by the script -->
+  <section id="eval-results" class="wrap hidden py-14 md:py-20" aria-live="polite"></section>
+
+  <!-- Next steps -->
+  <section id="eval-next" class="wrap hidden pb-20">
+    <div class="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+      <form id="lead-form" class="rounded-2xl bg-gradient-to-br from-royal to-royal-dark p-7 text-paper md:p-9" data-access-key={site.web3formsAccessKey} novalidate>
+        <h2 class="text-3xl text-white">Get the full report</h2>
+        <p class="mt-2 text-[#c8d0e0]">Every finding with the fix and the effort involved, as a PDF you can hand to anyone.</p>
+        <div class="mt-6 grid gap-3 sm:grid-cols-2">
+          {
+            [
+              { id: 'lead-name', name: 'name', label: 'Your name', type: 'text', auto: 'name', required: true },
+              { id: 'lead-email', name: 'email', label: 'Email', type: 'email', auto: 'email', required: true },
+              { id: 'lead-business', name: 'business', label: 'Business name', type: 'text', auto: 'organization', required: false },
+              { id: 'lead-phone', name: 'phone', label: 'Phone (optional)', type: 'tel', auto: 'tel', required: false },
+            ].map((f) => (
+              <div>
+                <label for={f.id} class="sr-only">{f.label}</label>
+                <input
+                  id={f.id}
+                  name={f.name}
+                  type={f.type}
+                  autocomplete={f.auto}
+                  required={f.required}
+                  placeholder={f.label}
+                  class="w-full rounded-lg bg-white px-4 py-3 text-base text-ink placeholder:text-muted"
+                />
+              </div>
+            ))
+          }
+        </div>
+        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="h-captcha mt-4" data-captcha="true"></div>
+        <div class="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p class="max-w-sm text-sm text-[#c8d0e0]">I review every report personally and reply within one business day.</p>
+          <button type="submit" class="rounded-lg bg-brass px-6 py-3 font-semibold text-ink hover:bg-[#d4b273]">Send my report</button>
+        </div>
+        <p id="lead-status" role="status" class="mt-3 text-sm font-medium text-brass"></p>
+      </form>
+
+      <div class="card p-7 md:p-9">
+        <h2 class="text-3xl">Rather talk it through?</h2>
+        <p class="mt-2 text-muted">A free 15-minute call to walk through your results.</p>
+        <ul class="mt-4 list-disc space-y-1.5 pl-5">
+          <li>Which fixes matter most for your business</li>
+          <li>What you can do yourself</li>
+          <li>What it would cost if I do it</li>
+        </ul>
+        <a
+          href={bookingHref}
+          target={site.bookingUrl ? '_blank' : undefined}
+          rel={site.bookingUrl ? 'noopener noreferrer' : undefined}
+          class="mt-6 inline-flex rounded-lg border-2 border-royal px-5 py-3 font-semibold text-royal hover:bg-royal hover:text-white"
+        >
+          Book a walkthrough
+        </a>
+        <p class="mt-4 text-sm text-muted">
+          Or call or text <a class="font-semibold text-royal underline" href={`tel:${site.phone.replace(/[^\d+]/g, '')}`}>{site.phone}</a>.
+        </p>
+      </div>
+    </div>
+    <p class="mt-8 text-center text-sm text-muted">
+      An automated check of public information, not a full audit or security test. Results are estimates.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initEvaluation } from '../scripts/website-evaluation';
+  initEvaluation();
+</script>
