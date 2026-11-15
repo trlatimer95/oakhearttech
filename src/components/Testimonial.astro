@@ -1,0 +1,44 @@
+---
+// One customer quote with its star rating and attribution.
+import type { Testimonial } from '../data/testimonials';
+
+interface Props {
+  t: Testimonial;
+  // 'long' shows the fuller excerpt, for service pages.
+  length?: 'short' | 'long';
+}
+const { t, length = 'short' } = Astro.props;
+const paragraphs = t[length];
+const star = 'M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.5l-5.9 3.2 1.2-6.6L2.5 9.5l6.6-.9z';
+---
+
+<figure class="card relative overflow-hidden p-7 md:p-10">
+  <span class="font-serif pointer-events-none absolute top-1 right-6 text-[7rem] leading-none text-oak/15 select-none md:text-[9rem]" aria-hidden="true">”</span>
+  <div class="flex items-center gap-3">
+    <span class="flex gap-0.5 text-brass" role="img" aria-label={`${t.stars} out of 5 stars`}>
+      {
+        Array.from({ length: t.stars }).map(() => (
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d={star} />
+          </svg>
+        ))
+      }
+    </span>
+    {
+      t.sourceUrl ? (
+        <a href={t.sourceUrl} target="_blank" rel="noopener" class="text-sm font-semibold text-royal underline underline-offset-4">
+          {t.source}
+        </a>
+      ) : (
+        <span class="text-sm font-semibold text-muted">{t.source}</span>
+      )
+    }
+  </div>
+  <blockquote class="relative mt-5 space-y-4 font-serif text-xl leading-relaxed text-ink md:text-2xl md:leading-relaxed">
+    {paragraphs.map((p) => <p>{p}</p>)}
+  </blockquote>
+  <figcaption class="mt-6 border-t border-line pt-5">
+    <span class="block font-semibold text-ink">{t.name}</span>
+    <span class="block text-sm text-muted">{t.role}</span>
+  </figcaption>
+</figure>

@@ -11,6 +11,8 @@ import CheckupBoard from '../../components/CheckupBoard.astro';
 import { services, type Service } from '../../data/services';
 import { site, bookingHref, bookingIsExternal } from '../../data/site';
 import { ph } from '../../lib/ph';
+import Testimonial from '../../components/Testimonial.astro';
+import { testimonials } from '../../data/testimonials';
 
 const phoneDigits = `+1${site.phone.replace(/\D/g, '')}`;
 const direct = (Astro.props.s as Service).directContact && Boolean(site.phone);
@@ -19,6 +21,7 @@ export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
 }
 const service = Astro.props.s as Service;
+const quotes = testimonials.filter((t) => t.services.includes(service.slug));
 ---
 
 <BaseLayout title={service.seoTitle} description={service.metaDescription}>
@@ -143,6 +146,17 @@ const service = Astro.props.s as Service;
       </aside>
     </div>
   </section>
+
+  {
+    quotes.length > 0 && (
+      <div class="wrap pb-16 md:pb-24">
+        <p class="eyebrow">What customers say</p>
+        <div class="mt-4 max-w-4xl space-y-6">
+          {quotes.map((t) => <Testimonial t={t} length="long" />)}
+        </div>
+      </div>
+    )
+  }
 
   {
     service.slug === 'workflow-checkup' && (

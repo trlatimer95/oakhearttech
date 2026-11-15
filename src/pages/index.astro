@@ -8,6 +8,8 @@ import FAQ from '../components/FAQ.astro';
 import CheckupBoard from '../components/CheckupBoard.astro';
 import Photo from '../components/Photo.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
+import Testimonial from '../components/Testimonial.astro';
+import { testimonials } from '../data/testimonials';
 import { bookingHref, bookingIsExternal } from '../data/site';
 import { originShort } from '../lib/origin';
 
@@ -174,6 +176,21 @@ const faqs = [
       </p>
     </div>
   </section>
+
+  <!-- 2b. What a customer said -->
+  {
+    testimonials.length > 0 && (
+      <section>
+        <div class="wrap section">
+          <p class="eyebrow">What customers say</p>
+          <h2 class="mt-3 max-w-2xl text-3xl md:text-4xl">“He didn’t stop until everything worked.”</h2>
+          <div class="reveal mt-8 max-w-4xl">
+            <Testimonial t={testimonials[0]} />
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <!-- 3. Blueprint: how I work -->
   <section id="checkup" class="on-dark blueprint scroll-mt-20">
