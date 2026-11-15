@@ -24,6 +24,18 @@ export const site = {
   // Cloudflare Turnstile site key for the Free Website Evaluation (public by design; the secret is a Worker secret).
   // Local builds (npm run dev:worker) always use Cloudflare's test key instead.
   turnstileSiteKey: '0x4AAAAAAGAMHB2dCHSLHvNQ',
+  // Google Ads conversion tracking (public by design). Blank id = no Google tag on the site at all.
+  // id: the Google tag ID, like 'AW-123456789'. Each label is the part after the slash in that conversion's
+  // send_to value ('AW-123456789/AbC-dEfGhIjK' → 'AbC-dEfGhIjK'). A blank label just skips that conversion.
+  googleAds: {
+    id: 'AW-18571987808',
+    labels: {
+      reportRequest: 'EmHUCIyJhrkdEOCW6JdF', // primary: "Get the full report" form delivered
+      contactForm: 'c320CI-JhrkdEOCW6JdF', // primary: contact form delivered
+      evaluationRun: 'EjXiCI2KhrkdEOCW6JdF', // secondary: a website evaluation finished its quick checks
+      bookingClick: 'V9ZgCIqKhrkdEOCW6JdF', // secondary: clicked through to the Bookings page
+    },
+  },
   // Cloudflare Web Analytics token. Blank = analytics script not included.
   analyticsToken: 'dfdca334fcae4908b671f638a9906f6d',
 };

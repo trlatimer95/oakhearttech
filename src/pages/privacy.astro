@@ -72,6 +72,15 @@ import { site } from '../data/site';
         <li><strong>Cloudflare Turnstile</strong> checks that a person, not a bot, is running the website evaluation. It may process device and browser information to do that.</li>
         <li><strong>Google PageSpeed Insights</strong> measures the speed of the website you evaluate. Google receives that website’s address, not your information.</li>
         <li><strong>hCaptcha</strong> blocks spam on the contact form. It loads only when you start using the form, and it may process device and browser information to tell people from bots.</li>
+        {
+          site.googleAds.id && (
+            <li>
+              <strong>Google Ads</strong> runs my search ads. When you visit, a Google tag records whether you then
+              contact me (sending a form, requesting an evaluation report, or opening the booking page), so I can tell
+              which ads work. It doesn’t receive what you type into forms.
+            </li>
+          )
+        }
         <li><strong>Microsoft</strong> provides the Bookings page and my email (Microsoft 365), so messages and bookings pass through Microsoft’s systems.</li>
         <li><strong>Quo</strong> provides the business phone line. Calls, texts and voicemails pass through Quo’s systems and the phone carriers that deliver them.</li>
       </ul>
@@ -79,8 +88,14 @@ import { site } from '../data/site';
       <h2>Analytics and cookies</h2>
       <p>
         The site uses Cloudflare Web Analytics, which measures traffic without cookies and without tracking individual
-        visitors across sites. My own pages don’t set cookies. Services you choose to use, such as the contact form’s
-        captcha or the Microsoft Bookings page, may set their own.
+        visitors across sites.{' '}
+        {
+          site.googleAds.id
+            ? 'The Google Ads tag described above sets cookies to connect an ad click with a later contact. You can block them in your browser settings or limit ad personalization at myadcenter.google.com, and the site works the same either way.'
+            : 'My own pages don’t set cookies.'
+        }{' '}
+        Services you choose to use, such as the contact form’s captcha or the Microsoft Bookings page, may set their
+        own.
       </p>
 
       <h2>Links to other sites</h2>

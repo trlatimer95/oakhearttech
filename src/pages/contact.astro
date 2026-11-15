@@ -133,6 +133,7 @@ import { site } from '../data/site';
 </script>
 
 <script>
+  import { trackConversion } from '../scripts/ads';
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const status = document.getElementById('form-status');
   form?.addEventListener('submit', async (e) => {
@@ -159,6 +160,7 @@ import { site } from '../data/site';
       if (!result.success) throw new Error('rejected');
       form.reset();
       status.textContent = 'Thanks, message sent. I’ll reply within 1 business day.';
+      trackConversion('contactForm');
     } catch {
       status.textContent = 'Something went wrong. Please email me directly instead.';
     }

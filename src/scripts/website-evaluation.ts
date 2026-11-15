@@ -1,6 +1,7 @@
 // Drives the Free Website Evaluation page: Turnstile, the two API calls, the progress list, and the results.
 
 import type { CategoryScore, CheckResult, EvaluationResult, Grade } from '../lib/evaluation/types';
+import { trackConversion } from './ads';
 
 declare global {
   interface Window {
@@ -258,6 +259,7 @@ async function run(form: HTMLFormElement) {
     clearInterval(ticker);
     QUICK_STEPS.forEach((_, i) => setStep(i, 'done'));
     render(quick);
+    trackConversion('evaluationRun');
     if (!quick.complete) {
       setStep(4, 'run');
       try {
@@ -335,6 +337,7 @@ function initLeadForm() {
       const result = await res.json();
       if (!result.success) throw new Error('rejected');
       post('/api/evaluate/lead', { id: r.id }).catch(() => {});
+      trackConversion('reportRequest');
       form.reset();
       status.textContent = 'Thanks! I’ll send your full report within one business day.';
     } catch {

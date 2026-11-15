@@ -102,6 +102,10 @@ const jsonLd = {
     </main>
     <Footer />
     <script>
+      import { initAds } from '../scripts/ads';
+      initAds();
+    </script>
+    <script>
       const els = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver(
