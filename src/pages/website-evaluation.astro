@@ -77,7 +77,7 @@ const turnstileKey = import.meta.env.MODE === 'development' ? TEST_KEY : site.tu
     <div class="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
       <form id="lead-form" class="rounded-2xl bg-gradient-to-br from-royal to-royal-dark p-7 text-paper md:p-9" data-access-key={site.web3formsAccessKey} novalidate>
         <h2 class="text-3xl text-white">Get the full report</h2>
-        <p class="mt-2 text-[#c8d0e0]">Every finding with the fix and the effort involved, as a PDF you can hand to anyone.</p>
+        <p class="mt-2 text-[#c8d0e0]">Every finding with the fix and the effort involved, emailed to you now. Print it or save it as a PDF to hand to anyone.</p>
         <div class="mt-6 grid gap-3 sm:grid-cols-2">
           {
             [
@@ -104,7 +104,7 @@ const turnstileKey = import.meta.env.MODE === 'development' ? TEST_KEY : site.tu
         <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="h-captcha mt-4" data-captcha="true"></div>
         <div class="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p class="max-w-sm text-sm text-[#c8d0e0]">I review every report personally and reply within one business day.</p>
+          <p class="max-w-sm text-sm text-[#c8d0e0]">I also review every report personally and follow up within one business day.</p>
           <button type="submit" class="rounded-lg bg-brass px-6 py-3 font-semibold text-ink hover:bg-[#d4b273]">Send my report</button>
         </div>
         <p id="lead-status" role="status" class="mt-3 text-sm font-medium text-brass"></p>

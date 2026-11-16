@@ -1,5 +1,6 @@
-// A printable version of one evaluation, for Tyler to save as a PDF and send with a personal note.
-// Protected by a password (HTTP Basic auth, any username) set with `wrangler secret put REPORT_PASSWORD`.
+// A printable version of one evaluation. Tyler opens it with a password (HTTP Basic auth, any username, set with
+// `wrangler secret put REPORT_PASSWORD`); the visitor opens their own copy from the signed link in their email
+// (see email.ts).
 
 import type { CheckResult, EvaluationResult } from '../src/lib/evaluation/types';
 
@@ -11,8 +12,10 @@ export function authorized(req: Request, password?: string): boolean {
   const h = req.headers.get('Authorization') ?? '';
   if (!h.startsWith('Basic ')) return false;
   try {
-    const [, pass] = atob(h.slice(6)).split(':');
-    return timingSafeEqual(pass ?? '', password);
+    // "username:password". Only the password is checked, and it may itself contain colons.
+    const creds = atob(h.slice(6));
+    const i = creds.indexOf(':');
+    return i >= 0 && timingSafeEqual(creds.slice(i + 1), password);
   } catch {
     return false;
   }
@@ -35,7 +38,7 @@ function row(c: CheckResult): string {
   </tr>`;
 }
 
-export function renderReport(r: EvaluationResult): string {
+export function renderReport(r: EvaluationResult, reader: 'owner' | 'visitor' = 'owner'): string {
   const date = new Date(r.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Los_Angeles' });
   const cats = r.categories
     .map(
@@ -72,7 +75,7 @@ export function renderReport(r: EvaluationResult): string {
   .foot{margin-top:36px;color:#5b616e;font-size:13px;border-top:1px solid #e3e0d8;padding-top:12px}
   @media print{body{margin:0}.noprint{display:none}}
 </style></head><body>
-<p class="noprint meta">Print this page or save it as a PDF (Ctrl+P) to send with your note.</p>
+<p class="noprint meta">${reader === 'visitor' ? 'To keep a copy, print this page or save it as a PDF (Ctrl+P, or Share → Print on a phone).' : 'Print this page or save it as a PDF (Ctrl+P) to send with your note.'}</p>
 <div class="eyebrow">Oakheart Technologies · Free Website Evaluation</div>
 <h1>${esc(r.facts.host)}</h1>
 <div class="overall"><div class="big">${esc(r.overall.grade ?? '–')}</div><div><b>${esc(r.overall.summary)}</b>
@@ -80,6 +83,7 @@ export function renderReport(r: EvaluationResult): string {
 <h2>Scores by area</h2><div class="cats">${cats}</div>
 <h2>Top fixes</h2><ol>${fixes || '<li>No significant problems found.</li>'}</ol>
 <h2>Everything we checked</h2>${sections}
+${reader === 'visitor' ? `<div class="noprint" style="margin-top:32px;border:1px solid #e3e0d8;border-radius:12px;padding:18px 22px"><b>Want help with any of this?</b><div class="why">I can walk you through what matters most, what you can do yourself, and what it would cost if I do it. <a href="https://oakhearttech.com/contact/" style="color:#152d5c;font-weight:600">Book a free call</a> or reply to the email this came with.</div></div>` : ''}
 <p class="foot">An automated check of public information, not a full audit or security test. Results are estimates.<br>
 Tyler Latimer · Oakheart Technologies · (509) 590-2944 · tyler@oakhearttech.com · oakhearttech.com</p>
 </body></html>`;

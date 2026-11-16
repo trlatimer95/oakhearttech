@@ -22,6 +22,9 @@ export interface Env {
   FETCHER_SECRET?: string;
   /** Set only on staging: adds X-Robots-Tag noindex to every page. */
   NOINDEX?: string;
+  /** Emailing visitors their report (see email.ts). Both must be set, or no email is sent. */
+  RESEND_API_KEY?: string;
+  REPORT_FROM?: string;
 }
 
 export const LIMITS = { perIpPerHour: 5, perDay: 200, cacheHours: 24, speedWindowMinutes: 15 };

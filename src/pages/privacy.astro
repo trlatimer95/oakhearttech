@@ -35,7 +35,8 @@ import { site } from '../data/site';
         public DNS and domain registration records, and Google’s PageSpeed test). To limit abuse, it also stores a
         one-way, scrambled version of your IP address, which can’t be turned back into the address. If you ask for the
         full report, I receive the name, email address, business and phone number (if you give one) that you enter,
-        along with the results.
+        along with the results, and the site emails you a private link to your report. Anyone you share that link with
+        can open the report. Your name and email address are used to send it and aren’t stored with the results.
       </p>
       <p>
         Please don’t send passwords, payment card numbers, government ID numbers or other sensitive information through
@@ -69,6 +70,7 @@ import { site } from '../data/site';
       <ul>
         <li><strong>Cloudflare</strong> hosts the site and provides its traffic analytics. Like any web host, it processes technical data such as IP addresses to deliver pages and protect the site.</li>
         <li><strong>Web3Forms</strong> delivers contact form messages and evaluation report requests to me by email.</li>
+        <li><strong>Resend</strong> sends the email with your evaluation report link. It receives your name, email address and the report summary to do that.</li>
         <li><strong>Cloudflare Turnstile</strong> checks that a person, not a bot, is running the website evaluation. It may process device and browser information to do that.</li>
         <li><strong>Google PageSpeed Insights</strong> measures the speed of the website you evaluate. Google receives that website’s address, not your information.</li>
         <li><strong>hCaptcha</strong> blocks spam on the contact form. It loads only when you start using the form, and it may process device and browser information to tell people from bots.</li>

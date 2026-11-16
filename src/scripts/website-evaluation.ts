@@ -336,10 +336,15 @@ function initLeadForm() {
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       const result = await res.json();
       if (!result.success) throw new Error('rejected');
-      post('/api/evaluate/lead', { id: r.id }).catch(() => {});
       trackConversion('reportRequest');
+      // Tyler has the request now. This also emails the visitor a link to their report, when that's set up.
+      const lead = await post<{ emailed?: boolean }>('/api/evaluate/lead', { id: r.id, name: data.get('name'), email: data.get('email') }).catch(
+        () => ({ emailed: false }),
+      );
       form.reset();
-      status.textContent = 'Thanks! I’ll send your full report within one business day.';
+      status.textContent = lead.emailed
+        ? 'Done! Your report is on its way to your inbox (check spam if you don’t see it in a few minutes). I’ll follow up within one business day.'
+        : 'Thanks! I’ll send your full report within one business day.';
     } catch {
       status.textContent = 'Something went wrong. Please email tyler@oakhearttech.com instead.';
     }

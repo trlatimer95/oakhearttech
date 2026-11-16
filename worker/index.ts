@@ -3,13 +3,15 @@
 //
 //   POST /api/evaluate         { url, token }  quick checks, returns a partial result with the speed test pending
 //   POST /api/evaluate/speed   { id }          runs PageSpeed and returns the finished result
-//   POST /api/evaluate/lead    { id }          marks that the visitor asked for the full report
+//   POST /api/evaluate/lead    { id, name, email }  marks that the visitor asked for the full report, emails them a link
 //   GET  /api/report/<id>                      printable report, password protected (for Tyler)
+//   GET  /api/report/<id>?k=<sig>              the same report for the visitor, from the signed link in their email
 
 import { normalizeUrl } from '../src/lib/evaluation/url';
 import { type Env, loadResult, rateLimited, recentResult, runQuick, runSpeed, saveResult, sha256 } from './evaluate';
 import { verifyTurnstile } from './lookups';
 import { authorized, renderReport } from './report';
+import { reportLink, sendReportEmail, validEmail, validLink } from './email';
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' } });
@@ -34,13 +36,17 @@ async function handle(req: Request, env: Env): Promise<Response> {
   const path = url.pathname.replace(/\/+$/, '');
 
   if (path.startsWith('/api/report/') && req.method === 'GET') {
-    if (!authorized(req, env.REPORT_PASSWORD)) {
+    const id = path.slice('/api/report/'.length);
+    if (!ID.test(id)) return new Response('Not found.', { status: 404 });
+    // The visitor's own copy: a signed link from their email, for an evaluation where they asked for the report.
+    // Anything else needs Tyler's password.
+    const visitor = await validLink(id, url.searchParams.get('k'), env.IP_SALT);
+    if (!visitor && !authorized(req, env.REPORT_PASSWORD)) {
       return new Response('Password required.', { status: 401, headers: { 'WWW-Authenticate': 'Basic realm="Oakheart reports", charset="UTF-8"' } });
     }
-    const id = path.slice('/api/report/'.length);
-    const saved = ID.test(id) ? await loadResult(env, id) : null;
-    if (!saved) return new Response('Not found.', { status: 404 });
-    return new Response(renderReport(saved.result), {
+    const saved = await loadResult(env, id);
+    if (!saved || (visitor && !saved.lead)) return new Response('Not found.', { status: 404 });
+    return new Response(renderReport(saved.result, visitor ? 'visitor' : 'owner'), {
       headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex', 'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'" },
     });
   }
@@ -88,8 +94,15 @@ async function handle(req: Request, env: Env): Promise<Response> {
   if (path === '/api/evaluate/lead') {
     const id = String(body.id ?? '');
     if (!ID.test(id)) return fail('Bad request.', 400);
-    await env.DB.prepare('UPDATE evaluations SET lead_submitted = 1 WHERE id = ?').bind(id).run();
-    return json({ ok: true });
+    // Only the first request for each evaluation counts, so one evaluation (each needs Turnstile) sends one email.
+    const first = await env.DB.prepare('UPDATE evaluations SET lead_submitted = 1 WHERE id = ? AND lead_submitted = 0').bind(id).run();
+    const email = String(body.email ?? '').trim();
+    if (!first.meta.changes || !validEmail(email) || !env.RESEND_API_KEY || !env.REPORT_FROM || !env.IP_SALT) return json({ ok: true, emailed: false });
+    const saved = await loadResult(env, id);
+    if (!saved) return json({ ok: true, emailed: false });
+    const link = await reportLink(url.origin, id, env.IP_SALT);
+    const emailed = await sendReportEmail(env.RESEND_API_KEY, env.REPORT_FROM, { name: String(body.name ?? '').slice(0, 100), email }, saved.result, link);
+    return json({ ok: true, emailed });
   }
 
   return fail('Not found.', 404);
