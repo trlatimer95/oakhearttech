@@ -8,7 +8,7 @@ import { parseRobots } from '../src/lib/evaluation/robots';
 import { buildResult } from '../src/lib/evaluation/score';
 import type { EvaluationResult, SiteFacts } from '../src/lib/evaluation/types';
 import { emailDns, pageSpeed, rdap } from './lookups';
-import { safeFetch } from './net';
+import { type PageFetcher, isOwnHost, relayFetcher, safeFetch } from './net';
 
 export interface Env {
   DB: D1Database;
@@ -17,22 +17,25 @@ export interface Env {
   PSI_API_KEY?: string;
   REPORT_PASSWORD?: string;
   IP_SALT?: string;
+  /** Helper Worker used when the site being evaluated is oakhearttech.com itself (see net.ts). */
+  FETCHER_URL?: string;
+  FETCHER_SECRET?: string;
   /** Set only on staging: adds X-Robots-Tag noindex to every page. */
   NOINDEX?: string;
 }
 
 export const LIMITS = { perIpPerHour: 5, perDay: 200, cacheHours: 24, speedWindowMinutes: 15 };
 
-export async function gatherQuick(origin: string, host: string, domain: string): Promise<QuickRaw> {
+export async function gatherQuick(origin: string, host: string, domain: string, get: PageFetcher = safeFetch): Promise<QuickRaw> {
   const altHostName = host.startsWith('www.') ? host.slice(4) : host === domain ? `www.${host}` : null;
 
   const [homepage, httpVersion, alt, robotsRes, sitemap1, sitemap2, dns, reg] = await Promise.all([
-    safeFetch(`${origin}/`),
-    safeFetch(`http://${host}/`, { readBody: false }),
-    altHostName ? safeFetch(`https://${altHostName}/`, { readBody: false, timeoutMs: 6000 }) : Promise.resolve(null),
-    safeFetch(`${origin}/robots.txt`, { maxBytes: 200_000, timeoutMs: 5000 }),
-    safeFetch(`${origin}/sitemap.xml`, { maxBytes: 20_000, timeoutMs: 5000 }),
-    safeFetch(`${origin}/sitemap_index.xml`, { maxBytes: 20_000, timeoutMs: 5000 }),
+    get(`${origin}/`),
+    get(`http://${host}/`, { readBody: false }),
+    altHostName ? get(`https://${altHostName}/`, { readBody: false, timeoutMs: 6000 }) : Promise.resolve(null),
+    get(`${origin}/robots.txt`, { maxBytes: 200_000, timeoutMs: 5000 }),
+    get(`${origin}/sitemap.xml`, { maxBytes: 20_000, timeoutMs: 5000 }),
+    get(`${origin}/sitemap_index.xml`, { maxBytes: 20_000, timeoutMs: 5000 }),
     emailDns(domain),
     rdap(host),
   ]);
@@ -109,7 +112,8 @@ export async function loadResult(env: Env, id: string): Promise<{ result: Evalua
 // ---- The two steps ----
 
 export async function runQuick(env: Env, origin: string, host: string, domain: string, ipHash: string): Promise<EvaluationResult | { error: string; status: number }> {
-  const raw = await gatherQuick(origin, host, domain);
+  const own = isOwnHost(host) && env.FETCHER_URL && env.FETCHER_SECRET;
+  const raw = await gatherQuick(origin, host, domain, own ? relayFetcher(env.FETCHER_URL!, env.FETCHER_SECRET!) : safeFetch);
   // Nothing at all at this name (no website, no email records): almost always a typo, so say that instead of an F.
   if (!raw.homepage.ok && raw.dns.ok && raw.dns.nxdomain && !raw.dns.mx.length) {
     return { error: `We couldn’t find a website or email at ${host}. Check the spelling and try again.`, status: 422 };

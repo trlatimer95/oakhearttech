@@ -10,7 +10,7 @@ export interface FetchResult extends HttpFacts {
   body?: string;
 }
 
-interface Options {
+export interface FetchOptions {
   timeoutMs?: number;
   maxRedirects?: number;
   maxBytes?: number;
@@ -24,7 +24,7 @@ function allowed(u: URL): boolean {
   return isPublicHostname(u.hostname);
 }
 
-export async function safeFetch(start: string, opts: Options = {}): Promise<FetchResult> {
+export async function safeFetch(start: string, opts: FetchOptions = {}): Promise<FetchResult> {
   const { timeoutMs = 8000, maxRedirects = 5, maxBytes = 2_000_000, readBody = true } = opts;
   const redirects: string[] = [];
   const t0 = Date.now();
@@ -108,4 +108,28 @@ function classifyStatus(status: number, headers: Record<string, string>, body: s
     /just a moment|attention required|challenge-platform|cf-chl|captcha|access denied|request unsuccessful|sgcaptcha|incapsula/i.test(body.slice(0, 20_000));
   if (status === 403 || status === 429 || ((status === 503 || status === 401) && challenge)) return 'blocked';
   return 'other';
+}
+
+export type PageFetcher = (url: string, opts?: FetchOptions) => Promise<FetchResult>;
+
+// Oakheart's own domain. Cloudflare won't let the site's Worker fetch its own address (it fails with a 522), and
+// other same-zone fetches skip the zone's redirect rules. So when the site being evaluated is ours, the requests go
+// through a small separate Worker on workers.dev (worker/fetcher.ts), which sees the site exactly as a visitor does.
+export const OWN_DOMAIN = 'oakhearttech.com';
+export const isOwnHost = (host: string) => host === OWN_DOMAIN || host.endsWith(`.${OWN_DOMAIN}`);
+
+export function relayFetcher(relayUrl: string, secret: string): PageFetcher {
+  return async (url, opts = {}) => {
+    try {
+      const res = await fetch(relayUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Fetcher-Key': secret },
+        body: JSON.stringify({ url, opts }),
+      });
+      if (res.ok) return (await res.json()) as FetchResult;
+    } catch {
+      // fall through
+    }
+    return { ok: false, redirects: [], headers: {}, error: 'other' };
+  };
 }

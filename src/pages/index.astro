@@ -114,9 +114,8 @@ const faqs = [
           <div class="screen">
             <div class="vp">
               <iframe
-                src="/console/"
+                data-src="/console/"
                 title="Animated example: one job moves from request to paid, a failed sync is caught and fixed with the owner’s approval, and the time to invoice drops"
-                loading="lazy"
                 tabindex="-1"></iframe>
             </div>
           </div>
@@ -349,6 +348,17 @@ const faqs = [
 
   <CTABand />
 </BaseLayout>
+
+<script>
+  // The hero animation is a whole page of its own. Start it once this page has finished loading, so it doesn't
+  // compete with the headline and text on a phone's connection.
+  const start = () =>
+    document.querySelectorAll<HTMLIFrameElement>('iframe[data-src]').forEach((f) => {
+      f.src = f.dataset.src!;
+    });
+  if (document.readyState === 'complete') start();
+  else addEventListener('load', start, { once: true });
+</script>
 
 <style>
   /* The report photo, taped to the board at a slight angle. */

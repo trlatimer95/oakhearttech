@@ -31,11 +31,14 @@
   // Weekly clean-up of evaluations older than 12 months (Mondays, 09:00 UTC).
   "triggers": { "crons": ["0 9 * * 1"] },
   "observability": { "enabled": true },
+  // Helper Worker used only when the evaluation checks oakhearttech.com itself (see worker/fetcher.ts).
+  "vars": { "FETCHER_URL": "https://oakheart-fetcher.trlatimer95.workers.dev" },
   // Secrets (set with `npx wrangler secret put <NAME>`, never written here):
   //   TURNSTILE_SECRET  Cloudflare Turnstile secret key for the evaluation form
   //   PSI_API_KEY       Google PageSpeed Insights API key
   //   REPORT_PASSWORD   password for /api/report/<id>
   //   IP_SALT           any long random string, mixed into the hashed IPs used for rate limiting
+  //   FETCHER_SECRET    shared secret for the oakheart-fetcher helper Worker (same value on all three)
   "env": {
     // A separate copy for testing at staging.oakhearttech.com, deployed with: npx wrangler deploy --env staging
     // It lives under oakhearttech.com so the real Turnstile key works there (Turnstile only accepts hostnames
@@ -44,7 +47,7 @@
       "name": "oakhearttech-staging",
       "workers_dev": true,
       "routes": [{ "pattern": "staging.oakhearttech.com", "custom_domain": true }],
-      "vars": { "NOINDEX": "1" },
+      "vars": { "NOINDEX": "1", "FETCHER_URL": "https://oakheart-fetcher.trlatimer95.workers.dev" },
       "assets": {
         "directory": "./dist",
         "binding": "ASSETS",

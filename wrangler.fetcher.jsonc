@@ -1,0 +1,12 @@
+{
+  // Helper Worker for evaluating oakhearttech.com itself (see worker/fetcher.ts). Deploy with:
+  //   npx wrangler deploy -c wrangler.fetcher.jsonc
+  // Secret (same value as FETCHER_SECRET on the main Worker and staging):
+  //   npx wrangler secret put FETCHER_SECRET -c wrangler.fetcher.jsonc
+  "name": "oakheart-fetcher",
+  "main": "worker/fetcher.ts",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true }
+}
